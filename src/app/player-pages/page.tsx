@@ -9,14 +9,34 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTheme } from "next-themes";
+import { useState } from "react";
+import ErrorMessage from "@/components/messageError/error-message";
 
 export default function PlayerPage() {
   const { theme, setTheme } = useTheme();
+  const [ inputValue, setinputValue ] = useState('')
+  const [error, setError] = useState<string>();
+
+  /**
+   * Handles form submission and validates user input. Displays an error message
+   * if input is empty.
+  */
+  const handleSubmit = () => {
+    
+    // Validate user input.
+    if (inputValue.trim() === '') {
+      setError('Please enter something before submitting.');
+    }
+  }
+
+  const handleCloseError = () => {
+    setError('')
+  }
 
   return (
     
     <main className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-       <header className="px-4 lg:px-6 h-14 flex items-center bg-gray-100 dark:bg-gray-900 w-full fixed top-0 z-10">
+      <header className="px-4 lg:px-6 h-14 flex items-center bg-gray-100 dark:bg-gray-900 w-full fixed top-0 z-10">
         <div className="container mx-auto flex items-center justify-end">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -62,11 +82,16 @@ export default function PlayerPage() {
         <Input
           type="text"
           placeholder="Type here"
+          onChange={(e) => setinputValue(e.target.value)}
           className="w-full p-4 mb-6 border border-gray-300 rounded-lg focus:outline-none"
         />
-        <button className="w-full px-6 py-3 font-semibold text-white bg-black rounded-lg hover:bg-gray-900 focus:outline-none">
+        <button 
+          onClick={handleSubmit}
+          className="w-full px-6 py-3 font-semibold text-white bg-black rounded-lg hover:bg-gray-900 focus:outline-none">
           Submit
         </button>
+        {/* Ensure the error message is visible only when there's an error state */}
+        {error && <ErrorMessage message={error} onClose={handleCloseError}/>}
       </div>
 
     
