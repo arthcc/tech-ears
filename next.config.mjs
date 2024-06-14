@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    
-};
-
-
-export default nextConfig;
+    env: {
+      ELEVENLABS_API_KEY: process.env.ELEVENLABS_API_KEY,
+    },
+  };
+  
+  export default nextConfig;
+  
