@@ -1,16 +1,18 @@
-'use client';
-
 import { useState, useEffect } from "react";
 
 export const AudioServer = () => {
 
+    const dotenv = require("dotenv")
+    dotenv.config()
+    const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
+    console.log(ELEVENLABS_API_KEY);
     const [audioSrc, setAudioSrc] = useState('');
     const [errorIndices, setErrorIndices] = useState([]);
     const fetchAudio = async (text) => {
       const options = {
         method: 'POST',
         headers: {
-          'xi-api-key': 'sk_27456abd3761652a63725f63ce3c3e950f89137d85cd72c6', // Replace with your actual API key
+          'xi-api-key': ELEVENLABS_API_KEY, 
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
