@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "./themeProvider";
 import { ReactNode } from "react";
+import {Providers} from "@/components/providers/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,14 +21,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <html lang="en" suppressHydrationWarning>
         <head />
         <body className={inter.className}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
+          <Providers
           >
             {children}
-          </ThemeProvider>
+          </Providers>
         </body>
       </html>
     </>
