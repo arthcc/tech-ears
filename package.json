@@ -18,7 +18,6 @@
     "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "dotenv": "^16.4.5",
     "elevenlabs": "^0.8.0",
     "install": "^0.13.0",
     "lucide-react": "^0.394.0",
