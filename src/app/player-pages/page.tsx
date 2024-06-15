@@ -5,12 +5,24 @@ import { BackMenu } from "@/components/backMenu/backMenu";
 import MenuTheme from "@/components/menuTheme/menuTheme";
 import { TextInput } from "@/components/textInput/textInput";
 import { useState } from "react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 
 export default function PlayerPage() {
-  const [inputValue, setInputValue] = useState('');
-  const [correction, setCorrection]: any = useState('');
-  let mockCorrectAnswer: any = 'hey my name is gabriel';
-  mockCorrectAnswer = mockCorrectAnswer.split(' ');
+  const [inputValue, setInputValue] = useState("");
+  const [correction, setCorrection]: any = useState("");
+  let mockCorrectAnswer: any = "Hello how can I help you today";
+  mockCorrectAnswer = mockCorrectAnswer.split(" ");
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -22,12 +34,21 @@ export default function PlayerPage() {
   };
 
   const compareAnswer = (inputValue, correctAnswer) => {
-    const inputWords = inputValue.split(' ');
+    const inputWords = inputValue.split(" ");
     return correctAnswer.map((word, index) => {
       if (word !== inputWords[index]) {
-        return <span key={index} className="text-red-500 ml-1"> {word} </span>;
+        return (
+          <span key={index} className="text-red-500 ml-1">
+            {" "}
+            {word}{" "}
+          </span>
+        );
       } else {
-        return <span key={index} className="text-green-500 ml-1">{word} </span>;
+        return (
+          <span key={index} className="text-green-500 ml-1">
+            {word}{" "}
+          </span>
+        );
       }
     });
   };
@@ -52,19 +73,33 @@ export default function PlayerPage() {
           <h3 className="mt-4 text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mb-6">
             What did you hear?
           </h3>
-          <form className="w-full" onSubmit={handleSubmit}>
+          <form className="w-full flex flex-col items-center" onSubmit={handleSubmit}>
             <TextInput
               placeholder="Enter your text"
               value={inputValue}
               onChange={handleChange}
             />
-            <button
-              type="submit"
-              className="w-full px-6 py-3 font-semibold text-white bg-black rounded-lg hover:bg-gray-900 focus:outline-none"
-            >
-              Submit
-            </button>
-            <h1 className="w-full flex justify-center mt-5">{correction}</h1>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button className="mt-4" variant="outline">
+                  Submit
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Results</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    <h1 className="w-full flex justify-center mt-5">
+                      {correction}
+                    </h1>
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Close</AlertDialogCancel>
+                  <AlertDialogAction>Share</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </form>
         </div>
       </main>
