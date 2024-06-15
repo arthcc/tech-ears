@@ -42,7 +42,7 @@ export const AudioServer = () => {
     };
   
     useEffect(() => {
-      fetchAudio("hello how can i help you today hi hi hi? ");
+      fetchAudio("hello how can i help you toda? ");
     }, []);
 
     return  (
