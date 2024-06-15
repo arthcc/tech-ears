@@ -10,7 +10,7 @@ const fetchAudio =  async () => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            text: "how are you today?",
+            text: "Hello how can I help you today",
             voice_settings: {
                 stability: 1,
                 similarity_boost: 1
