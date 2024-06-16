@@ -1,7 +1,6 @@
-import { Button } from "../ui/button"
-import Link from "next/link"
-import Image from "next/image"
-import newTabIcon from "@/components/svg/new-tab-light.png";
+import { Button } from "../ui/button";
+import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 
 export default function HeaderDesktop() {
   return (
@@ -13,55 +12,58 @@ export default function HeaderDesktop() {
           </div>
         </div>
         <div className="flex items-center space-x-4">
-            <Link
-              href="/about-me"
-              className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 flex items-center"
-            >
-              <Button
-                variant="link"
-                className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
-              >
-                About Me
-              </Button>
-            </Link>
-            <Link
-              href="/how-to-play"
+          <Link
+            href="/about-me"
+            className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 flex items-center"
+          >
+            <Button
+              variant="link"
               className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
             >
-              <Button
-                variant="link"
-                className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
-              >
-                How to Play?
-              </Button>
-            </Link>
-            <Link
-              href="https://github.com/arthcc/tech-ears"
-              target="_blank"
+              About Me
+            </Button>
+          </Link>
+          <Link
+            href="/how-to-play"
+            className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+          >
+            <Button
+              variant="link"
               className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
             >
-              <Button
-                variant="link"
-                className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
-              >
-               GitHub
-              </Button>
-            </Link>
-            <Link
-              href="https://pixmeacoffee.vercel.app/techears"
-              target="_blank"
+              How to Play?
+            </Button>
+          </Link>
+          <Link
+            href="https://github.com/arthcc/tech-ears"
+            target="_blank"
+            className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+          >
+            <Button
+              variant="link"
               className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
             >
-              <Button
-                variant="link"
-                className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
-              >
-                <Image src={newTabIcon} alt="new tab" width={20} height={20} />
-                Donate
-              </Button>
-            </Link>
+              GitHub
+            </Button>
+          </Link>
+          <Link
+            href="https://pixmeacoffee.vercel.app/techears"
+            target="_blank"
+            className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+          >
+            <Button
+              variant="link"
+              className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 flex gap-2 items-cente"
+            >
+              <ExternalLink
+                size={20}
+                className="text-gray-800 dark:text-gray-200"
+              />
+              <span>Donate</span>
+            </Button>
+          </Link>
         </div>
       </div>
     </header>
-  )
+  );
 }
