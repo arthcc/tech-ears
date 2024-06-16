@@ -3,9 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
 import { Providers } from "@/components/providers/providers";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
-
+import { Analytics } from "@vercel/analytics/react";
 export const metadata: Metadata = {
   title: "TechEars",
   description: "From developers to developers",
@@ -53,7 +53,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
 
         <body className={inter.className}>
-        <SpeedInsights />
+          <SpeedInsights />
+          <Analytics />
           <Providers>{children}</Providers>
         </body>
       </html>
