@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
 import { Providers } from "@/components/providers/providers";
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -53,6 +53,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
 
         <body className={inter.className}>
+        <SpeedInsights />
           <Providers>{children}</Providers>
         </body>
       </html>
