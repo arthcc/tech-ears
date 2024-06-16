@@ -59,6 +59,7 @@ const PlayerPage = () => {
   const [currentDate, setCurrentDate] = useState("");
   const [audioSrc, setAudioSrc] = useState(null);
   const [randomPhrase, setRandomPhrase] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const fetchRandomPhrase = async () => {
@@ -86,6 +87,7 @@ const PlayerPage = () => {
         );
 
         if (!response.ok) {
+          setErrorMessage("Failed to fetch the audio.")
           console.error("Failed to fetch the audio");
           return null;
         }
@@ -96,6 +98,7 @@ const PlayerPage = () => {
         setAudioSrc(audioUrl);
         return audioUrl;
       } catch (error) {
+        setErrorMessage("Error fetching the audio")
         console.error("Error fetching audio:", error);
         return null;
       }
@@ -171,6 +174,9 @@ const PlayerPage = () => {
         <div className="flex flex-col items-center w-full max-w-md p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
           {!correction && (
             <>
+              {errorMessage && (
+                <h4 className="w-full bg-red-900 text-center p-2 rounded-lg font-semibold">{errorMessage}</h4>
+              )}
               <h4
                 className="mt-6 text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mb-6 "
                 style={{ textAlign: "justify" }}
@@ -205,7 +211,7 @@ const PlayerPage = () => {
               <h1 className="w-full flex justify-center mt-2">{currentDate}</h1>
               <h1 className="w-full flex justify-center mt-5">
                 {" "}
-                 {correction}
+                {correction}
               </h1>
               <p className="w-full flex justify-center mt-2">
                 {" "}
