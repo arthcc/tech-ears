@@ -112,14 +112,14 @@ const PlayerPage = () => {
 
   const handleSubmit = (e) => {
     const options = {
-    year: "numeric" as const,
-    month: "long" as const,
-    day: "numeric" as const,
+      year: "numeric" as const,
+      month: "long" as const,
+      day: "numeric" as const,
     };
     setCurrentDate(new Date().toLocaleDateString("en-US", options));
     e.preventDefault();
     setCorrection(compareAnswer(inputValue, mockCorrectAnswer));
-    };
+  };
 
   const handlePlayAgain = () => {
     setInputValue("");
@@ -220,7 +220,7 @@ const PlayerPage = () => {
                 </button>
                 <button
                   className="px-4 py-2 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-100"
-                  onClick={handlePlayAgain}
+                  onClick={() => window.location.reload()}
                 >
                   Play Again
                 </button>
