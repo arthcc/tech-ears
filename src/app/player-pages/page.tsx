@@ -107,7 +107,7 @@ const PlayerPage = () => {
   let mockCorrectAnswer: string[] = randomPhrase.split(" ");
 
   const handleChange = (e) => {
-    setInputValue(e.target.value);
+    setInputValue(e.target.value.trim());
   };
 
   const handleSubmit = (e) => {
