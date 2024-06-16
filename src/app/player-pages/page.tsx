@@ -60,7 +60,10 @@ export default function PlayerPage() {
       <main className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
         <header className="px-4 lg:px-6 h-14 flex items-center bg-gray-100 dark:bg-gray-900 w-full fixed top-0 z-10">
           <div className="container mx-auto flex items-center justify-end">
+            <div className="h-4 w-4" >
             <MenuTheme />
+            </div>
+          
           </div>
           <div className="absolute top-0 left-0 m-4">
             <BackMenu />
