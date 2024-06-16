@@ -29,7 +29,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://metatags.io/" />
+        <meta property="og:url" content="https://ibb.co/y57PFYZ" />
         <meta property="og:title" content="Tech Ears " />
         <meta
           property="og:description"
@@ -37,11 +37,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
         <meta
           property="og:image"
-          content="https://metatags.io/images/meta-tags.png"
+          content="https://ibb.co/y57PFYZ"
         />
 
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://metatags.io/" />
+        <meta property="twitter:url" content="https://ibb.co/y57PFYZ" />
         <meta property="twitter:title" content="Tech Ears " />
         <meta
           property="twitter:description"
@@ -49,7 +49,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
         <meta
           property="twitter:image"
-          content="https://metatags.io/images/meta-tags.png"
+          content="https://ibb.co/y57PFYZ"
         />
 
         <body className={inter.className}>
