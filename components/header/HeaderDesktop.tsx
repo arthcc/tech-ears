@@ -36,6 +36,18 @@ export default function HeaderDesktop() {
               </Button>
             </Link>
             <Link
+              href="https://github.com/arthcc/tech-ears"
+              target="_blank"
+              className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+            >
+              <Button
+                variant="link"
+                className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+              >
+               GitHub
+              </Button>
+            </Link>
+            <Link
               href="https://pixmeacoffee.vercel.app/techears"
               target="_blank"
               className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
