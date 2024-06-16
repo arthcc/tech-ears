@@ -2,7 +2,56 @@
 
 import { useQuery } from "@tanstack/react-query";
 
+const phrases = {
+    backEnd: [
+      "Optimizing database queries for performance.",
+      "Implementing RESTful APIs for seamless integration.",
+      "Ensuring secure authentication and authorization.",
+      "Refactoring legacy code for better maintainability.",
+      "Scaling the server infrastructure for high traffic.",
+      "Automating deployment with CI/CD pipelines.",
+      "Monitoring server health with logging and alerts.",
+      "Managing microservices with container orchestration.",
+      "Integrating third-party services via APIs.",
+      "Handling data migrations with minimal downtime."
+    ],
+    frontEnd: [
+      "Building responsive UIs with modern frameworks.",
+      "Enhancing user experience with intuitive designs.",
+      "Debugging front-end issues with browser dev tools.",
+      "Implementing state management for complex apps.",
+      "Optimizing load times with code splitting.",
+      "Ensuring cross-browser compatibility.",
+      "Using CSS preprocessors for better styling.",
+      "Integrating front-end with back-end APIs.",
+      "Creating interactive components with JavaScript.",
+      "Testing UI components for consistency."
+    ],
+    softSkills: [
+      "Communicating effectively with team members.",
+      "Collaborating on code reviews for quality assurance.",
+      "Managing time efficiently to meet deadlines.",
+      "Adapting to new technologies and tools.",
+      "Providing constructive feedback during meetings.",
+      "Prioritizing tasks based on project goals.",
+      "Mentoring junior developers to foster growth.",
+      "Resolving conflicts with a positive attitude.",
+      "Documenting code and processes for clarity.",
+      "Balancing work and life for overall well-being."
+    ]
+  };
+
+  const getRandomPhrase = () => {
+    const categories = Object.keys(phrases);
+    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+    const phrasesInCategory = phrases[randomCategory];
+    const randomPhrase = phrasesInCategory[Math.floor(Math.random() * phrasesInCategory.length)];
+    return randomPhrase;
+  };
+
+
 const fetchAudio =  async () => {
+    const text = getRandomPhrase();
     const options = {
         method: 'POST',
         headers: {
@@ -10,7 +59,7 @@ const fetchAudio =  async () => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            text: "Hello how can I help you today",
+            text,
             voice_settings: {
                 stability: 1,
                 similarity_boost: 1
