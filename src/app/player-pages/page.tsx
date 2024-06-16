@@ -107,7 +107,7 @@ const PlayerPage = () => {
   let mockCorrectAnswer: string[] = randomPhrase.split(" ");
 
   const handleChange = (e) => {
-    setInputValue(e.target.value.trim());
+    setInputValue(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -118,7 +118,7 @@ const PlayerPage = () => {
     };
     setCurrentDate(new Date().toLocaleDateString("en-US", options));
     e.preventDefault();
-    setCorrection(compareAnswer(inputValue, mockCorrectAnswer));
+    setCorrection(compareAnswer(inputValue.trim(), mockCorrectAnswer));
   };
 
   const handlePlayAgain = () => {
