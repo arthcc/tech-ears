@@ -7,40 +7,40 @@ import { useEffect, useState } from "react";
 const PlayerPage = () => {
   const phrases = {
     backEnd: [
-      "Optimizing database queries for performance.",
-      "Implementing RESTful APIs for seamless integration.",
-      "Ensuring secure authentication and authorization.",
-      "Refactoring legacy code for better maintainability.",
-      "Scaling the server infrastructure for high traffic.",
-      "Automating deployment with CI/CD pipelines.",
-      "Monitoring server health with logging and alerts.",
-      "Managing microservices with container orchestration.",
-      "Integrating third-party services via APIs.",
-      "Handling data migrations with minimal downtime.",
+      "Optimizing database queries for performance",
+      "Implementing RESTful APIs for seamless integration",
+      "Ensuring secure authentication and authorization",
+      "Refactoring legacy code for better maintainability",
+      "Scaling the server infrastructure for high traffic",
+      "Automating deployment with CI/CD pipelines",
+      "Monitoring server health with logging and alerts",
+      "Managing microservices with container orchestration",
+      "Integrating third-party services via APIs",
+      "Handling data migrations with minimal downtime",
     ],
     frontEnd: [
-      "Building responsive UIs with modern frameworks.",
-      "Enhancing user experience with intuitive designs.",
-      "Debugging front-end issues with browser dev tools.",
-      "Implementing state management for complex apps.",
-      "Optimizing load times with code splitting.",
-      "Ensuring cross-browser compatibility.",
-      "Using CSS preprocessors for better styling.",
-      "Integrating front-end with back-end APIs.",
-      "Creating interactive components with JavaScript.",
-      "Testing UI components for consistency.",
+      "Building responsive UIs with modern frameworks",
+      "Enhancing user experience with intuitive designs",
+      "Debugging front-end issues with browser dev tools",
+      "Implementing state management for complex apps",
+      "Optimizing load times with code splitting",
+      "Ensuring cross-browser compatibility",
+      "Using CSS preprocessors for better styling",
+      "Integrating front-end with back-end APIs",
+      "Creating interactive components with JavaScript",
+      "Testing UI components for consistency",
     ],
     softSkills: [
-      "Communicating effectively with team members.",
-      "Collaborating on code reviews for quality assurance.",
-      "Managing time efficiently to meet deadlines.",
-      "Adapting to new technologies and tools.",
-      "Providing constructive feedback during meetings.",
-      "Prioritizing tasks based on project goals.",
-      "Mentoring junior developers to foster growth.",
-      "Resolving conflicts with a positive attitude.",
-      "Documenting code and processes for clarity.",
-      "Balancing work and life for overall well-being.",
+      "Communicating effectively with team members",
+      "Collaborating on code reviews for quality assurance",
+      "Managing time efficiently to meet deadlines",
+      "Adapting to new technologies and tools",
+      "Providing constructive feedback during meetings",
+      "Prioritizing tasks based on project goals",
+      "Mentoring junior developers to foster growth",
+      "Resolving conflicts with a positive attitude",
+      "Documenting code and processes for clarity",
+      "Balancing work and life for overall well-being",
     ],
   };
 
@@ -201,11 +201,11 @@ const PlayerPage = () => {
 
           {correction && (
             <>
-              <h2 className="w-full flex justify-center mt-2">Tech Ears</h2>
+              <h2 className="w-full flex justify-center mt-2">✨ Tech Ears</h2>
               <h1 className="w-full flex justify-center mt-2">{currentDate}</h1>
               <h1 className="w-full flex justify-center mt-5">
                 {" "}
-                Today's phrase: {correction}
+                 {correction}
               </h1>
               <p className="w-full flex justify-center mt-2">
                 {" "}
