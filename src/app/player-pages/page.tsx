@@ -112,14 +112,14 @@ const PlayerPage = () => {
 
   const handleSubmit = (e) => {
     const options = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
+    year: "numeric" as const,
+    month: "long" as const,
+    day: "numeric" as const,
     };
-    // setCurrentDate(new Date().toLocaleDateString("en-US", options));
+    setCurrentDate(new Date().toLocaleDateString("en-US", options));
     e.preventDefault();
     setCorrection(compareAnswer(inputValue, mockCorrectAnswer));
-  };
+    };
 
   const handlePlayAgain = () => {
     setInputValue("");
