@@ -3,7 +3,7 @@ import { ChevronLeft } from "lucide-react";
 
 export const BackMenu = () => {
     const handleClick = () => {
-        window.location.href = "http://localhost:3000";
+        window.location.href = "https://tech-ears.vercel.app";
       };
 
       return(
