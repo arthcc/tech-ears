@@ -13,7 +13,6 @@ export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-
       <main className="flex flex-col items-center justify-center flex-grow p-6 bg-gray-100 dark:bg-gray-900 pt-24">
         <h1 className="text-4xl font-bold tracking-tight lg:text-5xl mb-6">
           The
