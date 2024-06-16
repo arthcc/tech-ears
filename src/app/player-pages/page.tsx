@@ -11,7 +11,7 @@ export default function PlayerPage() {
   const [inputValue, setInputValue] = useState("");
   const [correction, setCorrection]: any = useState("");
   const [currentDate, setCurrentDate] = useState("");
-  let mockCorrectAnswer: any = "Hello how can I help you today?";
+  let mockCorrectAnswer: any = "Hello how can I help you today";
   mockCorrectAnswer = mockCorrectAnswer.split(" ");
 
   const handleChange = (e) => {
