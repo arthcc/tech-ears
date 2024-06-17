@@ -3,7 +3,7 @@
 import { BackMenu } from "@/components/backMenu/backMenu";
 import MenuTheme from "@/components/menuTheme/menuTheme";
 import { useEffect, useState } from "react";
-
+import { GoogleAnalytics } from '@next/third-parties/google'
 const PlayerPage = () => {
   const phrases = {
     backEnd: [
@@ -64,7 +64,7 @@ const PlayerPage = () => {
   useEffect(() => {
     const fetchRandomPhrase = async () => {
       const phrase = getRandomPhrase();
-      setRandomPhrase(phrase); // Set the random phrase to state
+      setRandomPhrase(phrase);
       try {
         const options = {
           method: "POST",
@@ -87,7 +87,7 @@ const PlayerPage = () => {
         );
 
         if (!response.ok) {
-          setErrorMessage("Failed to fetch the audio.")
+          setErrorMessage("Failed to fetch the audio.");
           console.error("Failed to fetch the audio");
           return null;
         }
@@ -98,7 +98,7 @@ const PlayerPage = () => {
         setAudioSrc(audioUrl);
         return audioUrl;
       } catch (error) {
-        setErrorMessage("Error fetching the audio")
+        setErrorMessage("Error fetching the audio");
         console.error("Error fetching audio:", error);
         return null;
       }
@@ -140,9 +140,10 @@ const PlayerPage = () => {
   };
 
   const compareAnswer = (inputValue, correctAnswer) => {
-    const inputWords = inputValue.split(" ");
+    const inputWords = inputValue.toLowerCase().split(" ");
+    const correctWords = correctAnswer.map((word) => word.toLowerCase());
     return correctAnswer.map((word, index) => {
-      if (word !== inputWords[index]) {
+      if (correctWords[index] !== inputWords[index]) {
         return (
           <span key={index} className="text-red-500 ml-1">
             {word}
@@ -159,23 +160,27 @@ const PlayerPage = () => {
   };
 
   return (
+    
     <>
+    <GoogleAnalytics gaId="G-R5SCDC4C8D" />
       <main className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-        <header className="px-4 lg:px-6 h-14 flex items-center bg-gray-100 dark:bg-gray-900 w-full fixed top-0 z-10">
-          <div className="container mx-auto flex items-center justify-end">
-            <div className="h-4 w-4">
+        <header className="hidden sm:flex px-4 lg:px-6 h-14 items-center bg-gray-100 dark:bg-gray-900 w-full fixed top-0 z-10">
+          <div className="sm:container pt-4 mx-auto flex items-center justify-between w-full">
+            <div className="flex items-center flex-1">
+              <BackMenu />
+            </div>
+            <div className="flex items-center space-x-4 flex-1 justify-end">
               <MenuTheme />
             </div>
-          </div>
-          <div className="absolute top-0 left-0 m-4">
-            <BackMenu />
           </div>
         </header>
         <div className="flex flex-col items-center w-full max-w-md p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
           {!correction && (
             <>
               {errorMessage && (
-                <h4 className="w-full bg-red-900 text-center p-2 rounded-lg font-semibold">{errorMessage}</h4>
+                <h4 className="w-full bg-red-900 text-center p-2 rounded-lg font-semibold">
+                  {errorMessage}
+                </h4>
               )}
               <h4
                 className="mt-6 text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mb-6 "
@@ -185,7 +190,7 @@ const PlayerPage = () => {
               </h4>
               {audioSrc && <audio controls src={audioSrc} />}
               <form
-                className="w-full flex flex-col items-center"
+                className="w-full max-w-md flex flex-col items-center px-10"
                 onSubmit={handleSubmit}
               >
                 <input
@@ -197,7 +202,7 @@ const PlayerPage = () => {
                 />
                 <button
                   type="submit"
-                  className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                  className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 w-full"
                 >
                   Submit
                 </button>
@@ -209,10 +214,7 @@ const PlayerPage = () => {
             <>
               <h2 className="w-full flex justify-center mt-2">✨ Tech Ears</h2>
               <h1 className="w-full flex justify-center mt-2">{currentDate}</h1>
-              <h1 className="w-full flex justify-center mt-5">
-                {" "}
-                {correction}
-              </h1>
+              <h1 className="w-full flex justify-center mt-5"> {correction}</h1>
               <p className="w-full flex justify-center mt-2">
                 {" "}
                 Your input: {inputValue}
