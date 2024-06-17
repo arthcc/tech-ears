@@ -6,6 +6,7 @@ import { Providers } from "@/components/providers/providers";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 import { Analytics } from "@vercel/analytics/react";
+import { GoogleAnalytics } from '@next/third-parties/google'
 export const metadata: Metadata = {
   title: "TechEars",
   description: "From developers to developers",
@@ -19,7 +20,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <head />
+        <head 
+        />
+        
 
         <title>Tech Ears </title>
         <meta name="title" content="Tech Ears " />
@@ -53,6 +56,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
 
         <body className={inter.className}>
+        <GoogleAnalytics gaId="G-XYZ" />
           <SpeedInsights />
           <Analytics />
           <Providers>{children}</Providers>
