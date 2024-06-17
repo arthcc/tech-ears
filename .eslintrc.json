@@ -1,4 +1,37 @@
 {
-  "extends": "next/core-web-vitals",
-  "rules": { "react/no-unescaped-entities": 0 }
+  "parser": "@typescript-eslint/parser",
+  "env": {
+      "browser": true,
+      "es2021": true,
+      "node": true
+  },
+  "plugins": ["react", "prettier", "@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "next/core-web-vitals"
+  ],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "settings": {
+    "react": {
+        "version": "detect"
+    }
+  },
+  "ignorePatterns": ["node_modules/"],
+  "rules": { 
+    "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/no-unknown-property": ["error", { "ignore": ["jsx", "global"] }],
+    "react/no-unescaped-entities": 0,
+    "react/react-in-jsx-scope": "off",
+    "prettier/prettier": "error",
+    "no-console": ["error", { "allow": ["warn", "error"] }]
+  }
 }

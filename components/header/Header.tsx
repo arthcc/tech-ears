@@ -1,6 +1,6 @@
-import React from 'react'
-import HeaderMobile from './HeaderMobile'
-import HeaderDesktop from './HeaderDesktop'
+import React from "react";
+import HeaderMobile from "./HeaderMobile";
+import HeaderDesktop from "./HeaderDesktop";
 
 export default function Header() {
   return (
@@ -8,5 +8,5 @@ export default function Header() {
       <HeaderMobile />
       <HeaderDesktop />
     </>
-  )
+  );
 }

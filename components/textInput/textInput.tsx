@@ -1,7 +1,13 @@
-import React from 'react';
+import React from "react";
 import { Input } from "@/components/ui/input";
 
-export const TextInput = ({ type = "text", placeholder = "Type here", className = "", onChange, ...props }) => {
+export const TextInput = ({
+  type = "text",
+  placeholder = "Type here",
+  className = "",
+  onChange,
+  ...props
+}) => {
   return (
     <Input
       type={type}
