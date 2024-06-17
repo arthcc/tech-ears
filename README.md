@@ -35,7 +35,8 @@ Tech Ears is an open-source project designed by developers for developers, aimed
 git clone https://github.com/arthcc/tech-ears
 ```
 
-Now go to ```cd tech-ears  ``` and run ```yarn install```
+Now go to ```cd tech-ears``` and run ```yarn install```
 
 After that you can go to:  ```http://localhost:3000``` so you can run locally. 
 
+- If you want to generate audios too, you need an API KEY, you can get one here: [Eleven Labs API](elevenlabs.io)
