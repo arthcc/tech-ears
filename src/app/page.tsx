@@ -6,12 +6,14 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import MenuTheme from "@/components/menuTheme/menuTheme";
 import Header from "@/components/header/Header";
-
+import { GoogleAnalytics } from '@next/third-parties/google'
 export default function HomePage() {
   const { theme, setTheme } = useTheme();
 
   return (
+    
     <div className="flex flex-col min-h-screen">
+       <GoogleAnalytics gaId="G-R5SCDC4C8D" />
       <Header />
       <main className="flex flex-col items-center justify-center flex-grow p-6 bg-gray-100 dark:bg-gray-900 pt-24">
         <h1 className="text-4xl font-bold tracking-tight lg:text-5xl mb-6">
