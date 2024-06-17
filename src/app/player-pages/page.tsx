@@ -57,51 +57,14 @@ const PlayerPage = () => {
   const [inputValue, setInputValue] = useState("");
   const [correction, setCorrection] = useState("");
   const [currentDate, setCurrentDate] = useState("");
-  const [audioSrc, setAudioSrc] = useState(null);
   const [randomPhrase, setRandomPhrase] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    const fetchRandomPhrase = async () => {
+    const fetchRandomPhrase = () => {
       const phrase = getRandomPhrase();
       setRandomPhrase(phrase);
-      try {
-        const options = {
-          method: "POST",
-          headers: {
-            "xi-api-key": process.env.ELEVENLABS_API_KEY,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            text: phrase,
-            voice_settings: {
-              stability: 1,
-              similarity_boost: 1,
-            },
-          }),
-        };
-
-        const response = await fetch(
-          "https://api.elevenlabs.io/v1/text-to-speech/iP95p4xoKVk53GoZ742B",
-          options
-        );
-
-        if (!response.ok) {
-          setErrorMessage("Failed to fetch the audio.");
-          console.error("Failed to fetch the audio");
-          return null;
-        }
-
-        const audioBlob = await response.blob();
-        const audioUrl = URL.createObjectURL(audioBlob);
-
-        setAudioSrc(audioUrl);
-        return audioUrl;
-      } catch (error) {
-        setErrorMessage("Error fetching the audio");
-        console.error("Error fetching audio:", error);
-        return null;
-      }
     };
 
     fetchRandomPhrase();
@@ -139,6 +102,20 @@ const PlayerPage = () => {
     window.open(twitterUrl, "_blank");
   };
 
+  const playAudio = () => {
+    setPlaying(true);
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance();
+    const voice = synth.getVoices()[30];
+    utterance.text = randomPhrase;
+    utterance.rate = 0.95;
+    utterance.voice = voice;
+
+    console.log(synth.getVoices());
+    synth.speak(utterance);
+    setPlaying(false);
+  }
+
   const compareAnswer = (inputValue, correctAnswer) => {
     const inputWords = inputValue.toLowerCase().split(" ");
     const correctWords = correctAnswer.map((word) => word.toLowerCase());
@@ -160,7 +137,7 @@ const PlayerPage = () => {
   };
 
   return (
-    
+
     <>
     <GoogleAnalytics gaId="G-R5SCDC4C8D" />
       <main className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -188,7 +165,20 @@ const PlayerPage = () => {
               >
                 Listen and type what you hear in the input below.
               </h4>
-              {audioSrc && <audio controls src={audioSrc} />}
+              {!playing &&
+                <button onClick={() => playAudio()}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
+                  </svg>
+                </button>
+              }
+              {playing &&
+                <button onClick={() => playAudio()}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+                  </svg>
+                </button>
+              }
               <form
                 className="w-full max-w-md flex flex-col items-center px-10"
                 onSubmit={handleSubmit}
