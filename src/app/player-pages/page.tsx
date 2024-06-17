@@ -132,7 +132,7 @@ const PlayerPage = () => {
 
   const handleShareProgress = () => {
     const tweetText =
-      "I just used TechEars to practice my English, join me at: tech-ears.vercel.app";
+      "I just used TechEars to practice my English ✨, join me at: tech-ears.vercel.app";
     const twitterUrl = `https://twitter.com/compose/tweet?text=${encodeURIComponent(
       tweetText
     )}`;
