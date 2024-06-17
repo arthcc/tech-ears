@@ -1,12 +1,9 @@
-"use client"; 
+"use client";
 
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-import Image from "next/image";
 import Link from "next/link";
-import newTabIcon from "@/components/svg/new-tab-light.png";
-import close from "@/components/svg/close.png";
-import burgerMenu from "@/components/svg/burger-menu.png";
+import { ExternalLink, Menu, X } from "lucide-react";
 
 export default function HeaderMobile() {
   const [menuMobile, setMenuMobile] = useState(false);
@@ -22,40 +19,38 @@ export default function HeaderMobile() {
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <Button 
+          <Button
             onClick={handleMenu}
             className="border-none bg-transparent pr-0 hover:bg-transparent"
           >
-            <Image 
-              src={burgerMenu} 
-              alt="Open menu mobile" 
-              width={20} 
-              height={20} 
-              className="w-5 h-5 invert object-contain" 
-            />
+            <Menu size={20} className="text-gray-800 dark:text-gray-200" />
           </Button>
         </div>
       </div>
 
-      <div className={`${menuMobile ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"} duration-300 absolute w-full h-screen top-0 left-0`}>
-        <div 
+      <div
+        className={`${
+          menuMobile
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        } duration-300 absolute w-full h-screen top-0 left-0`}
+      >
+        <div
           onClick={handleMenu}
-          className="content-[''] w-full h-screen bg-[rgba(0,0,0,0.4)] absolute top-0 left-0 z-10" 
+          className="content-[''] w-full h-screen bg-[rgba(0,0,0,0.4)] absolute top-0 left-0 z-10"
         />
-        <div className={`${menuMobile ? "right-0" : "-right-[220px]"} duration-300 absolute w-[220px] h-screen bg-background top-0 z-20`}>
+        <div
+          className={`${
+            menuMobile ? "right-0" : "-right-[220px]"
+          } duration-300 absolute w-[220px] h-screen bg-background top-0 z-20`}
+        >
           <div className="flex items-end flex-col p-4">
-            <Button 
+            <Button
               onClick={handleMenu}
-              variant="outline" 
+              variant="ghost"
               className="mr-3 mb-4 px-3 text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
             >
-              <Image 
-                src={close} 
-                alt="Close menu mobile" 
-                width={20} 
-                height={20} 
-                className="w-3 h-3 invert" 
-              />
+              <X className="text-gray-800 dark:text-gray-200" />
             </Button>
 
             <Link
@@ -87,10 +82,10 @@ export default function HeaderMobile() {
             >
               <Button
                 variant="link"
-                className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+                className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 flex gap-2 items-center"
               >
-                <Image src={newTabIcon} alt="new tab" width={20} height={20} />
-                Donate
+                <ExternalLink size={20} />
+                <span>Donate</span>
               </Button>
             </Link>
             <Link
@@ -102,12 +97,12 @@ export default function HeaderMobile() {
                 variant="link"
                 className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
               >
-               GitHub
+                GitHub
               </Button>
             </Link>
           </div>
         </div>
       </div>
     </header>
-  )
+  );
 }
