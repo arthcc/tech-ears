@@ -14,9 +14,7 @@ export default function HeaderMobile() {
     <header className="flex sm:hidden px-4 lg:px-6 h-14 items-center bg-gray-100 dark:bg-gray-900 w-full fixed top-0 z-10">
       <div className="sm:container pt-4 mx-auto flex items-center justify-between w-full">
         <div className="flex items-center">
-          <div className="text-lg font-bold text-gray-800 dark:text-gray-200">
-            TechEars
-          </div>
+          <div className="text-lg font-bold text-gray-800 dark:text-gray-200">TechEars</div>
         </div>
         <div className="flex items-center space-x-4">
           <Button
@@ -30,9 +28,7 @@ export default function HeaderMobile() {
 
       <div
         className={`${
-          menuMobile
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+          menuMobile ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         } duration-300 absolute w-full h-screen top-0 left-0`}
       >
         <div
