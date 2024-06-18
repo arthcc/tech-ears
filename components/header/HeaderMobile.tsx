@@ -1,14 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { ExternalLink, Menu, X } from "lucide-react";
+import { LanguageContext } from "@/src/context/LanguageContext";
 
 export default function HeaderMobile() {
   const [menuMobile, setMenuMobile] = useState(false);
-
   const handleMenu = () => setMenuMobile(!menuMobile);
+
+  const { language } = useContext(LanguageContext);
 
   return (
     <header className="flex sm:hidden px-4 lg:px-6 h-14 items-center bg-gray-100 dark:bg-gray-900 w-full fixed top-0 z-10">
@@ -27,18 +29,16 @@ export default function HeaderMobile() {
       </div>
 
       <div
-        className={`${
-          menuMobile ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        } duration-300 absolute w-full h-screen top-0 left-0`}
+        className={`${menuMobile ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          } duration-300 absolute w-full h-screen top-0 left-0`}
       >
         <div
           onClick={handleMenu}
           className="content-[''] w-full h-screen bg-[rgba(0,0,0,0.4)] absolute top-0 left-0 z-10"
         />
         <div
-          className={`${
-            menuMobile ? "right-0" : "-right-[220px]"
-          } duration-300 absolute w-[220px] h-screen bg-background top-0 z-20`}
+          className={`${menuMobile ? "right-0" : "-right-[220px]"
+            } duration-300 absolute w-[220px] h-screen bg-background top-0 z-20`}
         >
           <div className="flex items-end flex-col p-4">
             <Button
@@ -57,7 +57,7 @@ export default function HeaderMobile() {
                 variant="link"
                 className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
               >
-                About Me
+                {language == "english" ? "About me" : "Sobre mim"}
               </Button>
             </Link>
             <Link
@@ -68,7 +68,7 @@ export default function HeaderMobile() {
                 variant="link"
                 className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
               >
-                How to Play?
+                {language == "english" ? "How to Play?" : "Como jogar?"}
               </Button>
             </Link>
             <Link
@@ -81,7 +81,7 @@ export default function HeaderMobile() {
                 className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 flex gap-2 items-center"
               >
                 <ExternalLink size={20} />
-                <span>Donate</span>
+                <span>{language == "english" ? "Donate" : "Doação"}</span>
               </Button>
             </Link>
             <Link
