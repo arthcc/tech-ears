@@ -17,14 +17,11 @@ export const MenuLanguage = props => {
     <DropdownMenu {...props}>
       <DropdownMenuTrigger asChild>
         <Button size="icon">
-          {
-            language == "english" ?
-              <img src="/usaFlag.svg" className="h-[1.2rem] w-[1.2rem]" />
-              :
-              <img src="/brazilFlag.svg" className="absolute h-[1.2rem] w-[1.2rem]" />
-          }
-
-
+          {language == "english" ? (
+            <img src="/usaFlag.svg" className="h-[1.2rem] w-[1.2rem]" />
+          ) : (
+            <img src="/brazilFlag.svg" className="absolute h-[1.2rem] w-[1.2rem]" />
+          )}
           <span className="sr-only">Toggle language</span>
         </Button>
       </DropdownMenuTrigger>

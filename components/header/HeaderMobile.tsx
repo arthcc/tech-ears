@@ -1,3 +1,4 @@
+//eslint-disable-pretier/pretier
 "use client";
 
 import React, { useContext, useState } from "react";
@@ -27,9 +28,9 @@ export default function HeaderMobile() {
           </Button>
         </div>
       </div>
-
       <div
-        className={`${menuMobile ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        className={`${/* eslint-disable prettier/prettier */
+          menuMobile ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
           } duration-300 absolute w-full h-screen top-0 left-0`}
       >
         <div
