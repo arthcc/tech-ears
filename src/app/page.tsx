@@ -8,6 +8,7 @@ import MenuTheme from "@/components/menuTheme/menuTheme";
 import Header from "@/components/header/Header";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { LanguageContext } from "../context/LanguageContext";
+import { MenuLanguage } from "@/components/menuLanguage/menuLanguage";
 
 export default function HomePage() {
   const { theme, setTheme } = useTheme();
@@ -36,6 +37,7 @@ export default function HomePage() {
           </Link>
           <div className="flex items-center space-x-4">
             <MenuTheme />
+            <MenuLanguage />
           </div>
         </div>
       </main>
