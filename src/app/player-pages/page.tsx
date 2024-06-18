@@ -1,9 +1,11 @@
 "use client";
 
-import { BackMenu } from "@/components/backMenu/backMenu";
-import MenuTheme from "@/components/menuTheme/menuTheme";
+import { BackMenu } from "@/app/_components/backMenu/backMenu";
+import MenuTheme from "@/app/_components/menuTheme/menuTheme";
 import { useEffect, useState } from "react";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { getCookie, setCookie } from "cookies-next";
+
 const PlayerPage = () => {
   const phrases = {
     backEnd: [
@@ -54,55 +56,60 @@ const PlayerPage = () => {
 
   const [inputValue, setInputValue] = useState("");
   const [correction, setCorrection] = useState("");
-  const [currentDate, setCurrentDate] = useState("");
   const [audioSrc, setAudioSrc] = useState(null);
   const [randomPhrase, setRandomPhrase] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [rounds, setRounds] = useState<number>(0);
 
-  useEffect(() => {
-    const fetchRandomPhrase = async () => {
-      const phrase = getRandomPhrase();
-      setRandomPhrase(phrase);
-      try {
-        const options = {
-          method: "POST",
-          headers: {
-            "xi-api-key": process.env.ELEVENLABS_API_KEY,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            text: phrase,
-            voice_settings: {
-              stability: 1,
-              similarity_boost: 1
-            }
-          })
-        };
+  const fetchRandomPhrase = async () => {
+    const phrase = getRandomPhrase();
+    setRandomPhrase(phrase);
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "xi-api-key": process.env.ELEVENLABS_API_KEY,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          text: phrase,
+          voice_settings: {
+            stability: 1,
+            similarity_boost: 1
+          }
+        })
+      };
 
-        const response = await fetch(
-          "https://api.elevenlabs.io/v1/text-to-speech/iP95p4xoKVk53GoZ742B",
-          options
-        );
+      const response = await fetch(
+        "https://api.elevenlabs.io/v1/text-to-speech/iP95p4xoKVk53GoZ742B",
+        options
+      );
 
-        if (!response.ok) {
-          setErrorMessage("Failed to fetch the audio.");
-          console.error("Failed to fetch the audio");
-          return null;
-        }
-
-        const audioBlob = await response.blob();
-        const audioUrl = URL.createObjectURL(audioBlob);
-
-        setAudioSrc(audioUrl);
-        return audioUrl;
-      } catch (error) {
-        setErrorMessage("Error fetching the audio");
-        console.error("Error fetching audio:", error);
+      if (!response.ok) {
+        setErrorMessage("Failed to fetch the audio.");
+        console.error("Failed to fetch the audio");
         return null;
       }
-    };
 
-    fetchRandomPhrase();
+      const audioBlob = await response.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+
+      setAudioSrc(audioUrl);
+      return audioUrl;
+    } catch (error) {
+      setErrorMessage("Error fetching the audio");
+      console.error("Error fetching audio:", error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    const cookieRounds = getCookie("rounds");
+
+    if (cookieRounds) setRounds(+cookieRounds);
+    if (!(+cookieRounds >= 5)) {
+      fetchRandomPhrase();
+    }
   }, []);
 
   const mockCorrectAnswer: string[] = randomPhrase.split(" ");
@@ -112,20 +119,20 @@ const PlayerPage = () => {
   };
 
   const handleSubmit = e => {
-    const options = {
-      year: "numeric" as const,
-      month: "long" as const,
-      day: "numeric" as const
-    };
-    setCurrentDate(new Date().toLocaleDateString("en-US", options));
     e.preventDefault();
     setCorrection(compareAnswer(inputValue.trim(), mockCorrectAnswer));
   };
 
   const handlePlayAgain = () => {
+    const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+    const now = new Date();
+    setCookie("rounds", `${rounds + 1}`, {
+      expires: new Date(now.getTime() + ONE_DAY_MS)
+    });
+    setRounds(prev => prev + 1);
     setInputValue("");
     setCorrection("");
-    setCurrentDate("");
+    fetchRandomPhrase();
   };
 
   const handleShareProgress = () => {
@@ -183,32 +190,43 @@ const PlayerPage = () => {
               >
                 Listen and type what you hear in the input below.
               </h4>
-              {audioSrc && <audio controls src={audioSrc} />}
-              <form
-                className="w-full max-w-md flex flex-col items-center px-10"
-                onSubmit={handleSubmit}
-              >
-                <input
-                  type="text"
-                  placeholder="Enter your text"
-                  value={inputValue}
-                  onChange={handleChange}
-                  className="border border-gray-300 rounded-md px-3 py-2 mt-4 w-full"
-                />
-                <button
-                  type="submit"
-                  className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 w-full"
-                >
-                  Submit
-                </button>
-              </form>
+
+              {rounds >= 5 ? (
+                <p className="w-full flex justify-center mt-2">
+                  You exceeded your daily quota of 5 lessons
+                </p>
+              ) : (
+                <>
+                  {audioSrc && <audio controls src={audioSrc} />}
+                  <form
+                    className="w-full max-w-md flex flex-col items-center px-10"
+                    onSubmit={handleSubmit}
+                  >
+                    <input
+                      type="text"
+                      placeholder="Enter your text"
+                      value={inputValue}
+                      onChange={handleChange}
+                      className="border border-gray-300 rounded-md px-3 py-2 mt-4 w-full"
+                    />
+                    <button
+                      type="submit"
+                      className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 w-full"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </>
+              )}
             </>
           )}
 
           {correction && (
             <>
               <h2 className="w-full flex justify-center mt-2">✨ Tech Ears</h2>
-              <h1 className="w-full flex justify-center mt-2">{currentDate}</h1>
+              <h1 className="w-full flex justify-center mt-2">
+                {new Date().toLocaleDateString("en-US")}
+              </h1>
               <h1 className="w-full flex justify-center mt-5"> {correction}</h1>
               <p className="w-full flex justify-center mt-2"> Your input: {inputValue}</p>
               <div className="flex mt-4">
@@ -218,9 +236,10 @@ const PlayerPage = () => {
                 >
                   Share Progress
                 </button>
+
                 <button
                   className="px-4 py-2 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-100"
-                  onClick={() => window.location.reload()}
+                  onClick={handlePlayAgain}
                 >
                   Play Again
                 </button>
