@@ -5,8 +5,9 @@
       "es2021": true,
       "node": true
   },
-  "plugins": ["react", "prettier", "@typescript-eslint"],
+  "plugins": ["react", "prettier", "next/core-web-vitals", "plugin:prettier/recommended"],
   "extends": [
+    "prettier",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
