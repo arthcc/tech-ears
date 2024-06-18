@@ -4,6 +4,7 @@ import { BackMenu } from "@/app/_components/backMenu/backMenu";
 import MenuTheme from "@/app/_components/menuTheme/menuTheme";
 import { useEffect, useState } from "react";
 import { GoogleAnalytics } from "@next/third-parties/google";
+
 const PlayerPage = () => {
   const phrases = {
     backEnd: [
@@ -58,50 +59,53 @@ const PlayerPage = () => {
   const [audioSrc, setAudioSrc] = useState(null);
   const [randomPhrase, setRandomPhrase] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [rounds, setRounds] = useState<number>(0);
 
-  useEffect(() => {
-    const fetchRandomPhrase = async () => {
-      const phrase = getRandomPhrase();
-      setRandomPhrase(phrase);
-      try {
-        const options = {
-          method: "POST",
-          headers: {
-            "xi-api-key": process.env.ELEVENLABS_API_KEY,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            text: phrase,
-            voice_settings: {
-              stability: 1,
-              similarity_boost: 1
-            }
-          })
-        };
+  const fetchRandomPhrase = async () => {
+    if (rounds >= 5) return;
 
-        const response = await fetch(
-          "https://api.elevenlabs.io/v1/text-to-speech/iP95p4xoKVk53GoZ742B",
-          options
-        );
+    const phrase = getRandomPhrase();
+    setRandomPhrase(phrase);
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "xi-api-key": process.env.ELEVENLABS_API_KEY,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          text: phrase,
+          voice_settings: {
+            stability: 1,
+            similarity_boost: 1
+          }
+        })
+      };
 
-        if (!response.ok) {
-          setErrorMessage("Failed to fetch the audio.");
-          console.error("Failed to fetch the audio");
-          return null;
-        }
+      const response = await fetch(
+        "https://api.elevenlabs.io/v1/text-to-speech/iP95p4xoKVk53GoZ742B",
+        options
+      );
 
-        const audioBlob = await response.blob();
-        const audioUrl = URL.createObjectURL(audioBlob);
-
-        setAudioSrc(audioUrl);
-        return audioUrl;
-      } catch (error) {
-        setErrorMessage("Error fetching the audio");
-        console.error("Error fetching audio:", error);
+      if (!response.ok) {
+        setErrorMessage("Failed to fetch the audio.");
+        console.error("Failed to fetch the audio");
         return null;
       }
-    };
 
+      const audioBlob = await response.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+
+      setAudioSrc(audioUrl);
+      return audioUrl;
+    } catch (error) {
+      setErrorMessage("Error fetching the audio");
+      console.error("Error fetching audio:", error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
     fetchRandomPhrase();
   }, []);
 
@@ -183,25 +187,34 @@ const PlayerPage = () => {
               >
                 Listen and type what you hear in the input below.
               </h4>
-              {audioSrc && <audio controls src={audioSrc} />}
-              <form
-                className="w-full max-w-md flex flex-col items-center px-10"
-                onSubmit={handleSubmit}
-              >
-                <input
-                  type="text"
-                  placeholder="Enter your text"
-                  value={inputValue}
-                  onChange={handleChange}
-                  className="border border-gray-300 rounded-md px-3 py-2 mt-4 w-full"
-                />
-                <button
-                  type="submit"
-                  className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 w-full"
-                >
-                  Submit
-                </button>
-              </form>
+
+              {rounds >= 5 ? (
+                <p className="w-full flex justify-center mt-2">
+                  You exceeded your daily quota of 5 lessons
+                </p>
+              ) : (
+                <>
+                  {audioSrc && <audio controls src={audioSrc} />}
+                  <form
+                    className="w-full max-w-md flex flex-col items-center px-10"
+                    onSubmit={handleSubmit}
+                  >
+                    <input
+                      type="text"
+                      placeholder="Enter your text"
+                      value={inputValue}
+                      onChange={handleChange}
+                      className="border border-gray-300 rounded-md px-3 py-2 mt-4 w-full"
+                    />
+                    <button
+                      type="submit"
+                      className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 w-full"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </>
+              )}
             </>
           )}
 
@@ -218,9 +231,14 @@ const PlayerPage = () => {
                 >
                   Share Progress
                 </button>
+
                 <button
                   className="px-4 py-2 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-100"
-                  onClick={() => window.location.reload()}
+                  onClick={() => {
+                    setRounds(prev => prev + 1);
+                    setCorrection("");
+                    fetchRandomPhrase();
+                  }}
                 >
                   Play Again
                 </button>
