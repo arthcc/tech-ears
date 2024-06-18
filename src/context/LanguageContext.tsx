@@ -10,9 +10,9 @@ interface LanguageContextProps {
   setLanguage: Dispatch<SetStateAction<"english" | "portuguese">>;
 }
 
-const LanguageContext = createContext({} as LanguageContextProps);
+export const LanguageContext = createContext({} as LanguageContextProps);
 
-const LanguageContextProvider: React.FC<LanguageContextProviderProps> = ({ children }) => {
+export const LanguageContextProvider: React.FC<LanguageContextProviderProps> = ({ children }) => {
   const [language, setLanguage] = useState<"english" | "portuguese">("english");
 
   return (
