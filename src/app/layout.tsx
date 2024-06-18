@@ -6,10 +6,11 @@ import { Providers } from "@/components/providers/providers";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 import { Analytics } from "@vercel/analytics/react";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 export const metadata: Metadata = {
   title: "TechEars",
-  description: "From developers to developers"
+  description: "From developers to developers: Learn English by Listening"
 };
 
 interface RootLayoutProps {
@@ -48,11 +49,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <meta property="twitter:image" content="https://i.ibb.co/Y8wQBy1/og.png" />
 
         <body className={inter.className}>
-          <GoogleAnalytics gaId="G-XYZ" />
+       
           <SpeedInsights />
           <Analytics />
           <Providers>{children}</Providers>
         </body>
+        <GoogleAnalytics gaId="G-XYZ" />
       </html>
     </>
   );
