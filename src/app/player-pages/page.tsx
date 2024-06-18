@@ -4,6 +4,7 @@ import { BackMenu } from "@/app/_components/backMenu/backMenu";
 import MenuTheme from "@/app/_components/menuTheme/menuTheme";
 import { useEffect, useState } from "react";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { getCookie, setCookie } from "cookies-next";
 
 const PlayerPage = () => {
   const phrases = {
@@ -55,15 +56,12 @@ const PlayerPage = () => {
 
   const [inputValue, setInputValue] = useState("");
   const [correction, setCorrection] = useState("");
-  const [currentDate, setCurrentDate] = useState("");
   const [audioSrc, setAudioSrc] = useState(null);
   const [randomPhrase, setRandomPhrase] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [rounds, setRounds] = useState<number>(0);
 
   const fetchRandomPhrase = async () => {
-    if (rounds >= 5) return;
-
     const phrase = getRandomPhrase();
     setRandomPhrase(phrase);
     try {
@@ -106,7 +104,12 @@ const PlayerPage = () => {
   };
 
   useEffect(() => {
-    fetchRandomPhrase();
+    const cookieRounds = getCookie("rounds");
+
+    if (cookieRounds) setRounds(+cookieRounds);
+    if (!(+cookieRounds >= 5)) {
+      fetchRandomPhrase();
+    }
   }, []);
 
   const mockCorrectAnswer: string[] = randomPhrase.split(" ");
@@ -116,20 +119,20 @@ const PlayerPage = () => {
   };
 
   const handleSubmit = e => {
-    const options = {
-      year: "numeric" as const,
-      month: "long" as const,
-      day: "numeric" as const
-    };
-    setCurrentDate(new Date().toLocaleDateString("en-US", options));
     e.preventDefault();
     setCorrection(compareAnswer(inputValue.trim(), mockCorrectAnswer));
   };
 
   const handlePlayAgain = () => {
+    const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+    const now = new Date();
+    setCookie("rounds", `${rounds + 1}`, {
+      expires: new Date(now.getTime() + ONE_DAY_MS)
+    });
+    setRounds(prev => prev + 1);
     setInputValue("");
     setCorrection("");
-    setCurrentDate("");
+    fetchRandomPhrase();
   };
 
   const handleShareProgress = () => {
@@ -221,7 +224,9 @@ const PlayerPage = () => {
           {correction && (
             <>
               <h2 className="w-full flex justify-center mt-2">✨ Tech Ears</h2>
-              <h1 className="w-full flex justify-center mt-2">{currentDate}</h1>
+              <h1 className="w-full flex justify-center mt-2">
+                {new Date().toLocaleDateString("en-US")}
+              </h1>
               <h1 className="w-full flex justify-center mt-5"> {correction}</h1>
               <p className="w-full flex justify-center mt-2"> Your input: {inputValue}</p>
               <div className="flex mt-4">
@@ -234,11 +239,7 @@ const PlayerPage = () => {
 
                 <button
                   className="px-4 py-2 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-100"
-                  onClick={() => {
-                    setRounds(prev => prev + 1);
-                    setCorrection("");
-                    fetchRandomPhrase();
-                  }}
+                  onClick={handlePlayAgain}
                 >
                   Play Again
                 </button>
