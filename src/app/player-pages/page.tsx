@@ -1,7 +1,7 @@
 "use client";
 
-import { BackMenu } from "@/components/backMenu/backMenu";
-import MenuTheme from "@/components/menuTheme/menuTheme";
+import { BackMenu } from "@app/_components/backMenu/backMenu";
+import MenuTheme from "@app/_components/menuTheme/menuTheme";
 import { useEffect, useState } from "react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 const PlayerPage = () => {
