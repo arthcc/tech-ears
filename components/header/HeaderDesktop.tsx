@@ -13,27 +13,18 @@ export default function HeaderDesktop() {
         </div>
         <div className="flex items-center space-x-4">
           <Link
-            href="/about-me"
+                href="https://arthdev.vercel.app" target="_blank"
             className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 flex items-center"
           >
             <Button
               variant="link"
               className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
             >
-              About Me
+              <ExternalLink size={20} />
+                <span>About Me</span>
             </Button>
           </Link>
-          <Link
-            href="/how-to-play"
-            className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
-          >
-            <Button
-              variant="link"
-              className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
-            >
-              How to Play?
-            </Button>
-          </Link>
+        
           <Link
             href="https://github.com/arthcc/tech-ears"
             target="_blank"
@@ -43,7 +34,8 @@ export default function HeaderDesktop() {
               variant="link"
               className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
             >
-              GitHub
+                <ExternalLink size={20} />
+                <span> GitHub</span>
             </Button>
           </Link>
           <Link
