@@ -59,7 +59,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <Analytics />
           <Providers>{children}</Providers>
         </body>
-        /* eslint-disable prettier/prettier */
+        {/* eslint-disable prettier/prettier */}
         <GoogleAnalytics gaId="G-R5SCDC4C8D" />
       </html>
     </>
