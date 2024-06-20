@@ -22,8 +22,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <html lang="en" suppressHydrationWarning>
         <head 
         />
-        
-
         <title>Tech Ears </title>
         <meta name="title" content="Tech Ears " />
         <meta
@@ -54,7 +52,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           property="twitter:image"
           content="https://i.ibb.co/Y8wQBy1/og.png"
         />
-
         <body className={inter.className}>
         <GoogleAnalytics gaId="G-XYZ" />
           <SpeedInsights />
