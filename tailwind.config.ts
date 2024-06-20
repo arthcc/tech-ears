@@ -18,6 +18,20 @@ const config: Config = {
     },
     extend: {
       colors: {
+        'mirage': {
+          '50': '#f0f7fe',
+          '100': '#deecfb',
+          '200': '#c4e0f9',
+          '300': '#9cccf4',
+          '400': '#6dafed',
+          '500': '#4b90e6',
+          '600': '#3674da',
+          '700': '#2d60c8',
+          '800': '#2a4fa3',
+          '900': '#274481',
+          '950': '#0f172a',
+      },
+      
         'blue-h1': '#1E40AF', // Defina a cor personalizada para 'blue-h1'
         'blue-400': '#60A5FA', // Defina a cor personalizada para 'blue-400'
         border: "hsl(var(--border))",
