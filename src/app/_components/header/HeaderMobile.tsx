@@ -50,25 +50,16 @@ export default function HeaderMobile() {
             </Button>
 
             <Link
-              href="/about-me"
+              href="https://arthdev.vercel.app"
+              target="_blank"
               className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 flex items-center"
             >
               <Button
                 variant="link"
                 className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
               >
-                About Me
-              </Button>
-            </Link>
-            <Link
-              href="/how-to-play"
-              className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
-            >
-              <Button
-                variant="link"
-                className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
-              >
-                How to Play?
+                <ExternalLink size={20} />
+                <span>About Me</span>
               </Button>
             </Link>
             <Link
@@ -93,7 +84,8 @@ export default function HeaderMobile() {
                 variant="link"
                 className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
               >
-                GitHub
+                <ExternalLink size={20} />
+                <span> GitHub</span>
               </Button>
             </Link>
           </div>
