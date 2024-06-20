@@ -3,10 +3,12 @@
 import * as React from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import MenuTheme from "@/components/menuTheme/menuTheme";
-import Header from "@/components/header/Header";
 import { GoogleAnalytics } from '@next/third-parties/google'
+import Header from "./_components/header/Header";
+import { Button } from "./_components/ui/button";
+import MenuTheme from "./_components/menuTheme/menuTheme";
+
+
 export default function HomePage() {
   const { theme, setTheme } = useTheme();
 
