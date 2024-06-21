@@ -16,9 +16,9 @@ export default function HomePage() {
     <div className="flex flex-col min-h-screen">
       <GoogleAnalytics gaId="G-R5SCDC4C8D" />
       <Header />
-      <main className="flex flex-col items-center justify-center flex-grow p-6 bg-gray-100 dark:bg-gray-900 pt-24">
+      <main className="flex flex-col items-center justify-center flex-grow p-6 bg-gray-100 dark:bg-gray-900 pt-20 lg:pt-24 space-y-8">
         <div className="hero-background w-full h-full absolute top-0 left-0 z-0"></div>
-        <h1 className="text-4xl font-bold tracking-tight lg:text-5xl mb-6 relative z-10">
+        <h1 className="text-4xl font-bold tracking-tight text-center lg:text-left lg:text-5xl relative z-10">
           The
           <span className="text-mirage-500 dark:text-blue-400">
             {" "}
@@ -26,9 +26,11 @@ export default function HomePage() {
           </span>
           to Learn English
         </h1>
-        <h3 className="mt-4 text-2xl font-semibold tracking-tight text-mirage-600 dark:text-blue-400 mb-6 relative z-10">
-          <span> Improve your listening with just a few minutes per day!</span>
+
+        <h3 className="mt-4 text-2xl text-center lg:text-left font-semibold tracking-tight text-mirage-600 dark:text-blue-400 mb-6 relative z-10">
+          Improve your listening with just a few minutes per day!
         </h3>
+
         <div className="flex items-center space-x-4 relative z-10">
           <Link href="/player-pages">
             <Button className="btn-primary">Get Started</Button>
@@ -43,7 +45,7 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
-      
+
     </div>
   );
 }

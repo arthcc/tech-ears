@@ -35,12 +35,15 @@ export default function HeaderMobile() {
           onClick={handleMenu}
           className="content-[''] w-full h-screen bg-[rgba(0,0,0,0.4)] absolute top-0 left-0 z-10"
         />
+
+        {/* the content at the start and the close button at the end looks better then all of them at the end */}
+
         <div
           className={`${
             menuMobile ? "right-0" : "-right-[220px]"
           } duration-300 absolute w-[220px] h-screen bg-background top-0 z-20`}
         >
-          <div className="flex items-end flex-col p-4">
+          <div className="w-full flex justify-end p-4">
             <Button
               onClick={handleMenu}
               variant="ghost"
@@ -48,7 +51,9 @@ export default function HeaderMobile() {
             >
               <X className="text-gray-800 dark:text-gray-200" />
             </Button>
+          </div>
 
+          <div className="flex items-start flex-col p-4">
             <Link
               href="https://arthdev.vercel.app"
               target="_blank"
