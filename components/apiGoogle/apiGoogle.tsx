@@ -2,6 +2,7 @@
 
 import { Progress } from "@/app/_components/ui/progress";
 import { getCookie, setCookie } from "cookies-next";
+import React from "react";
 import { useEffect, useState } from "react";
 
 const phrases = {
@@ -72,6 +73,18 @@ const phrases = {
     "Engaging in community outreach and mentorship programs"
   ]
 };
+const StepComponent = ({ currentStep, totalSteps }) => {
+  return (
+    <div className="step-component mb-2 w-full">
+      <p className="text-center mb-1">
+        Phrase {currentStep} of {totalSteps}
+      </p>
+      <div className="flex justify-center">
+      <Progress value={(currentStep )  * 20}max={totalSteps} className="w-[60%]" />
+      </div>
+    </div>
+  );
+};
 
 const compareAnswer = (inputValue, correctAnswer) => {
   const inputWords = inputValue.toLowerCase().split(" ");
@@ -91,23 +104,6 @@ const compareAnswer = (inputValue, correctAnswer) => {
       );
     }
   });
-};
-
-const StepComponent = ({ currentStep, totalSteps }) => {
-  return (
-    <div className="step-component mb-2 w-full">
-      <p className="text-center mb-1">
-        Phrase {currentStep + 1} of {totalSteps}
-      </p>
-      <div className="flex justify-center">
-        <progress
-          value={currentStep + 1}
-          max={totalSteps}
-          className="w-full medium-progress mx-auto"
-        ></progress>
-      </div>
-    </div>
-  );
 };
 
 export const ApiGoogle = () => {
@@ -163,7 +159,6 @@ export const ApiGoogle = () => {
       const audioBase64 = `data:audio/mp3;base64,${audioContent}`;
       setAudioSrc(audioBase64);
     } catch (error) {
-      console.error("Error with the Text-to-Speech API", error);
       setErrorMessage("Failed to load audio. Please try again later.");
     }
   };
@@ -208,7 +203,6 @@ export const ApiGoogle = () => {
     setCorrections(prevCorrections => [...prevCorrections, newCorrections]);
     setUserResponses(prevResponses => [...prevResponses, inputValue.trim()]);
 
-    // Verificar se a resposta está correta
     const isCorrect = newCorrections.every(correction =>
       correction.props.className.includes("text-text-correct")
     );
@@ -255,7 +249,7 @@ export const ApiGoogle = () => {
     window.open(twitterUrl, "_blank");
   };
 
-  const options = {
+    const options = {
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -265,7 +259,7 @@ export const ApiGoogle = () => {
   const formattedDate = new Date().toLocaleDateString("en-US", options);
 
   return (
-    <div className="flex flex-col items-center w-full max-w-screen-md p-8 bg-gray-100 dark:bg-background-dark rounded-lg shadow-lg">
+    <div className="flex flex-col gap-y-6 items-center w-full max-w-screen-md p-8 lg:bg-white lg:dark:bg-gray-800 rounded-lg shadow-lg">
       {!showShareProgress && (
         <>
           {errorMessage && (
@@ -276,29 +270,30 @@ export const ApiGoogle = () => {
 
           {rounds < 5 && (
             <>
+             <StepComponent currentStep={currentStep + 1} totalSteps={5} />
               <h4 className="mt-6 text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mb-6">
                 Listen and type what you hear in the input below.
               </h4>
               {audioSrc && (
                 <>
                   <audio controls src={audioSrc} />
-                  <StepComponent currentStep={currentStep} totalSteps={5} />
+
                   <form
-                    className="w-full max-w-md flex flex-col items-center px-10"
+                    className="w-full mx-auto lg:max-w-md flex flex-col px-10"
                     onSubmit={handleSubmit}
                   >
                     <input
                       type="text"
-                      placeholder="Enter your text"
+                      placeholder="Listen and type what you hear here"
                       value={inputValue}
                       onChange={handleChange}
-                      className="border border-gray-300 rounded-md px-3 py-2 mt-4 w-full"
+                      className="border border-gray-300 rounded-md px-3 py-2 w-full"
                     />
                     <button
                       type="submit"
                       className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 w-full"
                     >
-                      Submit
+                      Next Phrase
                     </button>
                   </form>
                 </>
@@ -316,32 +311,33 @@ export const ApiGoogle = () => {
 
       {showShareProgress && (
         <>
-          <>
-            <h2 className="w-full flex justify-center mt-2">✨ Tech Ears</h2>
-            <h1 className="w-full flex justify-center mt-2">{formattedDate}</h1>
-            {corrections.map((roundCorrections, roundIndex) => (
-              <div key={roundIndex} className="w-full flex flex-col items-center mt-5">
-                <div className="flex justify-center">
-                  {roundCorrections.map((correction, index) => (
-                    <span key={index} className="ml-1">
-                      {correction}
-                    </span>
-                  ))}
-                </div>
-                <div className="mt-2">
-                  <span className="ml-1">Your Response: {userResponses[roundIndex]}</span>
-                </div>
-              </div>
-            ))}
-            <div className="flex justify-center mt-4"></div>
-          </>
-          <h4 className="mt-6 text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mb-6">
+          <h2 className="w-full flex justify-center mt-1">✨ Tech Ears</h2>
+          <h1 className="w-full flex justify-center mt-1">{formattedDate}</h1>
+          
+          <h4 className="text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mt-5 mb-2">
             Congratulations!
           </h4>
-          <p className="mb-6">
+          <p className="mb-3">
             You have completed today's session. You got {correctCount} out of 5 phrases correctly!
           </p>
-          <div className="flex justify-center">
+          
+          {corrections.map((roundCorrections, roundIndex) => (
+            <div key={roundIndex} className="w-full flex flex-col items-center mt-3">
+              <div className="flex justify-center">
+                {roundCorrections.map((correction, index) => (
+                  <span key={index} className="ml-1">
+                    {correction}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-1">
+                <span className="ml-1">Your Response: {userResponses[roundIndex]}</span>
+              </div>
+              
+            </div>
+            
+          ))}
+          <div className="flex justify-center mt-3">
             <button
               className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
               onClick={handleShareProgress}
