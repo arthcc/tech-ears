@@ -11,7 +11,7 @@ export default function HeaderMobile() {
   const handleMenu = () => setMenuMobile(!menuMobile);
 
   return (
-    <header className="flex sm:hidden px-4 lg:px-6 h-14 items-center bg-gray-100 dark:bg-gray-900 w-full fixed top-0 z-10">
+    <header className="flex sm:hidden px-4 lg:px-6 h-14 items-center bg-gray-100 dark:dark:bg-background-dark  w-full fixed top-0 z-10">
       <div className="sm:container pt-4 mx-auto flex items-center justify-between w-full">
         <div className="flex items-center">
           <div className="text-lg font-bold text-gray-800 dark:text-gray-200">TechEars</div>
