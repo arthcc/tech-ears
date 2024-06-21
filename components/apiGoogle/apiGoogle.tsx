@@ -1,5 +1,6 @@
 "use client";
 
+import { Progress } from "@/app/_components/ui/progress";
 import { getCookie, setCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 
@@ -24,7 +25,7 @@ const phrases = {
     "Analyzing server logs to optimize resource utilization",
     "Deploying serverless functions for cost-efficient scaling",
     "Integrating OAuth for third-party authentication",
-    "Managing secrets and environment variables securely",
+    "Managing secrets and environment variables securely"
   ],
   frontEnd: [
     "Building responsive UIs with modern frameworks",
@@ -46,7 +47,7 @@ const phrases = {
     "Integrating WebSockets for real-time updates",
     "Utilizing WebAssembly to optimize performance-critical code",
     "Implementing PWA features for offline functionality",
-    "Auditing performance metrics with Lighthouse",
+    "Auditing performance metrics with Lighthouse"
   ],
   softSkills: [
     "Communicating effectively with team members",
@@ -68,23 +69,23 @@ const phrases = {
     "Promoting a culture of knowledge sharing within the team",
     "Fostering diversity and inclusion initiatives",
     "Staying informed about industry trends and best practices",
-    "Engaging in community outreach and mentorship programs",
-  ],
+    "Engaging in community outreach and mentorship programs"
+  ]
 };
 
 const compareAnswer = (inputValue, correctAnswer) => {
   const inputWords = inputValue.toLowerCase().split(" ");
-  const correctWords = correctAnswer.map((word) => word.toLowerCase());
+  const correctWords = correctAnswer.map(word => word.toLowerCase());
   return correctAnswer.map((word, index) => {
     if (correctWords[index] !== inputWords[index]) {
       return (
-        <span key={index} className="text-red-500 ml-1">
+        <span key={index} className="text-text-wrong ml-1">
           {word}
         </span>
       );
     } else {
       return (
-        <span key={index} className="text-green-500 ml-1">
+        <span key={index} className="text-text-correct ml-1">
           {word}
         </span>
       );
@@ -92,15 +93,29 @@ const compareAnswer = (inputValue, correctAnswer) => {
   });
 };
 
+const StepComponent = ({ currentStep, totalSteps }) => {
+  return (
+    <div className="step-component mb-2 w-full">
+      <p className="text-center mb-1">
+        Phrase {currentStep + 1} of {totalSteps}
+      </p>
+      <div className="flex justify-center">
+        <progress
+          value={currentStep + 1}
+          max={totalSteps}
+          className="w-full medium-progress mx-auto"
+        ></progress>
+      </div>
+    </div>
+  );
+};
+
 export const ApiGoogle = () => {
   const getRandomPhrase = () => {
     const categories = Object.keys(phrases);
-    const randomCategory =
-      categories[Math.floor(Math.random() * categories.length)];
+    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
     const phrasesInCategory = phrases[randomCategory];
-    return phrasesInCategory[
-      Math.floor(Math.random() * phrasesInCategory.length)
-    ];
+    return phrasesInCategory[Math.floor(Math.random() * phrasesInCategory.length)];
   };
 
   const [inputValue, setInputValue] = useState("");
@@ -111,6 +126,8 @@ export const ApiGoogle = () => {
   const [rounds, setRounds] = useState(0);
   const [showShareProgress, setShowShareProgress] = useState(false);
   const [userResponses, setUserResponses] = useState([]);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [correctCount, setCorrectCount] = useState(0);
 
   const fetchRandomPhrase = async () => {
     const phrase = getRandomPhrase();
@@ -120,15 +137,15 @@ export const ApiGoogle = () => {
       const data = {
         input: { text: phrase },
         voice: { languageCode: "en-US", ssmlGender: "MALE" },
-        audioConfig: { audioEncoding: "MP3" },
+        audioConfig: { audioEncoding: "MP3" }
       };
 
       const options = {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
       };
 
       const apiKey = process.env.GOOGLE_API_KEY;
@@ -138,9 +155,7 @@ export const ApiGoogle = () => {
       );
 
       if (!response.ok) {
-        throw new Error(
-          `Error with the Text-to-Speech API: ${response.statusText}`
-        );
+        throw new Error(`Error with the Text-to-Speech API: ${response.statusText}`);
       }
 
       const responseData = await response.json();
@@ -155,37 +170,74 @@ export const ApiGoogle = () => {
 
   useEffect(() => {
     const cookieRounds = getCookie("rounds");
-    if (cookieRounds) setRounds(+cookieRounds);
-    if (!(+cookieRounds >= 5)) {
-      fetchRandomPhrase();
+    const expirationDate = new Date(getCookie("expirationDate"));
+    const now = new Date();
+
+    if (cookieRounds && expirationDate > now) {
+      setRounds(+cookieRounds);
+      const storedStep = localStorage.getItem("currentStep");
+      const storedCorrectCount = localStorage.getItem("correctCount");
+      if (storedStep) {
+        setCurrentStep(parseInt(storedStep));
+      }
+      if (storedCorrectCount) {
+        setCorrectCount(parseInt(storedCorrectCount));
+      }
+    } else {
+      setRounds(0);
+      setCurrentStep(0);
+      setCorrectCount(0);
+      localStorage.removeItem("currentStep");
+      localStorage.removeItem("correctCount");
+      setCookie("rounds", "0", { expires: new Date(now.getTime() + 24 * 60 * 60 * 1000) });
+      setCookie("expirationDate", new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString(), {
+        expires: new Date(now.getTime() + 24 * 60 * 60 * 1000)
+      });
     }
+
+    fetchRandomPhrase();
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setInputValue(e.target.value);
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = e => {
     e.preventDefault();
-    const newCorrections = compareAnswer(
-      inputValue.trim(),
-      randomPhrase.split(" ")
+    const newCorrections = compareAnswer(inputValue.trim(), randomPhrase.split(" "));
+    setCorrections(prevCorrections => [...prevCorrections, newCorrections]);
+    setUserResponses(prevResponses => [...prevResponses, inputValue.trim()]);
+
+    // Verificar se a resposta está correta
+    const isCorrect = newCorrections.every(correction =>
+      correction.props.className.includes("text-text-correct")
     );
-    setCorrections((prevCorrections) => [...prevCorrections, newCorrections]);
-    setUserResponses((prevResponses) => [...prevResponses, inputValue.trim()]);
+    if (isCorrect) {
+      setCorrectCount(prev => prev + 1);
+      localStorage.setItem("correctCount", (correctCount + 1).toString());
+    }
+
     setInputValue("");
 
     if (rounds + 1 === 5) {
       const ONE_DAY_MS = 24 * 60 * 60 * 1000;
       const now = new Date();
       setCookie("rounds", `${rounds + 1}`, {
-        expires: new Date(now.getTime() + ONE_DAY_MS),
+        expires: new Date(now.getTime() + ONE_DAY_MS)
       });
-      setRounds((prev) => prev + 1);
+      setCookie("expirationDate", new Date(now.getTime() + ONE_DAY_MS).toISOString(), {
+        expires: new Date(now.getTime() + ONE_DAY_MS)
+      });
+      setRounds(prev => prev + 1);
       setShowShareProgress(true);
     } else {
-      setRounds((prevRounds) => prevRounds + 1);
+      setRounds(prevRounds => prevRounds + 1);
       fetchRandomPhrase();
     }
+
+    const newStep = currentStep + 1;
+    setCurrentStep(newStep);
+    localStorage.setItem("currentStep", newStep.toString());
   };
 
   const handleShareProgress = () => {
@@ -193,13 +245,13 @@ export const ApiGoogle = () => {
     const now = new Date();
 
     setCookie("rounds", `${rounds + 1}`, {
-      expires: new Date(now.getTime() + ONE_DAY_MS),
+      expires: new Date(now.getTime() + ONE_DAY_MS)
     });
-    const tweetText =
-      "I just used TechEars to practice my English ✨, join me at: tech-ears.vercel.app";
-    const twitterUrl = `https://twitter.com/compose/tweet?text=${encodeURIComponent(
-      tweetText
-    )}`;
+    setCookie("expirationDate", new Date(now.getTime() + ONE_DAY_MS).toISOString(), {
+      expires: new Date(now.getTime() + ONE_DAY_MS)
+    });
+    const tweetText = `I just used TechEars to practice my English ✨, I got ${correctCount} phrases correctly! Join me at: tech-ears.vercel.app`;
+    const twitterUrl = `https://twitter.com/compose/tweet?text=${encodeURIComponent(tweetText)}`;
     window.open(twitterUrl, "_blank");
   };
 
@@ -207,94 +259,98 @@ export const ApiGoogle = () => {
     weekday: "long",
     year: "numeric",
     month: "long",
-    day: "numeric",
+    day: "numeric"
   } as const;
 
   const formattedDate = new Date().toLocaleDateString("en-US", options);
 
   return (
-    <>
-   <div className="flex flex-col items-center w-full max-w-screen-md p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-    {!showShareProgress && (
-      <>
-        {errorMessage && (
-          <h4 className="w-full bg-red-900 text-center p-2 rounded-lg font-semibold">
-            {errorMessage}
-          </h4>
-        )}
+    <div className="flex flex-col items-center w-full max-w-screen-md p-8 bg-gray-100 dark:bg-background-dark rounded-lg shadow-lg">
+      {!showShareProgress && (
+        <>
+          {errorMessage && (
+            <h4 className="w-full bg-red-900 text-center p-2 rounded-lg font-semibold">
+              {errorMessage}
+            </h4>
+          )}
 
-        {rounds < 5 && (
-          <h4 className="mt-6 text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mb-6">
-            Listen and type what you hear in the input below.
-          </h4>
-        )}
+          {rounds < 5 && (
+            <>
+              <h4 className="mt-6 text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mb-6">
+                Listen and type what you hear in the input below.
+              </h4>
+              {audioSrc && (
+                <>
+                  <audio controls src={audioSrc} />
+                  <StepComponent currentStep={currentStep} totalSteps={5} />
+                  <form
+                    className="w-full max-w-md flex flex-col items-center px-10"
+                    onSubmit={handleSubmit}
+                  >
+                    <input
+                      type="text"
+                      placeholder="Enter your text"
+                      value={inputValue}
+                      onChange={handleChange}
+                      className="border border-gray-300 rounded-md px-3 py-2 mt-4 w-full"
+                    />
+                    <button
+                      type="submit"
+                      className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 w-full"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </>
+              )}
+            </>
+          )}
 
-        {rounds >= 5 ? (
-          <p className="w-full flex justify-center mt-2">
-            You have completed 5 rounds. Come back tomorrow for more! ✨
-          </p>
-        ) : (
+          {rounds >= 5 && (
+            <p className="w-full flex justify-center mt-2">
+              You have completed 5 rounds. Come back tomorrow for more! ✨
+            </p>
+          )}
+        </>
+      )}
+
+      {showShareProgress && (
+        <>
           <>
-            {audioSrc && <audio controls src={audioSrc} />}
-            <form
-              className="w-full max-w-md flex flex-col items-center px-10"
-              onSubmit={handleSubmit}
-            >
-              <input
-                type="text"
-                placeholder="Enter your text"
-                value={inputValue}
-                onChange={handleChange}
-                className="border border-gray-300 rounded-md px-3 py-2 mt-4 w-full"
-              />
-              <button
-                type="submit"
-                className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 w-full"
-              >
-                Submit
-              </button>
-            </form>
+            <h2 className="w-full flex justify-center mt-2">✨ Tech Ears</h2>
+            <h1 className="w-full flex justify-center mt-2">{formattedDate}</h1>
+            {corrections.map((roundCorrections, roundIndex) => (
+              <div key={roundIndex} className="w-full flex flex-col items-center mt-5">
+                <div className="flex justify-center">
+                  {roundCorrections.map((correction, index) => (
+                    <span key={index} className="ml-1">
+                      {correction}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-2">
+                  <span className="ml-1">Your Response: {userResponses[roundIndex]}</span>
+                </div>
+              </div>
+            ))}
+            <div className="flex justify-center mt-4"></div>
           </>
-        )}
-      </>
-    )}
-
-    {corrections.length === 5 && (
-      <>
-        <h2 className="w-full flex justify-center mt-2">✨ Tech Ears</h2>
-        <h1 className="w-full flex justify-center mt-2">{formattedDate}</h1>
-        {corrections.map((roundCorrections, roundIndex) => (
-          <div
-            key={roundIndex}
-            className="w-full flex flex-col items-center mt-5"
-          >
-            <div className="flex justify-center">
-              {roundCorrections.map((correction, index) => (
-                <span key={index} className="ml-1">
-                  {" "}
-                  {correction}
-                </span>
-              ))}
-            </div>
-            <div className="mt-2">
-              <span className="ml-1">
-                Your Response: {userResponses[roundIndex]}
-              </span>
-            </div>
+          <h4 className="mt-6 text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mb-6">
+            Congratulations!
+          </h4>
+          <p className="mb-6">
+            You have completed today's session. You got {correctCount} out of 5 phrases correctly!
+          </p>
+          <div className="flex justify-center">
+            <button
+              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              onClick={handleShareProgress}
+            >
+              Share Progress
+            </button>
           </div>
-        ))}
-        <p className="w-full flex justify-center mt-2"></p>
-        <div className="flex mt-4">
-          <button
-            className="mr-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-            onClick={handleShareProgress}
-          >
-            Share Progress
-          </button>
-        </div>
-      </>
-    )}
-  </div>
-    </>
+        </>
+      )}
+    </div>
   );
 };
