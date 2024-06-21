@@ -17,7 +17,9 @@ const config: Config = {
       }
     },
     extend: {
+      
       colors: {
+        'background-dark': '#222c3b',
         'mirage': {
           '50': '#f0f7fe',
           '100': '#deecfb',
@@ -31,6 +33,30 @@ const config: Config = {
           '900': '#274481',
           '950': '#0f172a',
       },
+      'big-stone': {
+        '50': '#f5f7fa',
+        '100': '#eaeef4',
+        '200': '#d0dae7',
+        '300': '#a7bbd2',
+        '400': '#7897b8',
+        '500': '#577aa0',
+        '600': '#446285',
+        '700': '#38506c',
+        '800': '#31445b',
+        '900': '#2d3b4d',
+        '950': '#222c3b',
+    },
+    'text': {
+      'correct': '#addb67',
+      'wrong': '#FF5B69',
+  
+  },
+  
+    
+      
+    
+      
+
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
