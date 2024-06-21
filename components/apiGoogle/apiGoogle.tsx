@@ -1,5 +1,7 @@
 "use client";
 
+ 
+import Header from "@/app/_components/header/Header";
 import { Progress } from "@/app/_components/ui/progress";
 import { getCookie, setCookie } from "cookies-next";
 import { useEffect, useState } from "react";
@@ -208,6 +210,7 @@ export const ApiGoogle = () => {
     setCorrections(prevCorrections => [...prevCorrections, newCorrections]);
     setUserResponses(prevResponses => [...prevResponses, inputValue.trim()]);
 
+
     // Verificar se a resposta está correta
     const isCorrect = newCorrections.every(correction =>
       correction.props.className.includes("text-text-correct")
@@ -217,6 +220,7 @@ export const ApiGoogle = () => {
       localStorage.setItem("correctCount", (correctCount + 1).toString());
     }
 
+
     setInputValue("");
 
     if (rounds + 1 === 5) {
@@ -225,9 +229,11 @@ export const ApiGoogle = () => {
       setCookie("rounds", `${rounds + 1}`, {
         expires: new Date(now.getTime() + ONE_DAY_MS)
       });
+
       setCookie("expirationDate", new Date(now.getTime() + ONE_DAY_MS).toISOString(), {
         expires: new Date(now.getTime() + ONE_DAY_MS)
       });
+
       setRounds(prev => prev + 1);
       setShowShareProgress(true);
     } else {
@@ -247,6 +253,10 @@ export const ApiGoogle = () => {
     setCookie("rounds", `${rounds + 1}`, {
       expires: new Date(now.getTime() + ONE_DAY_MS)
     });
+
+    const tweetText =
+      "I just used TechEars to practice my English ✨, join me at: tech-ears.vercel.app";
+
     setCookie("expirationDate", new Date(now.getTime() + ONE_DAY_MS).toISOString(), {
       expires: new Date(now.getTime() + ONE_DAY_MS)
     });
@@ -265,6 +275,58 @@ export const ApiGoogle = () => {
   const formattedDate = new Date().toLocaleDateString("en-US", options);
 
   return (
+
+    <>
+      <Header />
+
+      <div className="flex flex-col gap-y-6 items-center w-full max-w-screen-md p-8 lg:bg-white lg:dark:bg-gray-800 rounded-lg shadow-lg">
+        {!showShareProgress && (
+          <>
+            {errorMessage && (
+              <h4 className="w-full bg-red-900 text-center p-2 rounded-lg font-semibold">
+                {errorMessage}
+              </h4>
+            )}
+
+            {rounds < 5 && (
+              <h4 className="text-2xl text-center lg:text-left font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mb-6">
+                Listen and type what you hear in the input below.
+              </h4>
+            )}
+
+            {rounds >= 5 ? (
+              <p className="w-full flex justify-center">
+                You have completed 5 rounds. Come back tomorrow for more! ✨
+              </p>
+            ) : (
+              <>
+                {/* using !! before a string forces it into a boolean, so you might want to use it everythime you want to check if a string is empty. otherwise, because of a bug from nextjs, your page could render unwanted content. check this: https://stackoverflow.com/questions/53048037/react-showing-0-instead-of-nothing-with-short-circuit-conditional-component */}
+                {!!audioSrc && <audio controls src={audioSrc} />}
+                <form
+                  className="w-full mx-auto lg:max-w-md flex flex-col px-10"
+                  onSubmit={handleSubmit}
+                >
+                  <input
+                    type="text"
+                    placeholder="Enter your text"
+                    value={inputValue}
+                    onChange={handleChange}
+                    className="border border-gray-300 rounded-md px-3 py-2 w-full"
+                  />
+                  <button
+                    type="submit"
+                    className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 w-full"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </>
+            )}
+          </>
+        )}
+
+        {corrections.length === 5 && (
+
     <div className="flex flex-col items-center w-full max-w-screen-md p-8 bg-gray-100 dark:bg-background-dark rounded-lg shadow-lg">
       {!showShareProgress && (
         <>
@@ -316,6 +378,7 @@ export const ApiGoogle = () => {
 
       {showShareProgress && (
         <>
+
           <>
             <h2 className="w-full flex justify-center mt-2">✨ Tech Ears</h2>
             <h1 className="w-full flex justify-center mt-2">{formattedDate}</h1>
@@ -323,7 +386,10 @@ export const ApiGoogle = () => {
               <div key={roundIndex} className="w-full flex flex-col items-center mt-5">
                 <div className="flex justify-center">
                   {roundCorrections.map((correction, index) => (
-                    <span key={index} className="ml-1">
+
+                      {" "}
+
+
                       {correction}
                     </span>
                   ))}
@@ -333,6 +399,21 @@ export const ApiGoogle = () => {
                 </div>
               </div>
             ))}
+
+            <p className="w-full flex justify-center mt-2"></p>
+            <div className="flex mt-4">
+              <button
+                className="mr-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                onClick={handleShareProgress}
+              >
+                Share Progress
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </>
+
             <div className="flex justify-center mt-4"></div>
           </>
           <h4 className="mt-6 text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mb-6">
@@ -352,5 +433,6 @@ export const ApiGoogle = () => {
         </>
       )}
     </div>
+
   );
 };
