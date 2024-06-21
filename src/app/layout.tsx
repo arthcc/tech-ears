@@ -6,7 +6,8 @@ import { Providers } from "@/app/_components/providers/providers";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 import { Analytics } from "@vercel/analytics/react";
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { GeistSans } from "geist/font/sans";
 
 export const metadata: Metadata = {
   title: "TechEars",
@@ -21,9 +22,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <head 
-        />
-        
+        <head />
 
         <title>Tech Ears </title>
         <meta name="title" content="Tech Ears " />
@@ -48,13 +47,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           property="twitter:description"
           content="Improve your listening with just a few minutes per day!"
         />
-        <meta
-          property="twitter:image"
-          content="https://i.ibb.co/Y8wQBy1/og.png"
-        />
+        <meta property="twitter:image" content="https://i.ibb.co/Y8wQBy1/og.png" />
 
-        <body className={inter.className}>
-       
+        <body className={GeistSans.className}>
           <SpeedInsights />
           <Analytics />
           <Providers>{children}</Providers>
