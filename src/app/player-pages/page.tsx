@@ -2,6 +2,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { ApiGoogle } from "../../../components/apiGoogle/apiGoogle";
 import MenuTheme from "../_components/menuTheme/menuTheme";
 import { BackMenu } from "../../../components/backMenu/backMenu";
+import { GamePage } from "../../../components/game-page/game-page";
 
 const PlayerPage = () => {
   return (
@@ -20,7 +21,14 @@ const PlayerPage = () => {
             </div>
           </div>
         </header>
-        <ApiGoogle />
+        {/* <ApiGoogle /> */}
+        <GamePage 
+          provider={
+          process.env.GOOGLE_API_KEY ? 'GOOGLE'
+          : process.env.ELEVENLABS_API_KEY ? 'ELEVENLABS'
+          : 'NATIVE'
+          }
+        />
       </main>
     </>
   );
