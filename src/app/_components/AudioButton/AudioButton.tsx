@@ -45,6 +45,7 @@ export const AudioButton = ({ src }: { src: string }) => {
                 src={audioSrc}
                 ref={audioRef}
                 onEnded={() => setIsPlaying(false)}
+                onAbort={() => setIsPlaying(false)}
                 style={{ display: "none" }}
             />
         </section>
