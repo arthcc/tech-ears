@@ -99,7 +99,10 @@ const NATIVE: Action = async ({
     setErrorMessage,
     setRandomPhrase,
     getRandomPhrase
-  }) => {};
+  }) => {
+    const phrase = getRandomPhrase();
+    setRandomPhrase(phrase);
+  };
 export const ACTIONS = {
     GOOGLE,
     ELEVENLABS,

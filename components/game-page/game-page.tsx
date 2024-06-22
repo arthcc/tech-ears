@@ -2,7 +2,7 @@
 
 import { Progress } from "@/app/_components/ui/progress";
 import { getCookie, setCookie } from "cookies-next";
-import React, { useRef } from "react";
+import React from "react";
 import { useEffect, useState } from "react";
 import { ACTIONS } from "./actions";
 
@@ -125,16 +125,15 @@ export const GamePage = ({ provider }: { provider: 'GOOGLE' | 'ELEVENLABS' | 'NA
   const [userResponses, setUserResponses] = useState([]);
   const [currentStep, setCurrentStep] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
-  const audioRef = useRef<HTMLAudioElement | null>(null)
   const playAudio = () => {
     // setPlaying(true);
     const synth = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance();
-    const voice = synth.getVoices()[5];
+    const voice = synth.getVoices()[3];
     utterance.text = randomPhrase;
     utterance.rate = 0.95;
     utterance.voice = voice;
-    console.log(synth.getVoices());
+    console.log({utterance})
     synth.speak(utterance);
     // setPlaying(false);
   };
@@ -255,7 +254,7 @@ export const GamePage = ({ provider }: { provider: 'GOOGLE' | 'ELEVENLABS' | 'NA
               </h4>
               {audioSrc ? (
                 <>
-                  <audio ref={audioRef} controls src={audioSrc} />
+                  <audio controls src={audioSrc} />
 
                   <form
                     className="w-full mx-auto lg:max-w-md flex flex-col px-10"
@@ -276,7 +275,7 @@ export const GamePage = ({ provider }: { provider: 'GOOGLE' | 'ELEVENLABS' | 'NA
                     </button>
                   </form>
                 </>
-              ) : provider == 'NATIVE' ? (
+              ) : (provider == 'NATIVE' && randomPhrase) ? (
                 <>
                 <button onClick={() => playAudio()}>
                     <svg
