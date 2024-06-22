@@ -4,6 +4,7 @@ import { Progress } from "@/app/_components/ui/progress";
 import { getCookie, setCookie } from "cookies-next";
 import React from "react";
 import { useEffect, useState } from "react";
+import { AudioButton } from "@/app/_components/AudioButton/AudioButton";
 
 const phrases = {
   backEnd: [
@@ -276,7 +277,7 @@ export const ApiGoogle = () => {
               </h4>
               {audioSrc && (
                 <>
-                  <audio controls src={audioSrc} />
+                  <AudioButton src={audioSrc} />
 
                   <form
                     className="w-full mx-auto lg:max-w-md flex flex-col px-10"
