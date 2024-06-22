@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { getCookie, setCookie } from "cookies-next";
+import { AudioButton } from "@/app/_components/AudioButton/AudioButton";
 
 const phrases = {
   backEnd: [
@@ -185,7 +186,7 @@ const getRandomPhrase = () => {
               </p>
             ) : (
               <>
-                {audioSrc && <audio controls src={audioSrc} />}
+                {audioSrc && <AudioButton src={audioSrc} />}
                 <form
                   className="w-full max-w-md flex flex-col items-center px-10"
                   onSubmit={handleSubmit}
