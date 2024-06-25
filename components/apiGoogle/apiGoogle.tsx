@@ -4,6 +4,7 @@ import { Progress } from "@/app/_components/ui/progress";
 import { getCookie, setCookie } from "cookies-next";
 import React from "react";
 import { useEffect, useState } from "react";
+import { LoadingSpinner } from "../loading/loading";
 
 const phrases = {
   backEnd: [
@@ -73,6 +74,7 @@ const phrases = {
     "Engaging in community outreach and mentorship programs"
   ]
 };
+
 const StepComponent = ({ currentStep, totalSteps }) => {
   return (
     <div className="step-component mb-2 w-full">
@@ -80,7 +82,7 @@ const StepComponent = ({ currentStep, totalSteps }) => {
         Phrase {currentStep} of {totalSteps}
       </p>
       <div className="flex justify-center">
-      <Progress value={(currentStep )  * 20}max={totalSteps} className="w-[60%]" />
+        <Progress value={currentStep * 20} max={totalSteps} className="w-[60%]" />
       </div>
     </div>
   );
@@ -124,8 +126,11 @@ export const ApiGoogle = () => {
   const [userResponses, setUserResponses] = useState([]);
   const [currentStep, setCurrentStep] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchRandomPhrase = async () => {
+    setIsLoading(true);
+
     const phrase = getRandomPhrase();
     setRandomPhrase(phrase);
 
@@ -157,9 +162,12 @@ export const ApiGoogle = () => {
       const responseData = await response.json();
       const audioContent = responseData.audioContent;
       const audioBase64 = `data:audio/mp3;base64,${audioContent}`;
+
       setAudioSrc(audioBase64);
     } catch (error) {
       setErrorMessage("Failed to load audio. Please try again later.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -249,7 +257,7 @@ export const ApiGoogle = () => {
     window.open(twitterUrl, "_blank");
   };
 
-    const options = {
+  const options = {
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -267,40 +275,41 @@ export const ApiGoogle = () => {
               {errorMessage}
             </h4>
           )}
-
           {rounds < 5 && (
             <>
-             <StepComponent currentStep={currentStep + 1} totalSteps={5} />
+              <StepComponent currentStep={currentStep + 1} totalSteps={5} />
               <h4 className="mt-6 text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mb-6">
                 Listen and type what you hear in the input below.
               </h4>
-              {audioSrc && (
-                <>
-                  <audio controls src={audioSrc} />
-
-                  <form
-                    className="w-full mx-auto lg:max-w-md flex flex-col px-10"
-                    onSubmit={handleSubmit}
-                  >
-                    <input
-                      type="text"
-                      placeholder="Listen and type what you hear here"
-                      value={inputValue}
-                      onChange={handleChange}
-                      className="border border-gray-300 rounded-md px-3 py-2 w-full"
-                    />
-                    <button
-                      type="submit"
-                      className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 w-full"
+              {isLoading ? (
+                <LoadingSpinner className="animate-spin size-7 " />
+              ) : (
+                audioSrc && (
+                  <>
+                    <audio controls src={audioSrc} />
+                    <form
+                      className="w-full mx-auto lg:max-w-md flex flex-col px-10"
+                      onSubmit={handleSubmit}
                     >
-                      Next Phrase
-                    </button>
-                  </form>
-                </>
+                      <input
+                        type="text"
+                        placeholder="Listen and type what you hear here"
+                        value={inputValue}
+                        onChange={handleChange}
+                        className="border border-gray-300 rounded-md px-3 py-2 w-full"
+                      />
+                      <button
+                        type="submit"
+                        className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 w-full"
+                      >
+                        Next Phrase
+                      </button>
+                    </form>
+                  </>
+                )
               )}
             </>
           )}
-
           {rounds >= 5 && (
             <p className="w-full flex justify-center mt-2">
               You have completed 5 rounds. Come back tomorrow for more! ✨
@@ -313,14 +322,14 @@ export const ApiGoogle = () => {
         <>
           <h2 className="w-full flex justify-center mt-1">✨ Tech Ears</h2>
           <h1 className="w-full flex justify-center mt-1">{formattedDate}</h1>
-          
+
           <h4 className="text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mt-5 mb-2">
             Congratulations!
           </h4>
           <p className="mb-3">
             You have completed today's session. You got {correctCount} out of 5 phrases correctly!
           </p>
-          
+
           {corrections.map((roundCorrections, roundIndex) => (
             <div key={roundIndex} className="w-full flex flex-col items-center mt-3">
               <div className="flex justify-center">
@@ -333,9 +342,7 @@ export const ApiGoogle = () => {
               <div className="mt-1">
                 <span className="ml-1">Your Response: {userResponses[roundIndex]}</span>
               </div>
-              
             </div>
-            
           ))}
           <div className="flex justify-center mt-3">
             <button
