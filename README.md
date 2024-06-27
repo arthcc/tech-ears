@@ -47,10 +47,22 @@ After that you can go to:  ```http://localhost:3000``` so you can run locally.
     cd tech-ears
     ```
 
-3. Build and start the Docker containers:
+3. Build the Docker containers:
     ```bash
-    docker-compose up --build
+    docker-compose build
     ```
+
+4. Start the Docker containers:
+    ```bash
+    docker-compose up
+    ```
+
+5. To stop the Docker containers:
+    ```bash
+    docker-compose down
+    ```
+
+These steps will build the Docker image once and then allow you to start and stop the containers quickly for development.
 
 ## 🧑‍💻 Contributing
 
