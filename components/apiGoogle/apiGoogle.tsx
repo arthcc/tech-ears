@@ -1,6 +1,6 @@
 "use client";
 
-import { Progress } from "@/app/_components/ui/progress";
+import { Progress } from "../ui/progress";
 import { getCookie, setCookie } from "cookies-next";
 import React from "react";
 import { useEffect, useState } from "react";
@@ -28,6 +28,7 @@ const phrases = {
     "Integrating OAuth for third-party authentication",
     "Managing secrets and environment variables securely"
   ],
+  
   frontEnd: [
     "Building responsive UIs with modern frameworks",
     "Enhancing user experience with intuitive designs",

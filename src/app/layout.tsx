@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
-import { Providers } from "@/app/_components/providers/providers";
+import { Providers } from "../../components/providers/providers";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { GeistSans } from "geist/font/sans";
+import Footer from "../../components/footer/footer";
 
 export const metadata: Metadata = {
   title: "TechEars",
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
 
         <title>Tech Ears </title>
+
         <meta name="title" content="Tech Ears " />
         <meta
           name="description"
@@ -52,8 +54,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body className={GeistSans.className}>
           <SpeedInsights />
           <Analytics />
+
           <Providers>{children}</Providers>
         </body>
+        <Footer />
         {/* eslint-disable prettier/prettier */}
         <GoogleAnalytics gaId="G-R5SCDC4C8D" />
       </html>
