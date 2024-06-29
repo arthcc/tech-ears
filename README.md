@@ -49,17 +49,17 @@ After that you can go to:  ```http://localhost:3000``` so you can run locally.
 
 3. Build the Docker containers:
     ```bash
-    docker-compose build
+    docker compose build
     ```
 
 4. Start the Docker containers:
     ```bash
-    docker-compose up
+    docker compose up
     ```
 
 5. To stop the Docker containers:
     ```bash
-    docker-compose down
+    docker compose down
     ```
 
 These steps will build the Docker image once and then allow you to start and stop the containers quickly for development.

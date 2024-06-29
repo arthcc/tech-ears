@@ -54,10 +54,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body className={GeistSans.className}>
           <SpeedInsights />
           <Analytics />
-
+          <Footer />
           <Providers>{children}</Providers>
         </body>
-        <Footer />
+   
         {/* eslint-disable prettier/prettier */}
         <GoogleAnalytics gaId="G-R5SCDC4C8D" />
       </html>
