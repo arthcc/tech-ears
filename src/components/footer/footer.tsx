@@ -4,7 +4,7 @@ import { BrazilIcon } from "../icons/brazil";
 export default function Footer() {
   return (
     <footer>
-      <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8 flex justify-between items-center">
+      <div className="flex-col sm:flex-row gap-4 sm:gap-0 w-full max-w-screen-xl mx-auto p-4 md:py-8 flex justify-between items-center">
         <span className="text-sm text-gray-500 dark:text-gray-400">
           © 2024 TechEars. All rights reserved.
         </span>

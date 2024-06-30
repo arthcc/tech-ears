@@ -15,7 +15,7 @@ export default function HomePage() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="overflow-hidden flex flex-col h-screen">
       <GoogleAnalytics gaId="G-R5SCDC4C8D" />
       <Header />
       <main className="flex flex-col items-center justify-center flex-grow p-6 bg-white">
@@ -23,15 +23,15 @@ export default function HomePage() {
         <div className="flex flex-col space-y-4">
           <Icon />
         </div>
-        <div className="flex flex-col space-y-4 mt-20">
-          <h1 className="text-4xl font-bold tracking-tight lg:text-5xl mb-6 relative z-10">
+        <div className="flex flex-col space-y-4 mt-20 text-black">
+          <h1 className="text-4xl font-bold tracking-tight lg:text-5xl mb-6 relative z-0">
             The
             <span className="text-mirage-500 dark:text-blue-400"> newest way </span>
             to Learn English
           </h1>
         </div>
 
-        <p className="mt-4 text-lg mb-6 relative z-10">
+        <p className="mt-4 text-lg mb-6 relative z-0">
           <span> Improve your listening with just a few minutes per day!</span>
         </p>
         <div className="flex gap-4 flex-col w-[280px]">

@@ -4,6 +4,10 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { ExternalLink, Menu, X } from "lucide-react";
+import HeaderButton from "../headerButton/button";
+import { GitHubIcon } from "../icons/github";
+import { DonateIcon } from "../icons/donate";
+import { SignInIcon } from "../icons/signIn";
 
 export default function HeaderMobile() {
   const [menuMobile, setMenuMobile] = useState(false);
@@ -13,9 +17,7 @@ export default function HeaderMobile() {
   return (
     <header className="flex sm:hidden px-4 lg:px-6 h-14 items-center bg-white w-full fixed top-0 z-10">
       <div className="sm:container pt-4 mx-auto flex items-center justify-between w-full">
-        <div className="flex items-center">
-          <div className="text-lg font-bold text-gray-800 dark:text-gray-200">TechEars</div>
-        </div>
+        <div className="flex items-center"></div>
         <div className="flex items-center space-x-4">
           <Button
             onClick={handleMenu}
@@ -54,44 +56,12 @@ export default function HeaderMobile() {
           </div>
 
           <div className="flex items-start flex-col p-4">
-            <Link
-              href="https://arthdev.vercel.app"
-              target="_blank"
-              className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 flex items-center"
-            >
-              <Button
-                variant="link"
-                className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
-              >
-                <ExternalLink size={20} />
-                <span>About Me</span>
-              </Button>
+            <HeaderButton text="Sign In" icon={<SignInIcon />} />
+            <Link href="https://pixmeacoffee.vercel.app/techears" target="_blank">
+              <HeaderButton text="Donate" icon={<DonateIcon />} />
             </Link>
-            <Link
-              href="https://pixmeacoffee.vercel.app/techears"
-              target="_blank"
-              className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
-            >
-              <Button
-                variant="link"
-                className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 flex gap-2 items-center"
-              >
-                <ExternalLink size={20} />
-                <span>Donate</span>
-              </Button>
-            </Link>
-            <Link
-              href="https://github.com/arthcc/tech-ears"
-              target="_blank"
-              className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
-            >
-              <Button
-                variant="link"
-                className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
-              >
-                <ExternalLink size={20} />
-                <span> GitHub</span>
-              </Button>
+            <Link href="https://github.com/arthcc/tech-ears" target="_blank">
+              <HeaderButton text="GitHub" icon={<GitHubIcon />} />
             </Link>
           </div>
         </div>
