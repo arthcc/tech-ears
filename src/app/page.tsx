@@ -4,13 +4,13 @@ import * as React from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import Header from "../../components/header/Header";
-import { PlayIcon } from "../../public/icons/playIcon";
-import MainButton from "../../components/mainButton/button";
-import SecondButton from "../../components/secondButton/button";
-import { LeadBoardIcon } from "../../public/icons/leadboardIcon";
-import { HowToPlayIcon } from "../../public/icons/howPlay";
-import { Icon } from "../../public/icons/icon";
+import Header from "../components/header/Header";
+import { PlayIcon } from "../components/icons/playIcon";
+import MainButton from "../components/mainButton/button";
+import SecondButton from "../components/secondButton/button";
+import { LeadBoardIcon } from "../components/icons/leadboardIcon";
+import { HowToPlayIcon } from "../components/icons/howPlay";
+import { Icon } from "../components/icons/icon";
 export default function HomePage() {
   const { theme, setTheme } = useTheme();
 
@@ -24,7 +24,6 @@ export default function HomePage() {
           <Icon />
         </div>
         <div className="flex flex-col space-y-4 mt-20">
-
           <h1 className="text-4xl font-bold tracking-tight lg:text-5xl mb-6 relative z-10">
             The
             <span className="text-mirage-500 dark:text-blue-400"> newest way </span>

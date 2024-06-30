@@ -1,6 +1,6 @@
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { ApiGoogle } from "../../../components/apiGoogle/apiGoogle";
-import MenuTheme from "../../../components/menuTheme/menuTheme";
+import { ApiGoogle } from "../../components/apiGoogle/apiGoogle";
+import MenuTheme from "../../components/menuTheme/menuTheme";
 
 const PlayerPage = () => {
   return (

@@ -2,10 +2,10 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import SecondButton from "../secondButton/button";
-import { SignInIcon } from "../../public/icons/signIn";
+import { SignInIcon } from "../icons/signIn";
 import HeaderButton from "../headerButton/button";
-import { DonateIcon } from "../../public/icons/donate";
-import { GitHubIcon } from "../../public/icons/github";
+import { DonateIcon } from "../icons/donate";
+import { GitHubIcon } from "../icons/github";
 
 export default function HeaderDesktop() {
   return (
