@@ -15,15 +15,16 @@ export default function HomePage() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-screen">
       <GoogleAnalytics gaId="G-R5SCDC4C8D" />
       <Header />
-      <main className="flex flex-col items-center justify-center flex-grow p-6 bg-white pt-24">
-        <div className="hero-background w-full h-full absolute top-0 left-0 z-0"></div>
+      <main className="flex flex-col items-center justify-center flex-grow p-6 bg-white">
+        <div className="hero-background w-full h-full absolute top-0 left-0"></div>
         <div className="flex flex-col space-y-4">
           <Icon />
         </div>
         <div className="flex flex-col space-y-4 mt-20">
+
           <h1 className="text-4xl font-bold tracking-tight lg:text-5xl mb-6 relative z-10">
             The
             <span className="text-mirage-500 dark:text-blue-400"> newest way </span>
