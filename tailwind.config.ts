@@ -19,7 +19,7 @@ const config: Config = {
     extend: {
       colors: {
         "background-dark": "#222c3b",
-
+        
         mirage: {
           "50": "#f0f7fe",
           "100": "#deecfb",
