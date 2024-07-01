@@ -1,6 +1,6 @@
 import React from "react";
-import MainButton from "../mainButton/button";
 import { IconSolo } from "../icons/logoSolo";
+import { MainButton } from "../mainButton/button";
 
 export default function Loading() {
   return (
@@ -10,7 +10,7 @@ export default function Loading() {
           <IconSolo />
         </div>
         <h1 className="font-bold text-4xl">
-          Loading your <span className="text-blue-400">phrases</span> of day...
+          Loading your <span className="text-blue-400">phrases</span> of the day...
         </h1>
       </div>
       <div className="w-52">

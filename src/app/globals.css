@@ -48,5 +48,27 @@
   --radius: 0.5rem;
 }
 
+@keyframes block1-animation {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+}
 
+@keyframes block2-animation {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+.block1 {
+  animation: block1-animation 1s ease-in-out infinite;
+}
 
+.block2 {
+  animation: block2-animation 1s ease-in-out infinite;
+}
