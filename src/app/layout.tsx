@@ -54,8 +54,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body className={GeistSans.className}>
           <SpeedInsights />
           <Analytics />
-          <Providers>{children}</Providers>
-          <Footer />
+          <Providers>
+            <div className="md:overflow-hidden flex flex-col h-screen">
+              {children}
+              <Footer />
+            </div>
+          </Providers>
         </body>
 
         {/* eslint-disable prettier/prettier */}

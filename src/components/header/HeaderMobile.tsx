@@ -15,7 +15,7 @@ export default function HeaderMobile() {
   const handleMenu = () => setMenuMobile(!menuMobile);
 
   return (
-    <header className="flex sm:hidden px-4 lg:px-6 h-14 items-center bg-white w-full fixed top-0 z-10">
+    <header className="flex sm:hidden px-4 lg:px-6 h-14 items-center bg-trasparent w-full fixed top-0 z-10">
       <div className="sm:container pt-4 mx-auto flex items-center justify-between w-full">
         <div className="flex items-center"></div>
         <div className="flex items-center space-x-4">
@@ -23,7 +23,7 @@ export default function HeaderMobile() {
             onClick={handleMenu}
             className="border-none bg-transparent pr-0 hover:bg-transparent"
           >
-            <Menu size={20} className="text-gray-800 dark:text-gray-200" />
+            <Menu size={20} className="text-gray-800 dark:text-black" />
           </Button>
         </div>
       </div>
