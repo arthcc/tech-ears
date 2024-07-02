@@ -6,15 +6,18 @@ import Loading from "@/components/loadingGame/loading";
 import Mode from "@/components/gameMode/footerButton";
 import FooterButton from "@/components/gameMode/footerButton";
 import TextLogo from "@/components/gameMode/textLogo";
-
+import { TextInput } from "@/components/textInput/textInput";
 
 const PlayerPage = () => {
   return (
     <>
       <GoogleAnalytics gaId="G-R5SCDC4C8D" />
-      <TextLogo/>
-      <FooterButton/>
-    
+      <TextLogo />
+      <div className="flex flex-col items-center p-5 mt-8">
+        <TextInput onChange={undefined} />
+      </div>
+
+      <FooterButton />
     </>
   );
 };

@@ -10,7 +10,10 @@
     "lint": "eslint './**/*.{jsx,jsx,ts,tsx}'"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@google-cloud/text-to-speech": "^5.3.0",
+    "@mui/joy": "^5.0.0-beta.36",
     "@next/third-parties": "^14.2.4",
     "@nextui-org/progress": "^2.0.31",
     "@radix-ui/react-alert-dialog": "^1.0.5",
