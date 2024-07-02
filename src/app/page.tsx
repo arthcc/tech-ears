@@ -7,7 +7,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import Header from "../components/header/Header";
 import { PlayIcon } from "../components/icons/playIcon";
 import { MainButton } from "../components/mainButton/button";
-import SecondButton from "../components/secondButton/button";
+import {SecondButton }from "../components/secondButton/button";
 import { LeadBoardIcon } from "../components/icons/leadboardIcon";
 import { HowToPlayIcon } from "../components/icons/howPlay";
 import { Icon } from "../components/icons/icon";
@@ -34,7 +34,7 @@ export default function HomePage() {
           <span> Improve your listening with just a few minutes per day!</span>
         </p>
         <div className="flex gap-4 flex-col w-[280px]">
-          <Link href="/player-pages" className="w-full">
+          <Link href="/game" className="w-full">
             <MainButton text="Play Now" icon={<PlayIcon />} />
           </Link>
           <div className="w-full">
