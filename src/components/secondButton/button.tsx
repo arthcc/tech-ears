@@ -1,17 +1,13 @@
-const SecondButton = ({ text, icon }) => {
-    return (
-      <button
-      
-        className="justify-center w-full border-2 border-solid flex rounded-2xl bg-button-normal text-black font-bold py-3 text-xl gap-2 "
-        type="button"
-      
-      >
-        {icon && <span>{icon}</span>}
-        {text}
-     
-      </button>
-      
-    );
-  };
-  
-  export default SecondButton; 
+interface Props {
+  text: string;
+  icon?: React.JSX.Element;
+}
+
+export function SecondButton(props: Props) {
+  return (
+    <button className="justify-center w-full border-2 border-solid flex rounded-2xl bg-button-normal text-black font-bold py-3 text-xl gap-2 hover:scale-110 transition-all">
+      {props.icon}
+      {props.text}
+    </button>
+  );
+}
