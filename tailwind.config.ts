@@ -56,7 +56,7 @@ const config: Config = {
         },
 
         text: {
-          correct: "#addb67",
+          correct: "#05BA79",
           wrong: "#FF5B69"
         },
 
