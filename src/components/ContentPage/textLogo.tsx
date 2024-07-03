@@ -1,4 +1,4 @@
-import { AudioIcon } from "../icons/audio";
+import { AudioIcon } from "../Icons/audio";
 
 
 export default function TextLogo() {

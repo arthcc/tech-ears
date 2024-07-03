@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
-import { Providers } from "../components/providers/providers";
+import { Providers } from "../components/ThemeProviders";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { GeistSans } from "geist/font/sans";
-import Footer from "../components/footer/footer";
+import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
   title: "TechEars",

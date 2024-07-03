@@ -4,13 +4,14 @@ import * as React from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import Header from "../components/header/Header";
-import { PlayIcon } from "../components/icons/playIcon";
-import { MainButton } from "../components/mainButton/button";
-import {SecondButton }from "../components/secondButton/button";
-import { LeadBoardIcon } from "../components/icons/leadboardIcon";
-import { HowToPlayIcon } from "../components/icons/howPlay";
-import { Icon } from "../components/icons/icon";
+import Header from "../components/Header/Header";
+import { PlayIcon } from "../components/Icons/playIcon";
+import { MainButton } from "../components/PrimaryButton";
+
+import { LeadBoardIcon } from "../components/Icons/leadboardIcon";
+import { HowToPlayIcon } from "../components/Icons/howPlay";
+import { Icon } from "../components/Icons/icon";
+import SecondButton  from "@/components/SecondaryButton";
 export default function HomePage() {
   const { theme, setTheme } = useTheme();
 

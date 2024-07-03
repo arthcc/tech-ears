@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BrazilIcon } from "../icons/brazil";
+import { BrazilIcon } from "../Icons/brazil";
 
 export default function Footer() {
   return (

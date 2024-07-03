@@ -19,6 +19,8 @@ const config: Config = {
     extend: {
       colors: {
         "background-dark": "#222c3b",
+        "progress-gray": "#F1F1F3",
+        "progress-blue": "#4581F4",
         
         mirage: {
           "50": "#f0f7fe",

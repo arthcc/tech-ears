@@ -1,6 +1,6 @@
 import React from "react";
-import { IconSolo } from "../icons/logoSolo";
-import { MainButton } from "../mainButton/button";
+import { IconSolo } from "../Icons/logoSolo";
+import { MainButton } from "../PrimaryButton";
 
 export default function Loading() {
   return (

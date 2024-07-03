@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { ExternalLink, Menu, X } from "lucide-react";
-import HeaderButton from "../headerButton/button";
-import { GitHubIcon } from "../icons/github";
-import { DonateIcon } from "../icons/donate";
-import { SignInIcon } from "../icons/signIn";
+import HeaderButton from "../HeaderButton";
+import { GitHubIcon } from "../Icons/github";
+import { DonateIcon } from "../Icons/donate";
+import { SignInIcon } from "../Icons/signIn";
 
 export default function HeaderMobile() {
   const [menuMobile, setMenuMobile] = useState(false);

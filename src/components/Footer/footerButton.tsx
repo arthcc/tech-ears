@@ -1,4 +1,4 @@
-import { MainButton } from "../mainButton/button";
+import { MainButton } from "../PrimaryButton";
 
 export default function FooterButton() {
   return (
