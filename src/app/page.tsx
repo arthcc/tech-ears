@@ -7,11 +7,10 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import Header from "../components/Header/Header";
 import { PlayIcon } from "../components/Icons/playIcon";
 import { MainButton } from "../components/PrimaryButton";
-
 import { LeadBoardIcon } from "../components/Icons/leadboardIcon";
 import { HowToPlayIcon } from "../components/Icons/howPlay";
-import { Icon } from "../components/Icons/icon";
 import SecondButton  from "@/components/SecondaryButton";
+import { Icon } from "@/components/Icons/icon";
 export default function HomePage() {
   const { theme, setTheme } = useTheme();
 
