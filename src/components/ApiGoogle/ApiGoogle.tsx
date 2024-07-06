@@ -28,7 +28,7 @@ const phrases = {
     "Integrating OAuth for third-party authentication",
     "Managing secrets and environment variables securely"
   ],
-  
+
   frontEnd: [
     "Building responsive UIs with modern frameworks",
     "Enhancing user experience with intuitive designs",
@@ -81,7 +81,7 @@ const StepComponent = ({ currentStep, totalSteps }) => {
         Phrase {currentStep} of {totalSteps}
       </p>
       <div className="flex justify-center">
-      <Progress value={(currentStep )  * 20}max={totalSteps} className="w-[60%]" />
+        <Progress value={currentStep * 20} max={totalSteps} className="w-[60%]" />
       </div>
     </div>
   );
@@ -250,7 +250,7 @@ export const ApiGoogle = () => {
     window.open(twitterUrl, "_blank");
   };
 
-    const options = {
+  const options = {
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -271,7 +271,7 @@ export const ApiGoogle = () => {
 
           {rounds < 5 && (
             <>
-             <StepComponent currentStep={currentStep + 1} totalSteps={5} />
+              <StepComponent currentStep={currentStep + 1} totalSteps={5} />
               <h4 className="mt-6 text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mb-6">
                 Listen and type what you hear in the input below.
               </h4>
@@ -314,14 +314,14 @@ export const ApiGoogle = () => {
         <>
           <h2 className="w-full flex justify-center mt-1">✨ Tech Ears</h2>
           <h1 className="w-full flex justify-center mt-1">{formattedDate}</h1>
-          
+
           <h4 className="text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mt-5 mb-2">
             Congratulations!
           </h4>
           <p className="mb-3">
             You have completed today's session. You got {correctCount} out of 5 phrases correctly!
           </p>
-          
+
           {corrections.map((roundCorrections, roundIndex) => (
             <div key={roundIndex} className="w-full flex flex-col items-center mt-3">
               <div className="flex justify-center">
@@ -334,9 +334,7 @@ export const ApiGoogle = () => {
               <div className="mt-1">
                 <span className="ml-1">Your Response: {userResponses[roundIndex]}</span>
               </div>
-              
             </div>
-            
           ))}
           <div className="flex justify-center mt-3">
             <button

@@ -21,7 +21,7 @@ const config: Config = {
         "background-dark": "#222c3b",
         "progress-gray": "#F1F1F3",
         "progress-blue": "#4581F4",
-        
+
         mirage: {
           "50": "#f0f7fe",
           "100": "#deecfb",
@@ -35,7 +35,7 @@ const config: Config = {
           "900": "#274481",
           "950": "#0f172a"
         },
-      
+
         "big-stone": {
           "50": "#f5f7fa",
           "100": "#eaeef4",
