@@ -1,6 +1,6 @@
 import React from "react";
-import { IconSolo } from "../Icons/logoSolo";
-import { MainButton } from "../PrimaryButton";
+import { IconSolo } from "./Icons/logoSolo";
+import { MainButton } from "./PrimaryButton";
 
 export default function Loading() {
   return (
@@ -16,7 +16,7 @@ export default function Loading() {
       <div className="w-52">
         <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
         <div>
-          <MainButton title= "I'm Ready" className="bg-button-main text-white py-3" />
+          <MainButton title="I'm Ready" className="bg-button-main text-white py-3" />
         </div>
       </div>
     </div>

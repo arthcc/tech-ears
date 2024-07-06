@@ -1,8 +1,8 @@
 "use client";
 
+import React from "react";
 import { Progress } from "../ui/progress";
 import { getCookie, setCookie } from "cookies-next";
-import React from "react";
 import { useEffect, useState } from "react";
 
 const phrases = {

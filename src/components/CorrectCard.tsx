@@ -1,4 +1,4 @@
-import { CorrectlIcon } from "../Icons/correct";
+import { CorrectlIcon } from "./Icons/correct";
 
 export function CorrectCard() {
   return (

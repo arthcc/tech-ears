@@ -1,9 +1,9 @@
 "use client";
 
 import { GoogleAnalytics } from "@next/third-parties/google";
-import FooterButton from "@/components/Footer/footerButton";
+import FooterButton from "@/components/Footer/FooterButton";
 import { TextInput } from "@/components/TextInput";
-import ProgressBar from "@/components/ProgressBar/index.";
+import ProgressBar from "@/components/ProgressBar";
 import Loading from "@/components/Loader";
 import React, { useState, useEffect } from "react";
 import { AudioIcon } from "@/components/Icons/audio";
