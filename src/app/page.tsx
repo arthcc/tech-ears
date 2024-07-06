@@ -9,8 +9,8 @@ import { PlayIcon } from "../components/Icons/playIcon";
 import { MainButton } from "../components/PrimaryButton";
 import { LeadBoardIcon } from "../components/Icons/leadboardIcon";
 import { HowToPlayIcon } from "../components/Icons/howPlay";
-import SecondButton  from "@/components/SecondaryButton";
 import { Icon } from "@/components/Icons/icon";
+
 export default function HomePage() {
   const { theme, setTheme } = useTheme();
 
@@ -35,13 +35,13 @@ export default function HomePage() {
         </p>
         <div className="flex gap-4 flex-col w-[280px]">
           <Link href="/game" className="w-full">
-            <MainButton text="Play Now" icon={<PlayIcon />} />
+            <MainButton title="Play Now" icon={<PlayIcon />} className="bg-button-main text-white py-3" /> 
           </Link>
           <div className="w-full">
-            <SecondButton text="Leaderboard" icon={<LeadBoardIcon />} />
+            <MainButton title="Leaderboard" icon={<LeadBoardIcon />} className="bg-button-normal border-2 border-solid text-black py-3" />
           </div>
           <div className="w-full">
-            <SecondButton text="How to Play?" icon={<HowToPlayIcon />} />
+            <MainButton title="How to Play?" icon={<HowToPlayIcon />} className="bg-button-normal border-2 border-solid text-black py-3"/>
           </div>
         </div>
       </div>

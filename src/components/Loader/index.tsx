@@ -16,7 +16,7 @@ export default function Loading() {
       <div className="w-52">
         <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
         <div>
-          <MainButton text= "I'm Ready" />
+          <MainButton title= "I'm Ready" className="bg-button-main text-white py-3" />
         </div>
       </div>
     </div>
