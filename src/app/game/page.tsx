@@ -38,7 +38,7 @@ const PlayerPage = () => {
         />
       </div>
       <div className="pt-10 mt-10"></div>
-      <div className="flex flex-col items-center justify-center py-12  bg-white dark:bg-mirage-700">
+      <div className="flex flex-col items-center justify-center py-12  bg-white ">
         <AudioIcon />
         <h1 className="items-center text-center justify-center font-bold text-4xl mt-2">
           <span className="text-blue-400">

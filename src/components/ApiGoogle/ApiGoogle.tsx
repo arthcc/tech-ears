@@ -77,7 +77,7 @@ const phrases = {
 const StepComponent = ({ currentStep, totalSteps }) => {
   return (
     <div className="step-component mb-2 w-full">
-      <p className="text-center mb-1">
+      <p className="text-center mb-1 text-black">
         Phrase {currentStep} of {totalSteps}
       </p>
       <div className="flex justify-center">
