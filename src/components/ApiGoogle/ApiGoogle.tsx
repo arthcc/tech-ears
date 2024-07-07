@@ -77,7 +77,7 @@ const phrases = {
 const StepComponent = ({ currentStep, totalSteps }) => {
   return (
     <div className="step-component mb-2 w-full">
-      <p className="text-center mb-1">
+      <p className="text-center mb-1 text-black">
         Phrase {currentStep} of {totalSteps}
       </p>
       <div className="flex justify-center">
@@ -260,7 +260,7 @@ export const ApiGoogle = () => {
   const formattedDate = new Date().toLocaleDateString("en-US", options);
 
   return (
-    <div className="flex flex-col gap-y-6 items-center w-full max-w-screen-md p-8 lg:bg-white lg:dark:bg-gray-800 rounded-lg shadow-lg">
+    <div className="flex flex-col gap-y-6 items-center w-full max-w-screen-md p-8 lg:bg-white rounded-lg shadow-lg">
       {!showShareProgress && (
         <>
           {errorMessage && (
@@ -272,7 +272,7 @@ export const ApiGoogle = () => {
           {rounds < 5 && (
             <>
               <StepComponent currentStep={currentStep + 1} totalSteps={5} />
-              <h4 className="mt-6 text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mb-6">
+              <h4 className="mt-6 text-2xl font-semibold tracking-tight text-blue-h1 mb-6">
                 Listen and type what you hear in the input below.
               </h4>
               {audioSrc && (
@@ -315,7 +315,7 @@ export const ApiGoogle = () => {
           <h2 className="w-full flex justify-center mt-1">✨ Tech Ears</h2>
           <h1 className="w-full flex justify-center mt-1">{formattedDate}</h1>
 
-          <h4 className="text-2xl font-semibold tracking-tight text-blue-h1 dark:text-blue-400 mt-5 mb-2">
+          <h4 className="text-2xl font-semibold tracking-tight text-blue-h1 mt-5 mb-2">
             Congratulations!
           </h4>
           <p className="mb-3">

@@ -24,26 +24,23 @@ const PlayerPage = () => {
   }
 
   return (
-    <>
+    <div className="md:overflow-hidden flex flex-col bg-white">
       <GoogleAnalytics gaId="G-R5SCDC4C8D" />
       <div className="pt-10">
         <ProgressBar
           indicatorColor="bg-progress-blue"
           progress={15}
           height="h-5"
-          width="w-1/4"
+          width="sm:w-1/4 w-1/2"
           className="mt-4 mx-auto"
           currentStep={0}
           totalSteps={5}
         />
       </div>
       <div className="pt-10 mt-10"></div>
-      <div className="flex flex-col items-center justify-center h-screen w-screen bg-white dark:bg-mirage-700">
-        <div className="text-center mb-auto mt-auto">
-          <div className="flex justify-center mb-4"></div>
-        </div>
+      <div className="flex flex-col items-center justify-center py-12  bg-white ">
         <AudioIcon />
-        <h1 className="text-align: center font-bold text-4xl mt-2">
+        <h1 className="items-center text-center justify-center font-bold text-4xl mt-2">
           <span className="text-blue-400">
             {" "}
             Tap to <span className="text-black">hear </span>your phrase.
@@ -53,9 +50,8 @@ const PlayerPage = () => {
       <div className="flex flex-col items-center p-5 mt-32">
         <TextInput onChange={undefined} />
       </div>
-
       <FooterButton />
-    </>
+    </div>
   );
 };
 

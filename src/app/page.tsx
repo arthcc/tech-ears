@@ -25,7 +25,7 @@ export default function HomePage() {
         <div className="flex flex-col mt-20 text-black">
           <h1 className="text-4xl font-bold tracking-tight lg:text-5xl mb-6 relative z-0">
             The
-            <span className="text-mirage-500 dark:text-blue-400"> newest way </span>
+            <span className="text-mirage-500 "> newest way </span>
             to Learn English
           </h1>
         </div>
