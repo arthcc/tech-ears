@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { CorrectlIcon } from "../Icons/correct";
-import { WrongIcon } from "../Icons/wrong";
+import { CorrectlIcon } from "./Icons/correct";
+import { WrongIcon } from "./Icons/wrong";
 
 interface AnswerCard {
   correct: boolean;

@@ -2,13 +2,12 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
-import { Providers } from "../providers/ThemeProviders";
+import { Providers } from "@/providers/ThemeProviders";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-const inter = Inter({ subsets: ["latin"] });
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { GeistSans } from "geist/font/sans";
-import Footer from "../components/Footer";
+import Footer from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "TechEars",
@@ -18,6 +17,8 @@ export const metadata: Metadata = {
 interface RootLayoutProps {
   children: ReactNode;
 }
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (

@@ -1,7 +1,6 @@
 import { getCookie, setCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 
-
 const getRandomPhrase = () => {
   const categories = Object.keys(phrases);
   const randomCategory = categories[Math.floor(Math.random() * categories.length)];

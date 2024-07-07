@@ -1,5 +1,5 @@
-import { CorrectlIcon } from "../Icons/correct";
-import { WrongIcon } from "../Icons/wrong";
+import { CorrectlIcon } from "./Icons/correct";
+import { WrongIcon } from "./Icons/wrong";
 
 export function WrongCard() {
   return (

@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint './**/*.{jsx,jsx,ts,tsx}'"
+    "lint": "eslint './**/*.{jsx,jsx,ts,tsx}'",
+    "format": "prettier --write './**/*.{jsx,jsx,ts,tsx}'"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",

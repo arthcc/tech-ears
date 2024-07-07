@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ExternalLink, Menu, X } from "lucide-react";
-import HeaderButton from "../HeaderButton";
-import { GitHubIcon } from "../Icons/github";
-import { DonateIcon } from "../Icons/donate";
-import { SignInIcon } from "../Icons/signIn";
+import HeaderButton from "@/components/Header/HeaderButton";
+import { GitHubIcon } from "@/components/Icons/github";
+import { DonateIcon } from "@/components/Icons/donate";
+import { SignInIcon } from "@/components/Icons/signIn";
 
 export default function HeaderMobile() {
   const [menuMobile, setMenuMobile] = useState(false);

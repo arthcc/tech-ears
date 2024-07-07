@@ -1,12 +1,11 @@
 import React from "react";
-import { Input } from "../ui/input";
+import { Input } from "./ui/input";
 import Textarea from "@mui/joy/Textarea";
-
 
 export const TextInput = ({ type = "text", className = "", onChange, ...props }) => {
   return (
     <Textarea
-    className={`w-full max-w-2xl mx-auto ${className}`}
+      className={`w-full max-w-2xl mx-auto ${className}`}
       placeholder="Your phrase is typed here..."
       color="neutral"
       minRows={5}

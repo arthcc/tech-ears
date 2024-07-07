@@ -3,16 +3,22 @@ import * as ProgressPrimitive from "@radix-ui/react-progress";
 
 interface CustomProgressProps
   extends React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> {
-    currentStep: number;
-    totalSteps: number;
-  
+  currentStep: number;
+  totalSteps: number;
+
   indicatorColor: string;
   progress: number;
   height?: string;
   width?: string;
 }
 
-const ProgressBar: React.FC<CustomProgressProps> = ({ currentStep, totalSteps, indicatorColor, height = 'h-4', width = 'w-[60%]' }) => {
+const ProgressBar: React.FC<CustomProgressProps> = ({
+  currentStep,
+  totalSteps,
+  indicatorColor,
+  height = "h-4",
+  width = "w-[60%]"
+}) => {
   const progress = (currentStep / totalSteps) * 100;
 
   return (
@@ -22,7 +28,10 @@ const ProgressBar: React.FC<CustomProgressProps> = ({ currentStep, totalSteps, i
       </p>
       <div className="flex justify-center">
         <div className={`${width} mx-auto bg-progress-gray rounded-full ${height}`}>
-          <div className={`${indicatorColor} ${height} rounded-full`} style={{ width: `${progress}%` }}></div>
+          <div
+            className={`${indicatorColor} ${height} rounded-full`}
+            style={{ width: `${progress}%` }}
+          ></div>
         </div>
       </div>
     </div>
