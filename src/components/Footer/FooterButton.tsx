@@ -2,7 +2,7 @@ import { MainButton } from "@/components/PrimaryButton";
 
 export default function FooterButton() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-screen bg-white dark:bg-mirage-700">
+    <div className="flex flex-col items-center justify-center bg-white dark:bg-mirage-700">
       <div className="text-center mb-auto mt-auto">
         <div className="flex justify-center mb-4"></div>
       </div>
