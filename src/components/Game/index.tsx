@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export const Game = () => {
   const [userAnswer, setUserAnswer] = useState("");
-  const [isCorrect, setIsCorrect] = useState(false);
+  const [isCorrect, setIsCorrect] = useState<boolean>(null);
   const [correctFeedback, setCorrectFeedback] = useState(null);
   const [userFeedback, setUserFeedback] = useState(null);
 
@@ -59,7 +59,7 @@ export const Game = () => {
         {/* <GameInput onChange={e => setInputValue(e.target.value)} /> */}
       </div>
 
-      <FooterButton disabled={!userAnswer} onButtonPress={handleButtonPress} />
+      <FooterButton buttonState={isCorrect} disabled={!userAnswer} onButtonPress={handleButtonPress} />
     </div>
   );
 };
