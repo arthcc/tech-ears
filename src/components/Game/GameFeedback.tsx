@@ -14,7 +14,7 @@ export const GameFeedback = ({
   audioSrc
 }: GameFeedbackProps) => {
   return (
-    <div className="flex items-center justify-center flex-col mb-6">
+    <div className="flex items-center justify-center flex-col mb-6 ">
       {feedback ? (
         <div className="flex flex-col items-center justify-center">
           {feedbackType === "correct" ? <CorrectIcon /> : <WrongIcon />}
@@ -39,12 +39,7 @@ export const GameFeedback = ({
           </div>
         </div>
       )}
-      {audioSrc && !feedback && (
-        <audio controls>
-          <source src={audioSrc} type="audio/mp3" />
-          Your browser does not support the audio element.
-        </audio>
-      )}
+     
     </div>
   );
 };

@@ -1,7 +1,6 @@
 "use client";
 
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { TextInput } from "@/components/TextInput";
 import ProgressBar from "@/components/ProgressBar";
 import Loading from "@/components/Loader";
 import React, { useState, useEffect } from "react";
@@ -24,7 +23,7 @@ const PlayerPage = () => {
   }
 
   return (
-    <div className="flex flex-col bg-white h-full pb-14">
+    <div className="flex flex-col bg-white h-full">
       <GoogleAnalytics gaId="G-R5SCDC4C8D" />
       <div className="pt-10">
         <ProgressBar

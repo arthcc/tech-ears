@@ -13,13 +13,9 @@ export default function Loading() {
           Loading your <span className="text-blue-400">phrases</span> of the day...
         </h1>
       </div>
-      <div className="w-52">
-        <hr className="h-px my-8 bg-gray-200 border-0 " />
+      <div className="w-full">
         <div>
-          <MainButton
-            title="I'm Ready"
-            className={`border border-solid-100 gap-x-2 px-4 bg-button-main text-white py-3 `}
-          />
+          <hr className="h-px my-8 bg-gray-200 border-0 w-full" />
         </div>
       </div>
     </div>

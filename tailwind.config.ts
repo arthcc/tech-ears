@@ -16,7 +16,11 @@ const config: Config = {
         "2xl": "1400px"
       }
     },
+
     extend: {
+      height: {
+        "416": "416px"
+      }, 
       colors: {
         "background-dark": "#222c3b",
         "progress-gray": "#F1F1F3",
@@ -62,7 +66,7 @@ const config: Config = {
           correct: "#05BA79",
           wrong: "#FF5B69"
         },
-
+      
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",

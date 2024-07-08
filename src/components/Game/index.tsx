@@ -35,13 +35,19 @@ export const Game = () => {
 
   return (
     <div className="h-full flex flex-col justify-between">
-      <div className="h-full flex items-center justify-center flex-col">
+      <div className="h-full flex items-center justify-center flex-col gap-12">
         {/* <AudioServer /> */}
         <GameFeedback
           audioSrc={data?.audioBase64}
           feedbackType={isCorrect ? "correct" : "incorrect"}
           feedback={correctFeedback}
         />
+         {data?.audioBase64&& !userFeedback && (
+        <audio controls>
+          <source src={data?.audioBase64} type="audio/mp3" />
+          Your browser does not support the audio element.
+        </audio>
+      )}
         {userFeedback ? (
           <GameInput.Field>
             <div className="flex flex-wrap">{userFeedback}</div>
