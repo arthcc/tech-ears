@@ -1,4 +1,4 @@
-const phrases = {
+export const phrases = {
   backEnd: [
     "Optimizing database queries for performance",
     "Implementing RESTful APIs for seamless integration",

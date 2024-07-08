@@ -56,7 +56,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <SpeedInsights />
           <Analytics />
           <Providers>
-            <div className="md:overflow-hidden flex flex-col justify-between bg-white h-screen">
+            <div className=" flex flex-col justify-between bg-white h-screen">
               {children}
               <Footer />
             </div>
