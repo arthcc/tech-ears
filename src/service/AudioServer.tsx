@@ -1,62 +1,83 @@
 import { getCookie, setCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 
-const getRandomPhrase = () => {
-  const categories = Object.keys(phrases);
-  const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-  const phrasesInCategory = phrases[randomCategory];
-  return phrasesInCategory[Math.floor(Math.random() * phrasesInCategory.length)];
-};
+export const AudioServer = () => {
+  const getRandomPhrase = () => {
+    const categories = Object.keys(phrases);
+    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+    const phrasesInCategory = phrases[randomCategory];
+    return phrasesInCategory[Math.floor(Math.random() * phrasesInCategory.length)];
+  };
 
-const [inputValue, setInputValue] = useState("");
-const [corrections, setCorrections] = useState([]);
-const [audioSrc, setAudioSrc] = useState(null);
-const [randomPhrase, setRandomPhrase] = useState("");
-const [errorMessage, setErrorMessage] = useState("");
-const [rounds, setRounds] = useState(0);
-const [showShareProgress, setShowShareProgress] = useState(false);
-const [userResponses, setUserResponses] = useState([]);
-const [currentStep, setCurrentStep] = useState(0);
-const [correctCount, setCorrectCount] = useState(0);
+  // const [inputValue, setInputValue] = useState("");
+  const [corrections, setCorrections] = useState([]);
+  const [audioSrc, setAudioSrc] = useState(null);
+  const [randomPhrase, setRandomPhrase] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [rounds, setRounds] = useState(0);
+  const [showShareProgress, setShowShareProgress] = useState(false);
+  const [userResponses, setUserResponses] = useState([]);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [correctCount, setCorrectCount] = useState(0);
 
-const fetchRandomPhrase = async () => {
-  const phrase = getRandomPhrase();
-  setRandomPhrase(phrase);
+  const fetchRandomPhrase = async () => {
+    const phrase = getRandomPhrase();
+    setRandomPhrase(phrase);
 
-  try {
-    const data = {
-      input: { text: phrase },
-      voice: { languageCode: "en-US", ssmlGender: "MALE" },
-      audioConfig: { audioEncoding: "MP3" }
-    };
+    try {
+      const data = {
+        input: { text: phrase },
+        voice: { languageCode: "en-US", ssmlGender: "MALE" },
+        audioConfig: { audioEncoding: "MP3" }
+      };
 
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    };
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      };
 
-    const apiKey = process.env.GOOGLE_API_KEY;
-    const response = await fetch(
-      `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`,
-      options
-    );
+      const apiKey = process.env.GOOGLE_API_KEY;
+      const response = await fetch(
+        `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`,
+        options
+      );
 
-    if (!response.ok) {
-      throw new Error(`Error with the Text-to-Speech API: ${response.statusText}`);
+      if (!response.ok) {
+        throw new Error(`Error with the Text-to-Speech API: ${response.statusText}`);
+      }
+
+      const responseData = await response.json();
+      const audioContent = responseData.audioContent;
+      const audioBase64 = `data:audio/mp3;base64,${audioContent}`;
+      setAudioSrc(audioBase64);
+    } catch (error) {
+      setErrorMessage("Failed to load audio. Please try again later.");
     }
+  };
 
-    const responseData = await response.json();
-    const audioContent = responseData.audioContent;
-    const audioBase64 = `data:audio/mp3;base64,${audioContent}`;
-    setAudioSrc(audioBase64);
-  } catch (error) {
-    setErrorMessage("Failed to load audio. Please try again later.");
-  }
+  useEffect(() => {
+    fetchRandomPhrase();
+  }, []);
+
+  return (
+    <div>
+      {audioSrc && (
+        <audio controls>
+          <source src={audioSrc} type="audio/mp3" />
+          Your browser does not support the audio element.
+        </audio>
+      )}
+      \
+    </div>
+  );
 };
 
+{
+  /*
+}
 const compareAnswer = (inputValue, correctAnswer) => {
   const inputWords = inputValue.toLowerCase().split(" ");
   const correctWords = correctAnswer.map(word => word.toLowerCase());
@@ -76,7 +97,7 @@ const compareAnswer = (inputValue, correctAnswer) => {
     }
   });
 };
-
+{/*}
 useEffect(() => {
   const cookieRounds = getCookie("rounds");
   const expirationDate = new Date(getCookie("expirationDate"));
@@ -162,3 +183,5 @@ const handleShareProgress = () => {
   const twitterUrl = `https://twitter.com/compose/tweet?text=${encodeURIComponent(tweetText)}`;
   window.open(twitterUrl, "_blank");
 };
+*/
+}
