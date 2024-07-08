@@ -1,15 +1,32 @@
 import { AudioIcon } from "@/components/Icons/audio";
+import { CorrectIcon } from "../Icons/correct";
+import { WrongIcon } from "../Icons/wrong";
 
 interface GameFeedbackProps {
-  hasFeedback?: boolean;
+  feedback: React.ReactNode;
+  feedbackType?: "correct" | "incorrect";
   audioSrc?: string;
 }
 
-export const GameFeedback = ({ hasFeedback = false, audioSrc = "" }: GameFeedbackProps) => {
+export const GameFeedback = ({
+  feedback,
+  feedbackType = "correct",
+  audioSrc
+}: GameFeedbackProps) => {
   return (
     <div className="flex items-center justify-center flex-col mb-6">
-      {hasFeedback ? (
-        <div>Tem feedback</div>
+      {feedback ? (
+        <div className="flex flex-col items-center justify-center">
+          {feedbackType === "correct" ? <CorrectIcon /> : <WrongIcon />}
+          <span
+            className={`font-bold mt-2 text-2xl text-center
+            ${feedbackType === "correct" ? "text-text-correct" : "text-text-wrong"}
+            `}
+          >
+            {feedbackType === "correct" ? "Your phrase is correct!" : "Correct Solution:"} <br />
+          </span>
+          <span>{feedbackType === "incorrect" && feedback}</span>
+        </div>
       ) : (
         <div>
           <div className="flex flex-col items-center justify-center py-12  bg-white ">
@@ -22,7 +39,7 @@ export const GameFeedback = ({ hasFeedback = false, audioSrc = "" }: GameFeedbac
           </div>
         </div>
       )}
-      {audioSrc && (
+      {audioSrc && !feedback && (
         <audio controls>
           <source src={audioSrc} type="audio/mp3" />
           Your browser does not support the audio element.

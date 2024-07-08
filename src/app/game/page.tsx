@@ -6,6 +6,7 @@ import ProgressBar from "@/components/ProgressBar";
 import Loading from "@/components/Loader";
 import React, { useState, useEffect } from "react";
 import { Game } from "@/components/Game";
+import { useQuery } from "@tanstack/react-query";
 
 const PlayerPage = () => {
   const [isLoading, setIsLoading] = useState(true);

@@ -3,7 +3,7 @@ interface Props {
   width?: number;
   height?: number;
 }
-export function CorrectlIcon(props: Props) {
+export function CorrectIcon(props: Props) {
   return (
     <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path

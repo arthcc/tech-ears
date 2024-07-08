@@ -21,6 +21,9 @@ const config: Config = {
         "background-dark": "#222c3b",
         "progress-gray": "#F1F1F3",
         "progress-blue": "#4581F4",
+        border: "#E0E3EE",
+        "correct-opacity": "#05BA7966",
+        "wrong-opacity": "#FF5B6966",
 
         mirage: {
           "50": "#f0f7fe",
@@ -60,7 +63,6 @@ const config: Config = {
           wrong: "#FF5B69"
         },
 
-        border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
