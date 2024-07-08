@@ -9,7 +9,6 @@ const queryClient = new QueryClient();
 export function Providers({ children, ...props }: ThemeProviderProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      {" "}
       <NextThemesProvider
         attribute="class"
         defaultTheme="light"
