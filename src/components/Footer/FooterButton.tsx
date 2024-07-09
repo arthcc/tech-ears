@@ -18,9 +18,7 @@ export default function FooterButton({ disabled, onButtonPress, buttonState }: F
     }
     return;
   };
-  useEffect(() => {
-    console.log("Estado" + buttonState);
-  });
+
   return (
     <div className="flex flex-col items-center justify-center bg-white ">
       <hr className="h-px my-6 bg-gray-200 border-0 w-full" />

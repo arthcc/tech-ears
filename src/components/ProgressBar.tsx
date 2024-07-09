@@ -5,7 +5,6 @@ interface CustomProgressProps
   extends React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> {
   currentStep: number;
   totalSteps: number;
-
   indicatorColor: string;
   progress: number;
   height?: string;
@@ -24,7 +23,7 @@ const ProgressBar: React.FC<CustomProgressProps> = ({
   return (
     <div className="step-component mb-2 w-full">
       <p className="text-center mb-1 text-black">
-        Phrase {currentStep} of {totalSteps}
+      {currentStep} / {totalSteps}
       </p>
       <div className="flex justify-center">
         <div className={`${width} mx-auto bg-progress-gray rounded-full ${height}`}>
