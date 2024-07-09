@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { CorrectlIcon } from "./Icons/correct";
+import { CorrectIcon } from "./Icons/correct";
 import { WrongIcon } from "./Icons/wrong";
 
 interface AnswerCard {
@@ -11,7 +11,7 @@ const AnswerCard: FC<AnswerCard> = ({ correct, pharse, correctPharse }) => {
   return (
     <div>
       <div className="flex flex-col items-center p-5 mt-9">
-        {correct ? <CorrectlIcon /> : <WrongIcon />}
+        {correct ? <CorrectIcon /> : <WrongIcon />}
         <span className="text-text-correct font-semibold text-2xl">{pharse}</span>
 
         {correctPharse && <p>{correctPharse}</p>}
