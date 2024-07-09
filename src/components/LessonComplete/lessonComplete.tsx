@@ -9,7 +9,7 @@ import { LogoIcon } from "../Icons/logo";
 
 export const LessonComplete = () => {
   return (
-    <div className="flex flex-col items-center justify-center bg-white min-h-screen">
+    <div className="flex flex-col items-center justify-center bg-white h-full">
     <div className="flex flex-col items-center justify-center flex-grow">
       <LogoIcon />
       <h1 className="text-center font-bold text-4xl mt-2">

@@ -20,12 +20,13 @@ const Game = () => {
   const [isLessonComplete, setIsLessonComplete] = useState(false);
   const totalSteps = 5;
 
-  const { fetchRandomPhrase, verifyAnswer, compareCorrectAnswer, compareUserAnswer } = useAudioServer();
+  const { fetchRandomPhrase, verifyAnswer, compareCorrectAnswer, compareUserAnswer } =
+    useAudioServer();
 
   const { data, error, isLoading, refetch } = useQuery({
     queryKey: ["randomPhrase", currentStep],
     queryFn: fetchRandomPhrase,
-    enabled: currentStep <= totalSteps,
+    enabled: currentStep <= totalSteps
   });
 
   useEffect(() => {
@@ -47,14 +48,15 @@ const Game = () => {
     setUserFeedback(userFeedbackComponent);
 
     if (currentStep < totalSteps) {
-      setCurrentStep((prevStep) => prevStep + 1);
+      setCurrentStep(prevStep => prevStep + 1);
     } else {
       setIsLessonComplete(true);
-      Cookies.set("lessonComplete", "true", { expires: 7 }); // Salva nos cookies por 7 dias
+      Cookies.set("lessonComplete", "true", { expires: 1 }); // Expires in 1 day
     }
-    
+
     setUserAnswer("");
     setTimeout(() => {
+      setIsCorrect(null);
       setUserFeedback(null);
       setCorrectFeedback(null);
     }, 3000);
@@ -92,7 +94,10 @@ const Game = () => {
                 <div className="flex flex-wrap">{userFeedback}</div>
               </GameInput.Field>
             ) : (
-              <GameInput.Textarea value={userAnswer} onChange={(e) => setUserAnswer(e.target.value)} />
+              <GameInput.Textarea
+                value={userAnswer}
+                onChange={e => setUserAnswer(e.target.value)}
+              />
             )}
           </div>
           <FooterButton
