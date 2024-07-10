@@ -5,6 +5,7 @@ interface MainButtonProps {
   iconPosition?: string;
   disabled?: boolean;
   onPress?: () => void;
+  onClick?: () => void;
 }
 
 export function MainButton({
@@ -13,8 +14,18 @@ export function MainButton({
   className = "",
   iconPosition = "left",
   disabled = false,
-  onPress
+  onPress,
+  onClick
 }: MainButtonProps) {
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+    if (onPress) {
+      onPress();
+    }
+  };
+
   return (
     <button
       className={
@@ -22,7 +33,7 @@ export function MainButton({
         className
       }
       disabled={disabled}
-      onClick={onPress}
+      onClick={handleClick}
     >
       {iconPosition === "left" && icon}
       {title}

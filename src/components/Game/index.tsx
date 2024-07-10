@@ -6,10 +6,11 @@ import { AudioServer } from "@/service/AudioServer";
 import { useAudioServer } from "@/hooks/useAudioServer";
 import { useQuery } from "@tanstack/react-query";
 import ProgressBar from "@/components/ProgressBar";
-import { LessonComplete } from "../LessonComplete/lessonComplete";
 import Cookies from "js-cookie";
+import LessonComplete from "../LessonComplete/lessonComplete";
 // On Load da página
 // 1. Dar o Fetch na frase e exibir a frase no componente de audio
+
 
 const Game = () => {
   const [userAnswer, setUserAnswer] = useState("");
@@ -18,6 +19,7 @@ const Game = () => {
   const [userFeedback, setUserFeedback] = useState(null);
   const [currentStep, setCurrentStep] = useState(1);
   const [isLessonComplete, setIsLessonComplete] = useState(false);
+  const [correctCount, setCorrectCount] = useState(0);
   const totalSteps = 5;
 
   const { fetchRandomPhrase, verifyAnswer, compareCorrectAnswer, compareUserAnswer } =
@@ -38,9 +40,24 @@ const Game = () => {
     }
   }, [currentStep, refetch]);
 
+  useEffect(() => {
+    const storedCorrectCount = localStorage.getItem("correctCount");
+    if (storedCorrectCount) {
+      setCorrectCount(parseInt(storedCorrectCount, 10));
+    }
+  }, []);
+
   async function handleButtonPress() {
     const isCorrect = verifyAnswer(userAnswer, data?.phrase);
     setIsCorrect(isCorrect);
+
+    if (isCorrect) {
+      setCorrectCount(prevCount => {
+        const newCount = prevCount + 1;
+        localStorage.setItem("correctCount", newCount.toString());
+        return newCount;
+      });
+    }
 
     const correctFeedbackComponent = compareCorrectAnswer(userAnswer, data?.phrase);
     const userFeedbackComponent = compareUserAnswer(userAnswer, data?.phrase);
@@ -51,7 +68,7 @@ const Game = () => {
       setCurrentStep(prevStep => prevStep + 1);
     } else {
       setIsLessonComplete(true);
-      Cookies.set("lessonComplete", "true", { expires: 1 }); // Expires in 1 day
+      Cookies.set("lessonComplete", "true", { expires: 1 });
     }
 
     setUserAnswer("");
@@ -65,7 +82,7 @@ const Game = () => {
   return (
     <div className="h-full flex flex-col justify-between">
       {isLessonComplete ? (
-        <LessonComplete />
+        <LessonComplete correctCount={correctCount} />
       ) : (
         <>
           <ProgressBar
@@ -95,8 +112,8 @@ const Game = () => {
               </GameInput.Field>
             ) : (
               <GameInput.Textarea
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter') {
+                onKeyDown={event => {
+                  if (event.key === "Enter") {
                     handleButtonPress();
                   }
                 }}

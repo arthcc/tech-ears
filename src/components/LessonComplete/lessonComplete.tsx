@@ -1,14 +1,28 @@
-import React from "react";
-import FooterButton from "../Footer/FooterButton";
+import React, { useEffect, useState } from "react";
 import { MainButton } from "../PrimaryButton";
 import { HomeIcon } from "../Icons/home";
 import { ShareIcon } from "../Icons/share";
-import { IconSolo } from "../Icons/logoSolo";
-import { ReviewIcon } from "../Icons/review";
+
 import { LogoIcon } from "../Icons/logo";
 import Link from "next/link";
 
-export const LessonComplete = () => {
+const LessonComplete = ({ correctCount }) => {
+  const [storedCorrectCount, setStoredCorrectCount] = useState(0);
+
+  useEffect(() => {
+    const count = localStorage.getItem("correctCount");
+    if (count) {
+      setStoredCorrectCount(parseInt(count, 10));
+    }
+  }, []);
+
+  const shareProgress = () => {
+    console.log("Share Progress Clicked");
+    const tweetText = `I just used TechEars to practice my English ✨, I got ${storedCorrectCount} phrases correctly! Join me at: tech-ears.vercel.app`;
+    const twitterUrl = `https://twitter.com/compose/tweet?text=${encodeURIComponent(tweetText)}`;
+    window.open(twitterUrl, "_blank");
+  };
+
   return (
     <div className="flex flex-col items-center justify-center bg-white h-full">
       <div className="flex flex-col items-center justify-center flex-grow">
@@ -18,11 +32,11 @@ export const LessonComplete = () => {
             Lesson <span className="text-black">Complete!</span>
           </span>
         </h1>
-        <MainButton
+        {/* <MainButton
           title="Review Lesson"
           className="max-w-56 bg-white text-black py-3 border border-solid border-gray-300 text-center mt-20"
           icon={<ReviewIcon />}
-        />
+        />*/}
       </div>
 
       <div className="w-full">
@@ -31,7 +45,7 @@ export const LessonComplete = () => {
           <Link href="https://www.techears.tech" target="_onblank">
             <MainButton
               title="Back To Home"
-              className="max-w-56 bg-white text-black py-3 border border-solid border-gray-300 text-center"
+              className="max-w-56 bg-white text-black py-3 px-4 border border-solid border-gray-300 text-center"
               icon={<HomeIcon />}
             />
           </Link>
@@ -40,9 +54,12 @@ export const LessonComplete = () => {
             title="Share Progress"
             className="max-w-56 bg-button-main text-white py-3 border border-solid border-gray-300 text-center"
             icon={<ShareIcon />}
+            onClick={shareProgress}
           />
         </div>
       </div>
     </div>
   );
 };
+
+export default LessonComplete;
