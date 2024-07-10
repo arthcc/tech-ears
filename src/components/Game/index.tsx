@@ -95,8 +95,13 @@ const Game = () => {
               </GameInput.Field>
             ) : (
               <GameInput.Textarea
-                value={userAnswer}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    handleButtonPress();
+                  }
+                }}
                 onChange={e => setUserAnswer(e.target.value)}
+                value={userAnswer}
               />
             )}
           </div>
