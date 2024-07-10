@@ -11,7 +11,6 @@ import LessonComplete from "../LessonComplete/lessonComplete";
 // On Load da página
 // 1. Dar o Fetch na frase e exibir a frase no componente de audio
 
-
 const Game = () => {
   const [userAnswer, setUserAnswer] = useState("");
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -33,19 +32,15 @@ const Game = () => {
 
   useEffect(() => {
     const lessonComplete = Cookies.get("lessonComplete");
+    const storedCorrectCount = Cookies.get("correctCount");
     if (lessonComplete) {
       setIsLessonComplete(true);
+    } else if (storedCorrectCount) {
+      setCorrectCount(parseInt(storedCorrectCount, 10));
     } else if (currentStep <= totalSteps) {
       refetch();
     }
   }, [currentStep, refetch]);
-
-  useEffect(() => {
-    const storedCorrectCount = localStorage.getItem("correctCount");
-    if (storedCorrectCount) {
-      setCorrectCount(parseInt(storedCorrectCount, 10));
-    }
-  }, []);
 
   async function handleButtonPress() {
     const isCorrect = verifyAnswer(userAnswer, data?.phrase);
@@ -54,7 +49,7 @@ const Game = () => {
     if (isCorrect) {
       setCorrectCount(prevCount => {
         const newCount = prevCount + 1;
-        localStorage.setItem("correctCount", newCount.toString());
+        Cookies.set("correctCount", newCount.toString(), { expires: 1 });
         return newCount;
       });
     }

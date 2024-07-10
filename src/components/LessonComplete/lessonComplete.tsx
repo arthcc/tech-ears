@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 import { MainButton } from "../PrimaryButton";
 import { HomeIcon } from "../Icons/home";
 import { ShareIcon } from "../Icons/share";
-
+import Cookies from "js-cookie";
 import { LogoIcon } from "../Icons/logo";
 import Link from "next/link";
-
 const LessonComplete = ({ correctCount }) => {
   const [storedCorrectCount, setStoredCorrectCount] = useState(0);
 
   useEffect(() => {
-    const count = localStorage.getItem("correctCount");
+    const count = Cookies.get("correctCount");
     if (count) {
       setStoredCorrectCount(parseInt(count, 10));
     }
