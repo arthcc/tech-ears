@@ -56,13 +56,6 @@ export default function HomePage() {
           </Link>
           <div className="w-full">
             <MainButton
-              title="Leaderboard"
-              icon={<LeadBoardIcon />}
-              className="bg-button-normal border-2 border-solid text-black py-3"
-            />
-          </div>
-          <div className="w-full">
-            <MainButton
               title="How to Play?"
               icon={<HowToPlayIcon />}
               className="bg-button-normal border-2 border-solid text-black py-3"
