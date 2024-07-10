@@ -1,5 +1,5 @@
 interface MainButtonProps {
-  title: string;
+  title?: string;
   icon?: React.JSX.Element;
   className?: string;
   iconPosition?: string;

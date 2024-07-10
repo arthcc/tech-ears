@@ -8,6 +8,8 @@ import HeaderButton from "@/components/Header/HeaderButton";
 import { GitHubIcon } from "@/components/Icons/github";
 import { DonateIcon } from "@/components/Icons/donate";
 import { SignInIcon } from "@/components/Icons/signIn";
+import { MainButton } from "../PrimaryButton";
+import { AlertPixIcon } from "../Icons/alertpix";
 
 export default function HeaderMobile() {
   const [menuMobile, setMenuMobile] = useState(false);
@@ -56,14 +58,18 @@ export default function HeaderMobile() {
           </div>
 
           <div className="flex items-start flex-col p-4">
-            <HeaderButton text="Sign In" icon={<SignInIcon />} />
-            <Link href="https://pixmeacoffee.vercel.app/techears" target="_blank">
-              <HeaderButton text="Donate" icon={<DonateIcon />} />
-            </Link>
-            <Link href="https://github.com/arthcc/tech-ears" target="_blank">
-              <HeaderButton text="GitHub" icon={<GitHubIcon />} />
+            
+            <Link
+              href="https://widget.alertpix.live/qrcode/668db49d2980b8e8158d3f76"
+              target="_blank"
+            >
+              <MainButton
+                icon={<AlertPixIcon />}
+                className="text-button-main border border-solid-100 gap-x-2 px-4 py-2"
+              />
             </Link>
           </div>
+
         </div>
       </div>
     </header>

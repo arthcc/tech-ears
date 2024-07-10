@@ -10,8 +10,6 @@ import { MainButton } from "@/components/PrimaryButton";
 import { Icon } from "@/components/Icons/icon";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
-import { HowToPlayIcon } from "@/components/Icons/howPlay";
-import { LeadBoardIcon } from "@/components/Icons/leadboardIcon";
 import { TimeIcon } from "@/components/Icons/time";
 
 export default function HomePage() {
@@ -54,13 +52,7 @@ export default function HomePage() {
               disabled={isLessonComplete}
             />
           </Link>
-          <div className="w-full">
-            <MainButton
-              title="How to Play?"
-              icon={<HowToPlayIcon />}
-              className="bg-button-normal border-2 border-solid text-black py-3"
-            />
-          </div>
+          <div className="w-full"></div>
         </div>
       </div>
     </div>
