@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
-import { Providers } from "@/app/_components/providers/providers";
+import { Providers } from "@/providers/ThemeProviders";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-const inter = Inter({ subsets: ["latin"] });
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { GeistSans } from "geist/font/sans";
+import Footer from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "TechEars",
@@ -18,6 +18,8 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
+const inter = Inter({ subsets: ["latin"] });
+
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
@@ -25,6 +27,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
 
         <title>Tech Ears </title>
+
         <meta name="title" content="Tech Ears " />
         <meta
           name="description"
@@ -32,29 +35,34 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://i.ibb.co/Y8wQBy1/og.png" />
+        <meta property="og:url" content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg" />
         <meta property="og:title" content="Tech Ears " />
         <meta
           property="og:description"
           content="Improve your listening with just a few minutes per day!"
         />
-        <meta property="og:image" content="https://i.ibb.co/Y8wQBy1/og.png" />
+        <meta property="og:image" content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg" />
 
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://i.ibb.co/Y8wQBy1/og.png" />
+        <meta property="twitter:url" content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg" />
         <meta property="twitter:title" content="Tech Ears " />
         <meta
           property="twitter:description"
           content="Improve your listening with just a few minutes per day!"
         />
-        <meta property="twitter:image" content="https://i.ibb.co/Y8wQBy1/og.png" />
+        <meta property="twitter:image" content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg" />
 
         <body className={GeistSans.className}>
           <SpeedInsights />
           <Analytics />
-          <Providers>{children}</Providers>
+          <Providers>
+            <div className=" flex flex-col justify-between bg-white h-screen">
+              {children}
+              <Footer />
+            </div>
+          </Providers>
         </body>
-        {/* eslint-disable prettier/prettier */}
+
         <GoogleAnalytics gaId="G-R5SCDC4C8D" />
       </html>
     </>

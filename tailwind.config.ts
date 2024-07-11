@@ -16,48 +16,57 @@ const config: Config = {
         "2xl": "1400px"
       }
     },
-    extend: {
-      
-      colors: {
-        'background-dark': '#222c3b',
-        'mirage': {
-          '50': '#f0f7fe',
-          '100': '#deecfb',
-          '200': '#c4e0f9',
-          '300': '#9cccf4',
-          '400': '#6dafed',
-          '500': '#4b90e6',
-          '600': '#3674da',
-          '700': '#2d60c8',
-          '800': '#2a4fa3',
-          '900': '#274481',
-          '950': '#0f172a',
-      },
-      'big-stone': {
-        '50': '#f5f7fa',
-        '100': '#eaeef4',
-        '200': '#d0dae7',
-        '300': '#a7bbd2',
-        '400': '#7897b8',
-        '500': '#577aa0',
-        '600': '#446285',
-        '700': '#38506c',
-        '800': '#31445b',
-        '900': '#2d3b4d',
-        '950': '#222c3b',
-    },
-    'text': {
-      'correct': '#addb67',
-      'wrong': '#FF5B69',
-  
-  },
-  
-    
-      
-    
-      
 
-        border: "hsl(var(--border))",
+    extend: {
+      height: {
+        "416": "416px"
+      }, 
+      colors: {
+        "background-dark": "#222c3b",
+        "progress-gray": "#F1F1F3",
+        "progress-blue": "#4581F4",
+        border: "#E0E3EE",
+        "correct-opacity": "#05BA7966",
+        "wrong-opacity": "#FF5B6966",
+
+        mirage: {
+          "50": "#f0f7fe",
+          "100": "#deecfb",
+          "200": "#c4e0f9",
+          "300": "#9cccf4",
+          "400": "#6dafed",
+          "500": "#4581F4",
+          "600": "#3674da",
+          "700": "#2d60c8",
+          "800": "#2a4fa3",
+          "900": "#274481",
+          "950": "#0f172a"
+        },
+
+        "big-stone": {
+          "50": "#f5f7fa",
+          "100": "#eaeef4",
+          "200": "#d0dae7",
+          "300": "#a7bbd2",
+          "400": "#7897b8",
+          "500": "#577aa0",
+          "600": "#446285",
+          "700": "#38506c",
+          "800": "#31445b",
+          "900": "#2d3b4d",
+          "950": "#222c3b"
+        },
+
+        button: {
+          main: "#4581F4",
+          normal: "#FFFFFF"
+        },
+
+        text: {
+          correct: "#05BA79",
+          wrong: "#FF5B69"
+        },
+      
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",

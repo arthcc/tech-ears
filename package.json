@@ -7,17 +7,22 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint './**/*.{jsx,jsx,ts,tsx}'"
+    "lint": "eslint './**/*.{jsx,jsx,ts,tsx}'",
+    "format": "prettier --write './**/*.{jsx,jsx,ts,tsx}'"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@google-cloud/text-to-speech": "^5.3.0",
+    "@mui/joy": "^5.0.0-beta.36",
+    "@mui/material": "^5.15.21",
     "@next/third-parties": "^14.2.4",
     "@nextui-org/progress": "^2.0.31",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-progress": "^1.1.0",
     "@radix-ui/react-slot": "^1.0.2",
-    "@tanstack/react-query": "^5.45.0",
+    "@tanstack/react-query": "^5.50.1",
     "@types/dotenv": "^8.2.0",
     "@vercel/analytics": "^1.3.1",
     "@vercel/speed-insights": "^1.0.12",
@@ -28,7 +33,9 @@
     "g": "^2.0.1",
     "geist": "^1.3.0",
     "install": "^0.13.0",
-    "lucide-react": "^0.394.0",
+    "js-cookie": "^3.0.5",
+    "js-cookies": "^1.0.4",
+    "lucide-react": "^0.400.0",
     "next": "^14.2.4",
     "next-themes": "^0.3.0",
     "nextui-cli": "^0.3.2",
@@ -39,6 +46,7 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.50.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
