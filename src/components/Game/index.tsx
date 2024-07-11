@@ -107,7 +107,7 @@ const Game = () => {
             )}
             {userFeedback ? (
               <GameInput.Field>
-                <div className="flex flex-wrap">{userFeedback}</div>
+                <div className="flex flex-wrap gap-1">{userFeedback}</div>
               </GameInput.Field>
             ) : (
               <GameInput.Textarea
