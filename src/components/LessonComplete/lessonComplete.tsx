@@ -43,7 +43,6 @@ const LessonComplete = ({ correctCount }) => {
         <div className="px-6 flex flex-wrap justify-center items-center gap-4">
           <Link
             href="https://www.techears.tech"
-            target="_onblank"
             className="sm:max-w-56 bg-white text-black py-3 px-4 border border-solid border-gray-300 text-center justify-center w-full flex rounded-2xl font-semibold text-xl gap-2 hover:scale-110 transition-all items-center"
           >
            <HomeIcon/>  Back To Home 

@@ -27,6 +27,11 @@ Tech Ears is an open-source project designed by developers for developers, aimed
 ```bash
 git clone https://github.com/arthcc/tech-ears
 ```
+-  Install [NVM](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) in order to easily run the recommended Node version for this project: 
+```bash
+nvm install v20
+nvm use
+```
 
 Now go to ```cd tech-ears``` and run ```yarn install```
 
