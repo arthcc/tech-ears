@@ -5,9 +5,10 @@ import { ReactNode } from "react";
 import { Providers } from "@/providers/ThemeProviders";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
-import { GoogleAnalytics } from "@next/third-parties/google";
+
 import { GeistSans } from "geist/font/sans";
 import Footer from "@/components/Footer/Footer";
+import GoogleAnalytics from "@/components/googleAnalytics/Analytics";
 
 export const metadata: Metadata = {
   title: "TechEars",
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <html lang="en" suppressHydrationWarning>
+        <GoogleAnalytics />
         <head />
 
         <title>Tech Ears </title>
@@ -35,22 +37,34 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg" />
+        <meta
+          property="og:url"
+          content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg"
+        />
         <meta property="og:title" content="Tech Ears " />
         <meta
           property="og:description"
           content="Improve your listening with just a few minutes per day!"
         />
-        <meta property="og:image" content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg" />
+        <meta
+          property="og:image"
+          content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg"
+        />
 
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg" />
+        <meta
+          property="twitter:url"
+          content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg"
+        />
         <meta property="twitter:title" content="Tech Ears " />
         <meta
           property="twitter:description"
           content="Improve your listening with just a few minutes per day!"
         />
-        <meta property="twitter:image" content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg" />
+        <meta
+          property="twitter:image"
+          content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg"
+        />
 
         <body className={GeistSans.className}>
           <SpeedInsights />
@@ -62,8 +76,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
           </Providers>
         </body>
-
-        <GoogleAnalytics gaId="G-R5SCDC4C8D" />
       </html>
     </>
   );

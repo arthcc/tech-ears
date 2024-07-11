@@ -3,7 +3,6 @@
 import * as React from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import Header from "@/components/Header/Header";
 import { PlayIcon } from "@/components/Icons/playIcon";
 import { MainButton } from "@/components/PrimaryButton";
@@ -25,7 +24,7 @@ export default function HomePage() {
 
   return (
     <div className="md:overflow-hidden flex flex-col h-screen">
-      <GoogleAnalytics gaId="G-R5SCDC4C8D" />
+   
       <Header />
       <div className="flex flex-col items-center justify-center flex-grow p-6 bg-white">
         <div className="">

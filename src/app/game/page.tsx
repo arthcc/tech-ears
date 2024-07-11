@@ -22,7 +22,6 @@ const PlayerPage = () => {
 
   return (
     <div className="flex flex-col bg-white h-full">
-      <GoogleAnalytics gaId="G-R5SCDC4C8D" />
       <div className="pt-10"></div>
       <div className="pt-1 mt-1"></div>
       <Game />
