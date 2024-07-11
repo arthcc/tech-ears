@@ -63,10 +63,11 @@ export const useAudioServer = () => {
       const isCorrect = inputWords[index] && inputWords[index].toLowerCase() === word.toLowerCase();
 
       return (
-        <span
+        <span 
           key={index}
-          className={`${
-            isCorrect ? "text-mirage-950 ml-1" : "text-text-correct ml-1"
+          className={`
+          ${
+            isCorrect ? "text-mirage-950 " : "text-text-correct "
           } text-xl font-medium`}
         >
           {word}
@@ -84,7 +85,7 @@ export const useAudioServer = () => {
         correctWords[index] && word.toLowerCase() === correctWords[index].toLowerCase();
 
       return (
-        <span key={index} className={isCorrect ? "text-text-correct ml-1" : "text-text-wrong ml-1"}>
+        <span key={index} className={isCorrect ? "text-text-correct " : "text-text-wrong "}>
           {word}
         </span>
       );

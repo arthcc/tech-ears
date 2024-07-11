@@ -12,7 +12,7 @@ const AnswerCard: FC<AnswerCard> = ({ correct, pharse, correctPharse }) => {
     <div>
       <div className="flex flex-col items-center p-5 mt-9">
         {correct ? <CorrectIcon /> : <WrongIcon />}
-        <span className="text-text-correct font-semibold text-2xl">{pharse}</span>
+        <span className=" text-text-correct font-semibold text-2xl">{pharse}</span>
 
         {correctPharse && <p>{correctPharse}</p>}
       </div>

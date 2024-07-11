@@ -19,6 +19,7 @@ const Game = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isLessonComplete, setIsLessonComplete] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
+  const [canContinue, setCanContinue] = useState(false); // Novo estado para controle de continuação
   const totalSteps = 5;
 
   const { fetchRandomPhrase, verifyAnswer, compareCorrectAnswer, compareUserAnswer } =
@@ -27,7 +28,7 @@ const Game = () => {
   const { data, error, isLoading, refetch } = useQuery({
     queryKey: ["randomPhrase", currentStep],
     queryFn: fetchRandomPhrase,
-    enabled: currentStep <= totalSteps
+    enabled: currentStep <= totalSteps,
   });
 
   useEffect(() => {
@@ -47,7 +48,7 @@ const Game = () => {
     setIsCorrect(isCorrect);
 
     if (isCorrect) {
-      setCorrectCount(prevCount => {
+      setCorrectCount((prevCount) => {
         const newCount = prevCount + 1;
         Cookies.set("correctCount", newCount.toString(), { expires: 1 });
         return newCount;
@@ -58,20 +59,23 @@ const Game = () => {
     const userFeedbackComponent = compareUserAnswer(userAnswer, data?.phrase);
     setCorrectFeedback(correctFeedbackComponent);
     setUserFeedback(userFeedbackComponent);
+    setCanContinue(true); // Permitir que o usuário continue
+  }
 
+  function handleContinue() {
     if (currentStep < totalSteps) {
-      setCurrentStep(prevStep => prevStep + 1);
+      setCurrentStep((prevStep) => prevStep + 1);
     } else {
       setIsLessonComplete(true);
       Cookies.set("lessonComplete", "true", { expires: 1 });
     }
 
+    // Limpar estados
     setUserAnswer("");
-    setTimeout(() => {
-      setIsCorrect(null);
-      setUserFeedback(null);
-      setCorrectFeedback(null);
-    }, 3000);
+    setIsCorrect(null);
+    setUserFeedback(null);
+    setCorrectFeedback(null);
+    setCanContinue(false); // Resetar o estado de continuação
   }
 
   return (
@@ -89,7 +93,7 @@ const Game = () => {
             currentStep={currentStep}
             totalSteps={totalSteps}
           />
-          <div className="h-full flex items-center justify-center flex-col gap-12">
+          <div className="h-full flex items-center justify-center flex-col gap-12 p-6">
             <GameFeedback
               audioSrc={data?.audioBase64}
               feedbackType={isCorrect ? "correct" : "incorrect"}
@@ -107,21 +111,25 @@ const Game = () => {
               </GameInput.Field>
             ) : (
               <GameInput.Textarea
-                onKeyDown={event => {
+                onKeyDown={(event) => {
                   if (event.key === "Enter") {
                     handleButtonPress();
                   }
                 }}
-                onChange={e => setUserAnswer(e.target.value)}
+                onChange={(e) => setUserAnswer(e.target.value)}
                 value={userAnswer}
               />
             )}
           </div>
-          <FooterButton
-            buttonState={isCorrect}
-            disabled={!userAnswer}
-            onButtonPress={handleButtonPress}
-          />
+          {canContinue ? (
+            <FooterButton buttonState={isCorrect} onButtonPress={handleContinue}>
+              Continue
+            </FooterButton>
+          ) : (
+            <FooterButton buttonState={isCorrect} disabled={!userAnswer} onButtonPress={handleButtonPress}>
+              Submit
+            </FooterButton>
+          )}
         </>
       )}
     </div>

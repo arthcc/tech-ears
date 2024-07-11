@@ -25,7 +25,7 @@ export const GameFeedback = ({
           >
             {feedbackType === "correct" ? "Your phrase is correct!" : "Correct Solution:"} <br />
           </span>
-          <span>{feedbackType === "incorrect" && feedback}</span>
+          <span className="flex flex-wrap justify-center gap-1">{feedbackType === "incorrect" && feedback}</span>
         </div>
       ) : (
         <div>

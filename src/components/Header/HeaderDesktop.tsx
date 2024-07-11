@@ -16,14 +16,14 @@ export default function HeaderDesktop() {
             >
               <MainButton
                 icon={<AlertPixIcon />}
-                className="text-button-main border border-solid-100 gap-x-2 px-4 py-2"
+                className="text-button-main border border-solid-100 gap-x-2 px-4 py-2 min-h-12"
               />
             </Link>
             <Link href="https://github.com/arthcc/tech-ears" target="_blank">
               <MainButton
                 icon={<GitHubIcon />}
                 title="GitHub"
-                className="text-button-main border border-solid-100 gap-x-2 px-4 py-2"
+                className="text-button-main border border-solid-100 gap-x-2 px-4 py-2 min-h-12"
               />
             </Link>
           </div>

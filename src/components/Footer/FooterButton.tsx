@@ -5,9 +5,10 @@ interface FooterButtonProps {
   disabled?: boolean;
   onButtonPress?: () => void;
   buttonState: boolean | null;
+  children: React.ReactNode;
 }
 
-export default function FooterButton({ disabled, onButtonPress, buttonState }: FooterButtonProps) {
+export default function FooterButton({ disabled, onButtonPress, buttonState, children }: FooterButtonProps) {
   const handleButton = () => {
     if ((buttonState = !null && buttonState)) {
       return "bg-green-500";
