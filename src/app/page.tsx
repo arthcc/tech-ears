@@ -30,7 +30,7 @@ export default function HomePage() {
         <div className="">
           <Icon />
         </div>
-        <div className="flex flex-col mt-20 text-black">
+        <div className="flex flex-col mt-20 text-center text-black">
           <h1 className="text-4xl font-bold tracking-tight lg:text-5xl mb-6 relative z-0">
             The
             <span className="text-mirage-500 "> newest way </span>
