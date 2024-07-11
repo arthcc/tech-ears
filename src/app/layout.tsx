@@ -35,22 +35,22 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://i.ibb.co/Y8wQBy1/og.png" />
+        <meta property="og:url" content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg" />
         <meta property="og:title" content="Tech Ears " />
         <meta
           property="og:description"
           content="Improve your listening with just a few minutes per day!"
         />
-        <meta property="og:image" content="https://i.ibb.co/Y8wQBy1/og.png" />
+        <meta property="og:image" content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg" />
 
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://i.ibb.co/Y8wQBy1/og.png" />
+        <meta property="twitter:url" content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg" />
         <meta property="twitter:title" content="Tech Ears " />
         <meta
           property="twitter:description"
           content="Improve your listening with just a few minutes per day!"
         />
-        <meta property="twitter:image" content="https://i.ibb.co/Y8wQBy1/og.png" />
+        <meta property="twitter:image" content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg" />
 
         <body className={GeistSans.className}>
           <SpeedInsights />

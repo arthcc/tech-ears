@@ -11,7 +11,7 @@ export default function HeaderDesktop() {
         <div className="w-6/12 border border-slate-100 mx-auto py-2 px-3 mt-1 flex items-center justify-center rounded-b-3xl">
           <div className=" flex gap-4 px-2 py-1">
             <Link
-              href="https://widget.alertpix.live/qrcode/668db49d2980b8e8158d3f76"
+              href="https://www.alertpix.live/thurrdev"
               target="_blank"
             >
               <MainButton

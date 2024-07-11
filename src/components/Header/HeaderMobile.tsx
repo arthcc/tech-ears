@@ -4,10 +4,6 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ExternalLink, Menu, X } from "lucide-react";
-import HeaderButton from "@/components/Header/HeaderButton";
-import { GitHubIcon } from "@/components/Icons/github";
-import { DonateIcon } from "@/components/Icons/donate";
-import { SignInIcon } from "@/components/Icons/signIn";
 import { MainButton } from "../PrimaryButton";
 import { AlertPixIcon } from "../Icons/alertpix";
 
@@ -60,7 +56,7 @@ export default function HeaderMobile() {
           <div className="flex items-start flex-col p-4">
             
             <Link
-              href="https://widget.alertpix.live/qrcode/668db49d2980b8e8158d3f76"
+              href="https://www.alertpix.live/thurrdev"
               target="_blank"
             >
               <MainButton
