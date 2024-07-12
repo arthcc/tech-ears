@@ -23,7 +23,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="md:overflow-hidden flex flex-col h-screen">
+    <div className="md:overflow-hidden flex flex-col">
    
       <Header />
       <div className="flex flex-col items-center justify-center flex-grow p-6 bg-white">
