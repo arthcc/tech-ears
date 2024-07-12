@@ -70,7 +70,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <SpeedInsights />
           <Analytics />
           <Providers>
-            <div className=" flex flex-col justify-between bg-white  h-svh md:h-screen">
+            <div className=" flex flex-col justify-between bg-white ">
               {children}
               <Footer />
             </div>
