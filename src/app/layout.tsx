@@ -28,9 +28,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <GoogleAnalytics />
         <head />
 
-        <title>Tech Ears </title>
+        <title>TechEars </title>
 
-        <meta name="title" content="Tech Ears " />
+        <meta name="title" content="TechEars " />
         <meta
           name="description"
           content="Improve your listening with just a few minutes per day!"
@@ -41,7 +41,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           property="og:url"
           content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg"
         />
-        <meta property="og:title" content="Tech Ears " />
+        <meta property="og:title" content="TechEars " />
         <meta
           property="og:description"
           content="Improve your listening with just a few minutes per day!"
@@ -56,7 +56,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           property="twitter:url"
           content="https://i.ibb.co/0s4Jnmr/Whats-App-Image-2024-07-10-at-22-18-27.jpg"
         />
-        <meta property="twitter:title" content="Tech Ears " />
+        <meta property="twitter:title" content="TechEars " />
         <meta
           property="twitter:description"
           content="Improve your listening with just a few minutes per day!"
