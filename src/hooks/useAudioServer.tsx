@@ -28,7 +28,7 @@ export const useAudioServer = () => {
     }
   };
 
-  const verifyAnswer = (answer, question) => {
+  const verifyAnswer = (answer: string, question: string): boolean => {
     const correctAnswer = question;
     const answerParsed = answer.toLowerCase().split(" ").join("").trim();
     const correctAnswerParsed = correctAnswer
@@ -40,7 +40,7 @@ export const useAudioServer = () => {
     return answerParsed === correctAnswerParsed;
   };
 
-  const compareCorrectAnswer = (inputValue, correctAnswer) => {
+  const compareCorrectAnswer = (inputValue: string, correctAnswer: string) => {
     const inputWords = inputValue.trim().split(" ");
     const correctWords = correctAnswer.trim().split(" ");
 
@@ -63,7 +63,7 @@ export const useAudioServer = () => {
     });
   };
 
-  const compareUserAnswer = (inputValue, correctAnswer) => {
+  const compareUserAnswer = (inputValue: string, correctAnswer: string) => {
     const inputWords = inputValue.trim().split(" ");
     const correctWords = correctAnswer.trim().split(" ");
 
