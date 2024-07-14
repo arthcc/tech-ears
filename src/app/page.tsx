@@ -37,7 +37,7 @@ export default function HomePage() {
             to Learn English
           </h1>
         </div>
-        <p className="mt-4 text-lg mb-6 text-[#747883]">
+        <p className="mt-4 text-lg mb-6 text-[#747883] text-center">
           <span> Improve your listening with just a few minutes per day!</span>
         </p>
         <div className="flex gap-4 flex-col w-[280px]">
