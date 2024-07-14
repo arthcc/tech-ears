@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { phrases } from "@/mocks";
+import { textToSpeechAction } from "@/app/actions/textToSpeechAction";
 
 export const useAudioServer = () => {
   const getRandomPhrase = () => {
     const categories = Object.keys(phrases);
-    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+    const randomCategory =
+      categories[Math.floor(Math.random() * categories.length)];
     const phrasesInCategory = phrases[randomCategory];
-    return phrasesInCategory[Math.floor(Math.random() * phrasesInCategory.length)];
+    return phrasesInCategory[
+      Math.floor(Math.random() * phrasesInCategory.length)
+    ];
   };
 
   const fetchRandomPhrase = async () => {
@@ -16,41 +20,22 @@ export const useAudioServer = () => {
       throw new Error("No phrase available");
     }
 
-    const data = {
-      input: { text: phrase },
-      voice: { languageCode: "en-US", ssmlGender: "MALE" },
-      audioConfig: { audioEncoding: "MP3" }
-    };
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    };
-
-    const apiKey = process.env.GOOGLE_API_KEY;
-    const response = await fetch(
-      `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`,
-      options
-    );
-
-    if (!response.ok) {
-      throw new Error(`Error with the Text-to-Speech API: ${response.statusText}`);
+    try {
+      const audioBase64 = await textToSpeechAction(phrase);
+      return { phrase, audioBase64 };
+    } catch (error) {
+      throw new Error(`Failed to load audio: ${error.message}`);
     }
-
-    const responseData = await response.json();
-    const audioContent = responseData.audioContent;
-    const audioBase64 = `data:audio/mp3;base64,${audioContent}`;
-
-    return { phrase, audioBase64 };
   };
 
   const verifyAnswer = (answer: string, question: string): boolean => {
     const correctAnswer = question;
     const answerParsed = answer.toLowerCase().split(" ").join("").trim();
-    const correctAnswerParsed = correctAnswer.toLowerCase().split(" ").join("").trim();
+    const correctAnswerParsed = correctAnswer
+      .toLowerCase()
+      .split(" ")
+      .join("")
+      .trim();
 
     return answerParsed === correctAnswerParsed;
   };
@@ -60,10 +45,12 @@ export const useAudioServer = () => {
     const correctWords = correctAnswer.trim().split(" ");
 
     return correctWords.map((word, index) => {
-      const isCorrect = inputWords[index] && inputWords[index].toLowerCase() === word.toLowerCase();
+      const isCorrect =
+        inputWords[index] &&
+        inputWords[index].toLowerCase() === word.toLowerCase();
 
       return (
-        <span 
+        <span
           key={index}
           className={`
           ${
@@ -82,10 +69,14 @@ export const useAudioServer = () => {
 
     return inputWords.map((word, index) => {
       const isCorrect =
-        correctWords[index] && word.toLowerCase() === correctWords[index].toLowerCase();
+        correctWords[index] &&
+        word.toLowerCase() === correctWords[index].toLowerCase();
 
       return (
-        <span key={index} className={isCorrect ? "text-text-correct " : "text-text-wrong "}>
+        <span
+          key={index}
+          className={isCorrect ? "text-text-correct " : "text-text-wrong "}
+        >
           {word}
         </span>
       );

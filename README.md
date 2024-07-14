@@ -1,4 +1,7 @@
-    
+
+![image](https://github.com/user-attachments/assets/44747953-edce-4316-bca0-5f35daad9ecb)
+
+
 # ✨ Tech Ears - From Developers to Developers
 
 Tech Ears is an open-source project designed by developers for developers, aimed at enhancing English language skills and providing practice for technical questions and interviews. Our platform offers a collaborative environment where developers can improve their communication skills while preparing for the challenges of technical interviews.
