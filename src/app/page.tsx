@@ -40,16 +40,17 @@ export default function HomePage() {
           <span> Improve your listening with just a few minutes per day!</span>
         </p>
         <div className="flex gap-4 flex-col w-[280px]">
-          <Link href="/game" className="w-full">
+
             <MainButton
-              title={isLessonComplete ? "Available Tomorrow" : "Play Now"}
-              icon={isLessonComplete ? <TimeIcon /> : <PlayIcon />}
-              className={`bg-button-main text-white py-3 ${
+              title={isLessonComplete ? "In Manuntenance" : "In Manuntenance"}
+              icon={isLessonComplete ? <TimeIcon /> : <TimeIcon />}
+              className={`bg-button-main text-white py-3 opacity-50 cursor-not-allowed ${
                 isLessonComplete ? "opacity-50 cursor-not-allowed" : ""
+                
               }`}
-              disabled={isLessonComplete}
+              disabled={isLessonComplete ? true : false}
             />
-          </Link>
+         
           <div className="w-full"></div>
         </div>
       </div>
