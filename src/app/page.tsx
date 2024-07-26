@@ -42,7 +42,7 @@ export default function HomePage() {
         <div className="flex gap-4 flex-col w-[280px]">
 
             <MainButton
-              title={isLessonComplete ? "In Manuntenance" : "In Manuntenance"}
+              title={isLessonComplete ? "In Maintenance" : "In Maintenance"}
               icon={isLessonComplete ? <TimeIcon /> : <TimeIcon />}
               className={`bg-button-main text-white py-3 opacity-50 cursor-not-allowed ${
                 isLessonComplete ? "opacity-50 cursor-not-allowed" : ""
