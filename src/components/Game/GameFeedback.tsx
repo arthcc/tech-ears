@@ -5,13 +5,11 @@ import { WrongIcon } from "../Icons/wrong";
 interface GameFeedbackProps {
   feedback: React.ReactNode;
   feedbackType?: "correct" | "incorrect";
-  audioSrc?: string;
 }
 
 export const GameFeedback = ({
   feedback,
-  feedbackType = "correct",
-  audioSrc
+  feedbackType = "correct"
 }: GameFeedbackProps) => {
   return (
     <div className="flex items-center justify-center flex-col mb-6 ">
@@ -20,12 +18,21 @@ export const GameFeedback = ({
           {feedbackType === "correct" ? <CorrectIcon /> : <WrongIcon />}
           <span
             className={`font-bold mt-2 text-2xl text-center
-            ${feedbackType === "correct" ? "text-text-correct" : "text-text-wrong"}
+            ${
+              feedbackType === "correct"
+                ? "text-text-correct"
+                : "text-text-wrong"
+            }
             `}
           >
-            {feedbackType === "correct" ? "Your phrase is correct!" : "Correct Solution:"} <br />
+            {feedbackType === "correct"
+              ? "Your phrase is correct!"
+              : "Correct Solution:"}{" "}
+            <br />
           </span>
-          <span className="flex flex-wrap justify-center gap-1">{feedbackType === "incorrect" && feedback}</span>
+          <span className="flex flex-wrap justify-center gap-1">
+            {feedbackType === "incorrect" && feedback}
+          </span>
         </div>
       ) : (
         <div>
@@ -39,7 +46,6 @@ export const GameFeedback = ({
           </div>
         </div>
       )}
-     
     </div>
   );
 };
