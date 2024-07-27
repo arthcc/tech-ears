@@ -47,7 +47,7 @@ export default function HomePage() {
               className={`bg-button-main text-white py-3 opacity-50 cursor-not-allowed ${
                 isLessonComplete ? "opacity-50 cursor-not-allowed" : ""
               }`}
-              disabled={false}
+              disabled={isLessonComplete ? true : false}
             />
           </Link>
           <div className="w-full"></div>
