@@ -1,9 +1,10 @@
 import { GameInput } from "./Input";
 import { GameFeedback } from "./GameFeedback";
-import { useEffect, useState } from "react";
+import { AudioPlayer, AudioStateEnum } from "./AudioPlayer/Index";
+import { useEffect, useState, useRef } from "react";
 import FooterButton from "@/components/Footer/FooterButton";
-import { AudioServer } from "@/service/AudioServer";
 import { useAudioServer } from "@/hooks/useAudioServer";
+import { useAudioBrowser } from "@/hooks/useAudioBrowser";
 import { useQuery } from "@tanstack/react-query";
 import ProgressBar from "@/components/ProgressBar";
 import Cookies from "js-cookie";
@@ -20,15 +21,28 @@ const Game = () => {
   const [isLessonComplete, setIsLessonComplete] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
   const [canContinue, setCanContinue] = useState(false); // Novo estado para controle de continuação
+  const [audio, setAudio] = useState<{
+    audioSynthesis: SpeechSynthesisUtterance;
+    audioState: AudioStateEnum;
+  }>({
+    audioSynthesis: null,
+    audioState: "PENDING"
+  }); // Novo objeto de audio
   const totalSteps = 5;
 
-  const { fetchRandomPhrase, verifyAnswer, compareCorrectAnswer, compareUserAnswer } =
-    useAudioServer();
+  const {
+    fetchRandomPhrase,
+    verifyAnswer,
+    compareCorrectAnswer,
+    compareUserAnswer
+  } = useAudioServer();
+
+  const { getAudio } = useAudioBrowser();
 
   const { data, error, isLoading, refetch } = useQuery({
     queryKey: ["randomPhrase", currentStep],
     queryFn: fetchRandomPhrase,
-    enabled: currentStep <= totalSteps,
+    enabled: currentStep <= totalSteps
   });
 
   useEffect(() => {
@@ -43,19 +57,36 @@ const Game = () => {
     }
   }, [currentStep, refetch]);
 
+  useEffect(() => {
+    if (!data) return;
+
+    async function fetchAudio() {
+      const audio = await getAudio(data.phrase);
+      setAudio(old => ({
+        audioState: "READY",
+        audioSynthesis: audio
+      }));
+    }
+
+    fetchAudio();
+  }, [data]);
+
   async function handleButtonPress() {
     const isCorrect = verifyAnswer(userAnswer, data?.phrase);
     setIsCorrect(isCorrect);
 
     if (isCorrect) {
-      setCorrectCount((prevCount) => {
+      setCorrectCount(prevCount => {
         const newCount = prevCount + 1;
         Cookies.set("correctCount", newCount.toString(), { expires: 1 });
         return newCount;
       });
     }
 
-    const correctFeedbackComponent = compareCorrectAnswer(userAnswer, data?.phrase);
+    const correctFeedbackComponent = compareCorrectAnswer(
+      userAnswer,
+      data?.phrase
+    );
     const userFeedbackComponent = compareUserAnswer(userAnswer, data?.phrase);
     setCorrectFeedback(correctFeedbackComponent);
     setUserFeedback(userFeedbackComponent);
@@ -64,7 +95,7 @@ const Game = () => {
 
   function handleContinue() {
     if (currentStep < totalSteps) {
-      setCurrentStep((prevStep) => prevStep + 1);
+      setCurrentStep(prevStep => prevStep + 1);
     } else {
       setIsLessonComplete(true);
       Cookies.set("lessonComplete", "true", { expires: 1 });
@@ -76,6 +107,18 @@ const Game = () => {
     setUserFeedback(null);
     setCorrectFeedback(null);
     setCanContinue(false); // Resetar o estado de continuação
+  }
+
+  async function handlePlayAudio() {
+    audio.audioSynthesis.onstart = () => {
+      setAudio(old => ({ ...old, audioState: "PLAYING" }));
+    };
+
+    audio.audioSynthesis.onend = () => {
+      setAudio(old => ({ ...old, audioState: "READY" }));
+    };
+
+    window.speechSynthesis.speak(audio.audioSynthesis);
   }
 
   return (
@@ -95,15 +138,14 @@ const Game = () => {
           />
           <div className="h-full flex items-center justify-center flex-col gap-12 p-6">
             <GameFeedback
-              audioSrc={data?.audioBase64}
               feedbackType={isCorrect ? "correct" : "incorrect"}
               feedback={correctFeedback}
             />
-            {data?.audioBase64 && !userFeedback && (
-              <audio controls>
-                <source src={data?.audioBase64} type="audio/mp3" />
-                Your browser does not support the audio element.
-              </audio>
+            {!userFeedback && (
+              <AudioPlayer
+                state={audio.audioState}
+                onClick={() => handlePlayAudio()}
+              />
             )}
             {userFeedback ? (
               <GameInput.Field>
@@ -111,22 +153,29 @@ const Game = () => {
               </GameInput.Field>
             ) : (
               <GameInput.Textarea
-                onKeyDown={(event) => {
+                onKeyDown={event => {
                   if (event.key === "Enter") {
                     handleButtonPress();
                   }
                 }}
-                onChange={(e) => setUserAnswer(e.target.value)}
+                onChange={e => setUserAnswer(e.target.value)}
                 value={userAnswer}
               />
             )}
           </div>
           {canContinue ? (
-            <FooterButton buttonState={isCorrect} onButtonPress={handleContinue}>
+            <FooterButton
+              buttonState={isCorrect}
+              onButtonPress={handleContinue}
+            >
               Continue
             </FooterButton>
           ) : (
-            <FooterButton buttonState={isCorrect} disabled={!userAnswer} onButtonPress={handleButtonPress}>
+            <FooterButton
+              buttonState={isCorrect}
+              disabled={!userAnswer}
+              onButtonPress={handleButtonPress}
+            >
               Submit
             </FooterButton>
           )}

@@ -21,8 +21,7 @@ export const useAudioServer = () => {
     }
 
     try {
-      const audioBase64 = await textToSpeechAction(phrase);
-      return { phrase, audioBase64 };
+      return { phrase };
     } catch (error) {
       throw new Error(`Failed to load audio: ${error.message}`);
     }
