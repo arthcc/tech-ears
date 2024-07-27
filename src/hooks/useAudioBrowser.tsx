@@ -5,7 +5,7 @@ export const useAudioBrowser = () => {
       synthesis.lang = "en-US";
       return synthesis;
     } catch (e) {
-      console.log(e);
+      throw Error("Unable to load audio synthesizer");
     }
   };
 

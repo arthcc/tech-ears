@@ -1,5 +1,6 @@
 import { GameInput } from "./Input";
 import { GameFeedback } from "./GameFeedback";
+import { AudioPlayer, AudioStateEnum } from "./AudioPlayer/Index";
 import { useEffect, useState, useRef } from "react";
 import FooterButton from "@/components/Footer/FooterButton";
 import { useAudioServer } from "@/hooks/useAudioServer";
@@ -20,8 +21,13 @@ const Game = () => {
   const [isLessonComplete, setIsLessonComplete] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
   const [canContinue, setCanContinue] = useState(false); // Novo estado para controle de continuação
-  const [audioS, setAudios] = useState(null); // Novo estado para controle de continuação
-  const audio = useRef<string | null>();
+  const [audio, setAudio] = useState<{
+    audioSynthesis: SpeechSynthesisUtterance;
+    audioState: AudioStateEnum;
+  }>({
+    audioSynthesis: null,
+    audioState: "PENDING"
+  }); // Novo objeto de audio
   const totalSteps = 5;
 
   const {
@@ -31,7 +37,7 @@ const Game = () => {
     compareUserAnswer
   } = useAudioServer();
 
-  const { getAudio, audioBase64 } = useAudioBrowser();
+  const { getAudio } = useAudioBrowser();
 
   const { data, error, isLoading, refetch } = useQuery({
     queryKey: ["randomPhrase", currentStep],
@@ -54,7 +60,15 @@ const Game = () => {
   useEffect(() => {
     if (!data) return;
 
-    setAudios(getAudio(data.phrase));
+    async function fetchAudio() {
+      const audio = await getAudio(data.phrase);
+      setAudio(old => ({
+        audioState: "READY",
+        audioSynthesis: audio
+      }));
+    }
+
+    fetchAudio();
   }, [data]);
 
   async function handleButtonPress() {
@@ -96,8 +110,15 @@ const Game = () => {
   }
 
   async function handlePlayAudio() {
-    const a = await audioS;
-    window.speechSynthesis.speak(a);
+    audio.audioSynthesis.onstart = () => {
+      setAudio(old => ({ ...old, audioState: "PLAYING" }));
+    };
+
+    audio.audioSynthesis.onend = () => {
+      setAudio(old => ({ ...old, audioState: "READY" }));
+    };
+
+    window.speechSynthesis.speak(audio.audioSynthesis);
   }
 
   return (
@@ -120,13 +141,12 @@ const Game = () => {
               feedbackType={isCorrect ? "correct" : "incorrect"}
               feedback={correctFeedback}
             />
-            {data?.audioBase64 && !userFeedback && (
-              <audio controls>
-                <source src={data?.audioBase64} type="audio/mp3" />
-                Your browser does not support the audio element.
-              </audio>
+            {!userFeedback && (
+              <AudioPlayer
+                state={audio.audioState}
+                onClick={() => handlePlayAudio()}
+              />
             )}
-            <a onClick={() => handlePlayAudio()}>audio</a>
             {userFeedback ? (
               <GameInput.Field>
                 <div className="flex flex-wrap gap-1">{userFeedback}</div>
