@@ -17,7 +17,7 @@ export async function textToSpeechAction(phrase: string) {
     };
 
     const apiKey = process.env.GOOGLE_API_KEY;
-    console.log("asdasd");
+
     const response = await fetch(
       `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`,
       options

@@ -16,7 +16,6 @@ const LessonComplete = ({ correctCount }) => {
   }, []);
 
   const shareProgress = () => {
-    console.log("Share Progress Clicked");
     const tweetText = `I just used TechEars to practice my English ✨, I got ${storedCorrectCount} phrases correctly! Join me at: techears.tech`;
     const twitterUrl = `https://twitter.com/compose/tweet?text=${encodeURIComponent(tweetText)}`;
     window.open(twitterUrl, "_blank");
@@ -45,8 +44,8 @@ const LessonComplete = ({ correctCount }) => {
             href="https://www.techears.tech"
             className="sm:max-w-56 bg-white text-black py-3 px-4 border border-solid border-gray-300 text-center justify-center w-full flex rounded-2xl font-semibold text-xl gap-2 hover:scale-110 transition-all items-center"
           >
-           <HomeIcon/>  Back To Home 
-       
+            <HomeIcon />  Back To Home
+
           </Link>
 
           <MainButton

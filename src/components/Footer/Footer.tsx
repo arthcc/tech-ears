@@ -7,7 +7,7 @@ export default function Footer() {
       <span className="text-sm text-gray-500">© 2024 TechEars. All rights reserved.</span>
       <span className="text-sm text-gray-500 flex items-center">
         Made with Love by
-        <Link href={"https://x.com/tech_ears"}>
+        <Link target="_blank" href={"https://x.com/tech_ears"}>
           <span className="font-semibold ml-1">@ThurrDev</span>
         </Link>
         <span className="mx-1">from</span>

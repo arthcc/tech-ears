@@ -36,7 +36,7 @@ nvm install v20
 nvm use
 ```
 
-Now go to ```cd tech-ears``` and run ```yarn install```
+Now go to ```cd tech-ears```, run ```yarn install``` and when finish install, run ```yarn dev```
 
 After that you can go to:  ```http://localhost:3000``` so you can run locally. 
 
